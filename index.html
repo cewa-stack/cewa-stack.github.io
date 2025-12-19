@@ -425,6 +425,48 @@
     margin-right: 10px;
     color: var(--primary);
 }
+/* --- SCROLL TO TOP BUTTON --- */
+        #scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 8px; /* Lekko kanciaste dla technicznego wyglądu */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 900; /* Poniżej menu i toastu, ale nad treścią */
+            opacity: 0;
+            pointer-events: none; /* Nieklikalny gdy niewidoczny */
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.1);
+        }
+
+        #scroll-top-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 20px var(--primary);
+            transform: translateY(-5px); /* Uniesienie przy najechaniu */
+        }
+
+        #scroll-top-btn.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        /* Na telefonach trochę mniejszy margines */
+        @media (max-width: 900px) {
+            #scroll-top-btn { bottom: 20px; right: 20px; }
+        }
     </style>
 </head>
 <body class="loading-active">
@@ -940,6 +982,11 @@
         </div>
     </footer>
 
+<!-- BUTTON SCROLL TO TOP -->
+    <a href="#" id="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>
+
     <!-- SCRIPTS -->
     <script>
         /* --- 1. PRELOADER --- */
@@ -1244,6 +1291,28 @@
                 }
             });
         }
+        /* --- SCROLL TO TOP LOGIC --- */
+        const scrollBtn = document.getElementById('scroll-top-btn');
+        const aboutSection = document.getElementById('about');
+
+        window.addEventListener('scroll', () => {
+            if (!aboutSection) return;
+
+            // Sprawdź pozycję sekcji 'About'
+            const triggerHeight = aboutSection.offsetTop - 100; // Pojawi się 100px przed sekcją About
+            
+            if (window.scrollY > triggerHeight) {
+                scrollBtn.classList.add('active');
+            } else {
+                scrollBtn.classList.remove('active');
+            }
+        });
+
+        // Płynne przewijanie do góry po kliknięciu
+        scrollBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 </body>
 </html>
