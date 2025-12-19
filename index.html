@@ -1120,14 +1120,16 @@
         document.querySelectorAll('section').forEach(s => observer.observe(s));
 
         /* --- 10. REAL FORM SUBMIT (FORMSPREE + ANIMATION) --- */
-        const contactForm = document.getElementById('contact-form');
+          const contactForm = document.getElementById('contact-form');
         
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault(); // Zatrzymuje przeładowanie strony
 
                 const btn = contactForm.querySelector('.btn-term');
-                const termBody = contactForm.querySelector('.term-body');
+                
+                // --- POPRAWKA TUTAJ: Używamy closest(), bo term-body jest rodzicem formularza ---
+                const termBody = contactForm.closest('.term-body'); 
                 
                 // 1. Zmiana przycisku na "Wysyłanie..."
                 btn.innerText = "> SENDING_DATA...";
