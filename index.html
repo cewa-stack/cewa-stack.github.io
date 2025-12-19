@@ -481,7 +481,7 @@
     <section id="about">
         <div class="section-header">
             <div class="section-subtitle">WHO AM I</div>
-            <h2 class="section-title">Profil Eksperta</h2>
+            <h2 class="section-title">Profil</h2>
         </div>
         <div class="about-tech-card">
             <div class="about-image-wrapper">
@@ -505,7 +505,7 @@
                 </div>
 
                 <p>
-                    Od kodu do strategii biznesowej. Jako inżynier AI z doświadczeniem w zarządzaniu e-commerce rozumiem zarówno jak zbudować zaawansowany system ML, jak i dlaczego firma tego potrzebuje. Python i algorytmy to moje narzędzia, rozwiązywanie problemów biznesowych to cel.
+                    Inżynier AI i Automatyzacji łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.
                 </p>
                 <div>
                     <span class="skills-label">CORE SOFT SKILLS:</span>
@@ -544,6 +544,7 @@
                     <span class="tech-item">Gemini API</span>
                     <span class="tech-item">Google API</span>
                     <span class="tech-item">Chat AI</span>
+                    <span class="tech-item">GitHub</span>
                 </div>
             </div>
 
@@ -814,7 +815,7 @@
                 </div>
                 <div class="social-info">
                     <h3>LinkedIn</h3>
-                    <p>Check my profile!</p>
+                    <p>Check my Profile!</p>
                 </div>
                 <div class="social-status">
                     <i class="fa-solid fa-arrow-right"></i>
@@ -839,7 +840,7 @@
                 </div>
                 <div class="download-info">
                     <h3>CV (PDF)</h3>
-                    <p>Open Online / Download / Print</p>
+                    <p>VIEW ONLINE / DONWLOAD / PRINT</p>
                 </div>
                 <div class="social-status">
                     <i class="fa-solid fa-external-link-alt"></i>
@@ -853,7 +854,7 @@
                 </div>
                 <div class="download-info">
                     <h3>CV (DOCX)</h3>
-                    <p>Download / Print</p>
+                    <p>DOWNLOAD / PRINT</p>
                 </div>
                 <div class="social-status">
                     <i class="fa-solid fa-download"></i>
@@ -942,6 +943,7 @@
                             onComplete: function(self) { self.cursor.remove(); }
                         });
 
+                        // Uruchomienie statystyk
                         initFunStats();
 
                     }, 500);
@@ -961,7 +963,7 @@
         const projectConfig = {
             "car-diagnostic-ai-bot": {
                 img: "projekt1.png",
-                metrics: [{v:"85%", l:"TRAFIC"}, {v:"ALL-IN-ONE", l:"APP"}],
+                metrics: [{v:"85%", l:"TRAFIC"}, {v:"2m", l:"TIME"}],
             },
             "lecturemate-ai-reporter": {
                 img: "projekt2.png",
@@ -1024,7 +1026,7 @@
                 const res = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100`);
                 const repos = await res.json();
                 container.innerHTML = '';
-                const myRepos = repos.filter(r => !r.fork);
+                const myRepos = repos.filter(r => !r.fork && !ignoredRepos.includes(r.name));
                 
                 myRepos.forEach(r => container.insertAdjacentHTML('beforeend', createProjectCard(r)));
 
@@ -1048,8 +1050,9 @@
             window.requestAnimationFrame(step);
         }
 
-        /* --- FUN STATS --- */
+        /* --- FUN STATS (Fake Live Data) --- */
         function initFunStats() {
+            // Coffee Calculation
             const coffeeElem = document.getElementById('stat-coffee');
             const startYear = 2024;
             const currentYear = new Date().getFullYear();
@@ -1121,39 +1124,51 @@
         
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Zatrzymuje przeładowanie strony
 
                 const btn = contactForm.querySelector('.btn-term');
                 const termBody = contactForm.querySelector('.term-body');
-                const formspreeUrl = "https://formspree.io/f/xbdrrrov"; 
-
+                
+                // 1. Zmiana przycisku na "Wysyłanie..."
                 btn.innerText = "> SENDING_DATA...";
                 btn.style.opacity = "0.7";
                 btn.disabled = true;
 
+                // 2. Pobranie danych z formularza
                 const formData = new FormData(contactForm);
 
+                // --- TUTAJ WKLEJ SWÓJ LINK FORMSPREE ---
+                const formspreeUrl = "https://formspree.io/f/xbdrrrov"; 
+
                 try {
+                    // 3. Prawdziwa wysyłka danych (AJAX)
                     const response = await fetch(formspreeUrl, {
                         method: 'POST',
                         body: formData,
-                        headers: { 'Accept': 'application/json' }
+                        headers: {
+                            'Accept': 'application/json'
+                        }
                     });
 
                     if (response.ok) {
+                        // 4. SUKCES - Wyświetl komunikat w stylu terminala
                         showSuccessMessage(termBody);
                     } else {
+                        // Błąd wysyłki (np. zły email)
                         throw new Error('Błąd serwera: ' + response.status);
                     }
                 } catch (error) {
+                    // 5. BŁĄD - Wyświetl komunikat błędu
                     console.error("Szczegóły błędu:", error);
                     
+                    // Specjalna obsługa dla lokalnych testów (file://)
                     if(window.location.protocol === 'file:') {
                         showSuccessMessage(termBody);
                     } else {
                         btn.innerText = "> ERROR: CONNECTION_REFUSED";
                         btn.style.color = "#ff5f56";
                         btn.style.borderColor = "#ff5f56";
+                        
                         let errorMsg = document.createElement('p');
                         errorMsg.style.color = "#ff5f56";
                         errorMsg.style.marginTop = "10px";
