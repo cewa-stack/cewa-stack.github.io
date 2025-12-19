@@ -392,6 +392,39 @@
             .socials-grid { grid-template-columns: 1fr; }
             .downloads-grid { grid-template-columns: 1fr; }
         }
+        /* --- CYBERPUNK TOAST NOTIFICATION --- */
+#cyber-toast {
+    visibility: hidden;
+    min-width: 300px;
+    background-color: rgba(10, 10, 10, 0.95); /* Ciemne tło */
+    color: #fff; /* Biały tekst */
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000; /* Zawsze na wierzchu */
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    border: 1px solid var(--primary); /* Zielona ramka */
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+    font-family: var(--font-code); /* Twoja czcionka terminalowa */
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    backdrop-filter: blur(5px);
+}
+
+#cyber-toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px; /* Lekkie uniesienie przy pojawieniu */
+}
+
+#cyber-toast i {
+    margin-right: 10px;
+    color: var(--primary);
+}
     </style>
 </head>
 <body class="loading-active">
@@ -1119,22 +1152,54 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-        /* --- 10. REAL FORM SUBMIT (FORMSPREE + ANIMATION) --- */
+/* --- 10. REAL FORM SUBMIT (CYBER TOAST VERSION) --- */
+        
+        // Funkcja pomocnicza do wyświetlania ładnego powiadomienia
+        function showCyberToast(message, isError = false) {
+            // 1. Sprawdź czy element już istnieje, jak nie to stwórz
+            let toast = document.getElementById("cyber-toast");
+            if (!toast) {
+                toast = document.createElement("div");
+                toast.id = "cyber-toast";
+                document.body.appendChild(toast);
+            }
+
+            // 2. Ustaw treść i styl
+            const icon = isError ? '<i class="fa-solid fa-triangle-exclamation" style="color:#ff5f56"></i>' : '<i class="fa-solid fa-check-circle"></i>';
+            toast.innerHTML = icon + message;
+            
+            if(isError) {
+                toast.style.borderColor = "#ff5f56"; // Czerwona ramka przy błędzie
+                toast.style.boxShadow = "0 0 20px rgba(255, 95, 86, 0.2)";
+            } else {
+                toast.style.borderColor = "#00ff88"; // Zielona ramka przy sukcesie
+                toast.style.boxShadow = "0 0 20px rgba(0, 255, 136, 0.2)";
+            }
+
+            // 3. Pokaż
+            toast.className = "show";
+
+            // 4. Ukryj po 4 sekundach
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 4000);
+        }
+
+        // Główna logika formularza
         const contactForm = document.getElementById('contact-form');
         
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault(); // Zatrzymuje przeładowanie strony
+                e.preventDefault(); 
 
                 const btn = contactForm.querySelector('.btn-term');
                 const originalText = btn.innerText;
 
-                // 1. Zmiana przycisku na "Wysyłanie..."
-                btn.innerText = "> SENDING...";
+                // Zmiana przycisku
+                btn.innerText = "> SENDING_DATA...";
                 btn.style.opacity = "0.7";
                 btn.disabled = true;
 
-                // 2. Dane formularza
                 const formData = new FormData(contactForm);
                 const formspreeUrl = "https://formspree.io/f/xbdrrrov"; 
 
@@ -1142,53 +1207,43 @@
                     const response = await fetch(formspreeUrl, {
                         method: 'POST',
                         body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
+                        headers: { 'Accept': 'application/json' }
                     });
 
                     if (response.ok) {
-                        // 3. SUKCES
-                        // Wyświetl prosty POPUP (Alert przeglądarki - działa zawsze)
-                        alert("Wysłano! Odezwę się najszybciej jak będę mógł! :)");
+                        // --- SUKCES ---
+                        showCyberToast("Wiadomość wysłana! Odezwę się wkrótce.");
                         
-                        // Wyczyść pola formularza
-                        contactForm.reset();
+                        contactForm.reset(); // Czyści formularz
                         
-                        // Przywróć przycisk
-                        btn.innerText = "> MESSAGE_SENT_OK";
-                        btn.style.color = "#27c93f"; // Zielony kolor sukcesu
+                        // Zmiana przycisku na zielono
+                        btn.innerText = "> SENT_SUCCESSFULLY";
+                        btn.style.color = "#27c93f"; 
                         btn.style.borderColor = "#27c93f";
                         
-                        // Po 3 sekundach przywróć pierwotny stan przycisku
-                        setTimeout(() => {
-                            btn.innerText = originalText;
-                            btn.style.opacity = "1";
-                            btn.disabled = false;
-                            btn.style.color = ""; // Reset koloru
-                            btn.style.borderColor = ""; // Reset ramki
-                        }, 5000);
-
                     } else {
-                        throw new Error('Błąd serwera');
+                        throw new Error('Server error');
                     }
                 } catch (error) {
-                    // 4. BŁĄD
+                    // --- BŁĄD ---
                     console.error("Błąd:", error);
-                    alert("Coś poszło nie tak. Napisz do mnie bezpośrednio na maila.");
+                    showCyberToast("Błąd połączenia. Spróbuj później.", true);
                     
-                    btn.innerText = "> ERROR_TRY_AGAIN";
+                    btn.innerText = "> ERROR: CONNECTION_FAILED";
                     btn.style.color = "#ff5f56";
+                    btn.style.borderColor = "#ff5f56";
+                } finally {
+                    // Przywróć przycisk po 5 sekundach (niezależnie od wyniku)
                     setTimeout(() => {
                         btn.innerText = originalText;
                         btn.style.opacity = "1";
                         btn.disabled = false;
-                        btn.style.color = "";
-                    }, 3000);
+                        btn.style.color = ""; 
+                        btn.style.borderColor = ""; 
+                    }, 5000);
                 }
             });
         }
-
     </script>
 </body>
 </html>
