@@ -1120,30 +1120,25 @@
         document.querySelectorAll('section').forEach(s => observer.observe(s));
 
         /* --- 10. REAL FORM SUBMIT (FORMSPREE + ANIMATION) --- */
-          const contactForm = document.getElementById('contact-form');
+        const contactForm = document.getElementById('contact-form');
         
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault(); // Zatrzymuje przeładowanie strony
 
                 const btn = contactForm.querySelector('.btn-term');
-                
-                // --- POPRAWKA TUTAJ: Używamy closest(), bo term-body jest rodzicem formularza ---
-                const termBody = contactForm.closest('.term-body'); 
-                
+                const originalText = btn.innerText;
+
                 // 1. Zmiana przycisku na "Wysyłanie..."
-                btn.innerText = "> SENDING_DATA...";
+                btn.innerText = "> SENDING...";
                 btn.style.opacity = "0.7";
                 btn.disabled = true;
 
-                // 2. Pobranie danych z formularza
+                // 2. Dane formularza
                 const formData = new FormData(contactForm);
-
-                // --- TUTAJ WKLEJ SWÓJ LINK FORMSPREE ---
                 const formspreeUrl = "https://formspree.io/f/xbdrrrov"; 
 
                 try {
-                    // 3. Prawdziwa wysyłka danych (AJAX)
                     const response = await fetch(formspreeUrl, {
                         method: 'POST',
                         body: formData,
@@ -1153,48 +1148,45 @@
                     });
 
                     if (response.ok) {
-                        // 4. SUKCES - Wyświetl komunikat w stylu terminala
-                        showSuccessMessage(termBody);
+                        // 3. SUKCES
+                        // Wyświetl prosty POPUP (Alert przeglądarki - działa zawsze)
+                        alert("Wysłano! Odezwę się najszybciej jak będę mógł! :)");
+                        
+                        // Wyczyść pola formularza
+                        contactForm.reset();
+                        
+                        // Przywróć przycisk
+                        btn.innerText = "> MESSAGE_SENT_OK";
+                        btn.style.color = "#27c93f"; // Zielony kolor sukcesu
+                        btn.style.borderColor = "#27c93f";
+                        
+                        // Po 3 sekundach przywróć pierwotny stan przycisku
+                        setTimeout(() => {
+                            btn.innerText = originalText;
+                            btn.style.opacity = "1";
+                            btn.disabled = false;
+                            btn.style.color = ""; // Reset koloru
+                            btn.style.borderColor = ""; // Reset ramki
+                        }, 5000);
+
                     } else {
-                        // Błąd wysyłki (np. zły email)
-                        throw new Error('Błąd serwera: ' + response.status);
+                        throw new Error('Błąd serwera');
                     }
                 } catch (error) {
-                    // 5. BŁĄD - Wyświetl komunikat błędu
-                    console.error("Szczegóły błędu:", error);
+                    // 4. BŁĄD
+                    console.error("Błąd:", error);
+                    alert("Coś poszło nie tak. Napisz do mnie bezpośrednio na maila.");
                     
-                    // Specjalna obsługa dla lokalnych testów (file://)
-                    if(window.location.protocol === 'file:') {
-                        showSuccessMessage(termBody);
-                    } else {
-                        btn.innerText = "> ERROR: CONNECTION_REFUSED";
-                        btn.style.color = "#ff5f56";
-                        btn.style.borderColor = "#ff5f56";
-                        
-                        let errorMsg = document.createElement('p');
-                        errorMsg.style.color = "#ff5f56";
-                        errorMsg.style.marginTop = "10px";
-                        errorMsg.innerText = "> SYSTEM_ERR: Sprawdź konsolę (F12) lub spróbuj później.";
-                        btn.parentNode.insertBefore(errorMsg, btn.nextSibling);
-                    }
+                    btn.innerText = "> ERROR_TRY_AGAIN";
+                    btn.style.color = "#ff5f56";
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.opacity = "1";
+                        btn.disabled = false;
+                        btn.style.color = "";
+                    }, 3000);
                 }
             });
-        }
-
-        function showSuccessMessage(container) {
-            container.innerHTML = `
-                <div style="color: var(--primary); font-family: var(--font-code); text-align: center; padding: 2rem;">
-                    <p style="margin-bottom: 10px;">> PACKET_SENT: [====================] 100%</p>
-                    <p style="margin-bottom: 20px;">> SERVER_RESPONSE: 200 OK</p>
-                    
-                    <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 1rem;">Dzięki za kontakt!</h3>
-                    <p style="color: #ccc;">Odezwę się najszybciej jak będę mógł! :)</p>
-                    
-                    <button onclick="location.reload()" class="btn-term" style="margin-top: 30px;">
-                        > NEW_SESSION
-                    </button>
-                </div>
-            `;
         }
 
     </script>
