@@ -13,6 +13,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Biblioteka do animacji pisania -->
+    <!-- SEO -->
+<meta name="description" content="Portfolio Łukasz Szymankiewicz - AI/ML Engineer & Automation Specialist. Projekty Python, AI, No-Code.">
+<meta name="keywords" content="AI Engineer, Python Developer, Automation, Portfolio, Łukasz Szymankiewicz">
+<meta name="author" content="Łukasz Szymankiewicz">
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cewa-stack.github.io/">
+<meta property="og:title" content="Łukasz Szymankiewicz | AI & ML Engineer">
+<meta property="og:description" content="Zobacz moje projekty AI, automatyzacje i doświadczenie w IT.">
+<meta property="og:image" content="https://cewa-stack.github.io/og-image.png"> <!-- Zrób screena strony i wgraj jako og-image.png -->
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Łukasz Szymankiewicz | AI & ML Engineer">
+<meta property="twitter:description" content="Sprawdź moje portfolio inżyniera AI.">
+<meta property="twitter:image" content="https://cewa-stack.github.io/og-image.png">
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
     <style>
@@ -230,11 +247,7 @@
         .edu-list { list-style: none; font-family: var(--font-code); font-size: 0.85rem; color: #ccc; }
         .edu-list li { margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px; }
         .edu-list li::before { content: '+'; color: var(--secondary); }
-        .edu-status-success {
-            margin-top: 1rem; display: inline-block; background: rgba(39, 201, 63, 0.15); color: #27c93f;
-            padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-family: var(--font-code);
-            border: 1px solid rgba(39, 201, 63, 0.4);
-        }
+
 
         /* --- 5. COURSES --- */
         .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -467,7 +480,57 @@
         @media (max-width: 900px) {
             #scroll-top-btn { bottom: 20px; right: 20px; }
         }
+
+        /* Hamburger Styles */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 900px) {
+    .hamburger { display: flex; z-index: 2000; }
+    
+    .nav-links {
+        display: flex; /* Zmieniamy z none na flex, ale ukrywamy pozycją */
+        position: fixed;
+        left: -100%;
+        top: 0;
+        gap: 0;
+        flex-direction: column;
+        background-color: rgba(10, 10, 10, 0.98);
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: 0.3s;
+        padding-top: 100px;
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 16px 0;
+    }
+
+    /* Animacja Hamburgera w X */
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
     </style>
+    
 </head>
 <body class="loading-active">
 
@@ -500,6 +563,11 @@
             <li><a href="#portfolio">PROJECTS</a></li>
             <li><a href="#contact">CONTACT</a></li>
         </ul>
+        <div class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
     </nav>
 
     <!-- 1. HERO -->
@@ -533,11 +601,13 @@
                 <div class="dash-item">
                     <div class="dash-label"><i class="fa-solid fa-file-code"></i> Lines of Code <span class="live-dot"></span></div>
                     <span class="dash-num" id="stat-loc">1K+</span>
-                </div>
+             </div>
                 <div class="dash-item">
-                    <div class="dash-label"><i class="fa-solid fa-mug-hot"></i> Coffee Consumed</div>
-                    <span class="dash-num" id="stat-coffee">0</span>
-                </div>
+                    <div class="dash-label">
+                        <i class="fa-solid fa-microchip"></i> LLM Tokens
+                     </div>
+                   <span class="dash-num" id="stat-tokens">0</span>
+            </div>
                 <div class="dash-item">
                     <div class="dash-label"><i class="fa-solid fa-robot"></i> AI Models Trained</div>
                     <span class="dash-num">4</span>
@@ -599,6 +669,17 @@
             </div>
         </div>
     </section>
+   
+    <div class="why-me-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+    <div style="background:rgba(255,255,255,0.05); padding:15px; border-left:3px solid var(--primary);">
+        <h5 style="color:white; margin-bottom:5px;">Biznes + Technologia</h5>
+        <p style="font-size:0.85rem; color:#aaa;">Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe.</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.05); padding:15px; border-left:3px solid var(--secondary);">
+        <h5 style="color:white; margin-bottom:5px;">Szybkie Wdrożenia</h5>
+        <p style="font-size:0.85rem; color:#aaa;">Używam AI i No-Code, aby dostarczać MVP w dni, nie miesiące.</p>
+    </div>
+</div>
 
     <!-- NEW SECTION: TECH STACK / HARD SKILLS -->
     <section id="tech-stack">
@@ -754,9 +835,6 @@
                         <li>Systemy Operacyjne (Linux/Windows Server)</li>
                         <li>Podstawy Baz Danych (SQL)</li>
                     </ul>
-                    <div class="edu-status-success">
-                        Matura = True
-                    </div>
                 </div>
             </div>
         </div>
@@ -1133,15 +1211,30 @@
             window.requestAnimationFrame(step);
         }
 
-        /* --- FUN STATS (Fake Live Data) --- */
-        function initFunStats() {
-            // Coffee Calculation
-            const coffeeElem = document.getElementById('stat-coffee');
-            const startYear = 2024;
-            const currentYear = new Date().getFullYear();
-            const coffeeTotal = (currentYear - startYear) * 365 * 2;
-            animateValue(coffeeElem, 0, coffeeTotal, 2000);
+      function initFunStats() {
+    const el = document.getElementById('stat-tokens');
+    const target = 55000000; 
+    const duration = 2500;
+    let start = null;
+
+    const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 4); // Efekt zwalniania
+        
+        const current = Math.floor(ease * target);
+        
+        // Formatowanie: 125M+
+        if (current > 1000000) {
+            el.innerHTML = (current / 1000000).toFixed(0) + 'M+';
+        } else {
+            el.innerHTML = current;
         }
+
+        if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+}
 
         /* --- 3. NEURAL BACKGROUND & SCROLL --- */
         const canvas = document.getElementById('neuro-bg');
@@ -1316,6 +1409,18 @@
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+        const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}));
     </script>
 </body>
 </html>
