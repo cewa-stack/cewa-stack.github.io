@@ -1191,7 +1191,52 @@
                 
                 myRepos.forEach(r => container.insertAdjacentHTML('beforeend', createProjectCard(r)));
 
+let allTechs = new Set();
+
+myRepos.forEach(repo => {
+  
+    if (repo.language) {
+        allTechs.add(repo.language);
+    }
+    
+    if (repo.topics) {
+        repo.topics.forEach(topic => {
+            allTechs.add(topic);
+        });
+    }
+});
+
+// Pobierz wielkość zbioru
+let techCount = allTechs.size;
+
+// Uruchom animację licznika
+animateValue(statTechElem, 0, techCount, 1500);
+
                 let stars = myRepos.reduce((acc, r) => acc + r.stargazers_count, 0);
+                /* --- UNIKALNY TECH STACK COUNTER (Bez duplikatów) --- */
+let uniqueStack = new Set();
+
+myRepos.forEach(repo => {
+    // 1. Dodaj główny język (np. Python), zamień na małe litery
+    if (repo.language) {
+        uniqueStack.add(repo.language.toLowerCase());
+    }
+    
+    // 2. Dodaj tagi (Topics), jeśli istnieją
+    if (repo.topics) {
+        repo.topics.forEach(topic => {
+            // Dodajemy do zbioru - Set sam ignoruje duplikaty
+            uniqueStack.add(topic.toLowerCase());
+        });
+    }
+});
+
+// uniqueStack.size to teraz liczba UNIKALNYCH technologii
+// np. Python, AI, TensorFlow, React (nawet jak występują w 10 projektach)
+
+animateValue(statReposElem, 0, myRepos.length, 1500);
+animateValue(statStarsElem, 0, stars, 1500);
+animateValue(statTechElem, 0, uniqueStack.size, 1500); // <-- Tutaj wstawiamy wynik
                 let techs = new Set(myRepos.map(r => r.language).filter(l => l)).size;
                 
                 animateValue(statReposElem, 0, myRepos.length, 1500);
