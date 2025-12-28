@@ -95,11 +95,20 @@
         }
         .logo { font-family: var(--font-code); font-weight: 700; font-size: 1.2rem; color: #fff; }
         .logo span { color: var(--primary); }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
         .nav-links a {
-            color: #ccc; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px;
+            color: #ccc; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
         }
         .nav-links a:hover { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
+
+        /* Language Switcher */
+        .lang-switch {
+            font-family: var(--font-code); font-size: 0.9rem; margin-left: 20px; 
+            border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px;
+        }
+        .lang-btn { cursor: pointer; color: #666; transition: 0.3s; font-weight: bold; }
+        .lang-btn.active { color: var(--primary); text-shadow: 0 0 5px var(--primary); }
+        .lang-sep { color: #444; margin: 0 5px; }
 
         /* Animations */
         section {
@@ -118,16 +127,18 @@
         #home { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; position: relative; opacity: 1 !important; transform: none !important; filter: none !important; }
         .hero-content { z-index: 1; max-width: 750px; width: 100%; }
         .hero-content h1 { font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; font-weight: 800; color: #fff; }
-        .hero-content h1 span { color: var(--primary); text-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
+        
+        /* FIX: Greeting is white, Name is Green */
+        .hero-content h1 span { color: #fff; text-shadow: none; }
+        .hero-content h1 span#typed-name { color: var(--primary); text-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
 
-        /* HERO IMAGE CONTAINER STYLES (New Class instead of inline styles) */
         .hero-image-container {
             width: 400px; height: 400px; 
             border-radius: 50%; 
             border: 2px solid var(--primary); 
             padding: 10px; 
             box-shadow: 0 0 50px rgba(0,255,136,0.1);
-            margin: 0 auto; /* Center on mobile */
+            margin: 0 auto;
         }
         .hero-image-container img {
             width: 100%; height: 100%; 
@@ -150,12 +161,29 @@
         .live-dot { width: 6px; height: 6px; background: #ff5f56; border-radius: 50%; display: inline-block; animation: pulse-red 1.5s infinite; margin-left: auto; }
         @keyframes pulse-red { 0% {opacity:1;} 50% {opacity:0.4;} 100% {opacity:1;} }
 
+        /* BUTTONS */
+        .btn-group { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+
         .btn-glow {
-            display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem; background: var(--primary); color: #000;
+            display: inline-block; padding: 1rem 2.5rem; background: var(--primary); color: #000;
             font-weight: 700; text-decoration: none; clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-            transition: all 0.3s;
+            transition: all 0.3s; border: 1px solid var(--primary);
         }
         .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 0 20px var(--primary); }
+
+        /* New Outline Button (Get Resume) */
+        .btn-outline {
+            display: inline-block; padding: 1rem 2.5rem; 
+            background: transparent; color: var(--primary);
+            font-weight: 700; text-decoration: none; 
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: all 0.3s; border: 1px solid var(--primary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .btn-outline:hover { 
+            background: var(--primary); color: #000; 
+            transform: translateY(-3px); box-shadow: 0 0 20px var(--primary-dim); 
+        }
 
         /* Section: About */
         .about-tech-card {
@@ -430,6 +458,8 @@
                 margin-bottom: 30px;
             }
 
+            .btn-group { justify-content: center; }
+
             .about-tech-card { flex-direction: column; text-align: center; padding: 2rem 1.5rem; gap: 2rem; }
             .about-img { width: 100%; max-width: 320px; height: auto; aspect-ratio: 4/5; }
             
@@ -470,7 +500,7 @@
 
     <!-- System Preloader -->
     <div id="preloader">
-        <div class="loader-glitch">SYSTEM_BOOT</div>
+        <div class="loader-glitch" data-lang-key="system_boot">SYSTEM_BOOT</div>
         <div class="loader-bar-wrap">
             <div class="loader-bar" id="loader-bar"></div>
         </div>
@@ -480,13 +510,19 @@
     <nav>
         <div class="logo">AI/ML_<span>ENGINEER</span></div>
         <ul class="nav-links">
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#tech-stack">SKILLS</a></li>
-            <li><a href="#experience">EXPERIENCE</a></li>
-            <li><a href="#education">EDUCATION</a></li>
-            <li><a href="#courses">CERTS</a></li>
-            <li><a href="#portfolio">PROJECTS</a></li>
-            <li><a href="#contact">CONTACT</a></li>
+            <li><a href="#about" data-lang-key="nav_about">O MNIE</a></li>
+            <li><a href="#tech-stack" data-lang-key="nav_skills">UMIEJĘTNOŚCI</a></li>
+            <li><a href="#experience" data-lang-key="nav_exp">DOŚWIADCZENIE</a></li>
+            <li><a href="#education" data-lang-key="nav_edu">EDUKACJA</a></li>
+            <li><a href="#courses" data-lang-key="nav_certs">CERTYFIKATY</a></li>
+            <li><a href="#portfolio" data-lang-key="nav_projects">PROJEKTY</a></li>
+            <li><a href="#contact" data-lang-key="nav_contact">KONTAKT</a></li>
+            <!-- LANGUAGE SWITCHER -->
+            <li class="lang-switch">
+                <span class="lang-btn active" id="btn-pl" onclick="setLanguage('pl')">PL</span>
+                <span class="lang-sep">|</span>
+                <span class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</span>
+            </li>
         </ul>
         <div class="hamburger">
             <span class="bar"></span>
@@ -499,39 +535,45 @@
     <section id="home" class="visible">
         <div class="hero-content">
             <h1>
-                Cześć, nazywam się <br>
+                <span data-lang-key="hero_greeting">Cześć, nazywam się</span><br>
                 <span id="typed-name"></span>
             </h1>
-            <p style="color:#aaa; font-size:1.2rem; margin-bottom:2rem;">AI & Automation Engineer. Widzę rozwiązania tam, gdzie inni widzą dane. Tworzę systemy AI, które napędzają realny rozwój biznesu.</p>
+            <p style="color:#aaa; font-size:1.2rem; margin-bottom:2rem;" data-lang-key="hero_desc">AI & Automation Engineer. Widzę rozwiązania tam, gdzie inni widzą dane. Tworzę systemy AI, które napędzają realny rozwój biznesu.</p>
             
-            <a href="#portfolio" class="btn-glow">EXPLORE PROJECTS</a>
+            <div class="btn-group">
+                <a href="#portfolio" class="btn-glow" data-lang-key="hero_btn_projects">ZOBACZ PROJEKTY</a>
+                <!-- NEW GET RESUME BUTTON -->
+                <a href="#downloads" class="btn-outline">
+                    <i class="fa-solid fa-download"></i> <span data-lang-key="hero_btn_resume">POBIERZ CV</span>
+                </a>
+            </div>
 
             <div class="hero-dashboard">
                 <div class="dash-item">
-                    <div class="dash-label"><i class="fa-solid fa-code-branch"></i> Repositories</div>
+                    <div class="dash-label"><i class="fa-solid fa-code-branch"></i> <span data-lang-key="stat_repos">Repositories</span></div>
                     <span class="dash-num" id="stat-repos">0</span>
                 </div>
                 <div class="dash-item">
-                    <div class="dash-label"><i class="fa-solid fa-star"></i> Total Stars</div>
+                    <div class="dash-label"><i class="fa-solid fa-star"></i> <span data-lang-key="stat_stars">Total Stars</span></div>
                     <span class="dash-num" id="stat-stars">0</span>
                 </div>
                 <div class="dash-item">
-                    <div class="dash-label"><i class="fa-solid fa-layer-group"></i> Tech Stack</div>
+                    <div class="dash-label"><i class="fa-solid fa-layer-group"></i> <span data-lang-key="stat_stack">Tech Stack</span></div>
                     <span class="dash-num" id="stat-tech">0</span>
                 </div>
                 
                 <div class="dash-item">
-                    <div class="dash-label"><i class="fa-solid fa-file-code"></i> Lines of Code <span class="live-dot"></span></div>
+                    <div class="dash-label"><i class="fa-solid fa-file-code"></i> <span data-lang-key="stat_loc">Lines of Code</span> <span class="live-dot"></span></div>
                     <span class="dash-num" id="stat-loc">1K+</span>
                 </div>
                 <div class="dash-item">
                     <div class="dash-label">
-                        <i class="fa-solid fa-microchip"></i> LLM Tokens
+                        <i class="fa-solid fa-microchip"></i> <span data-lang-key="stat_tokens">LLM Tokens</span>
                      </div>
                    <span class="dash-num" id="stat-tokens">0</span>
                 </div>
                 <div class="dash-item">
-                    <div class="dash-label"><i class="fa-solid fa-robot"></i> AI Models Trained</div>
+                    <div class="dash-label"><i class="fa-solid fa-robot"></i> <span data-lang-key="stat_models">AI Models Trained</span></div>
                     <span class="dash-num">4</span>
                 </div>
             </div>
@@ -547,8 +589,8 @@
     <!-- Profile Section -->
     <section id="about">
         <div class="section-header">
-            <div class="section-subtitle">WHO AM I</div>
-            <h2 class="section-title">Profile</h2>
+            <div class="section-subtitle" data-lang-key="sect_who">KIM JESTEM</div>
+            <h2 class="section-title" data-lang-key="sect_profile">Profil</h2>
         </div>
         <div class="about-tech-card">
             <div class="about-image-wrapper">
@@ -564,28 +606,28 @@
                     </div>
                     <div class="vibe-details">
                         <div class="vibe-stat"><span style="color: #22c55e; font-weight: bold; font-size: 20px;">↑</span>60%</div>
-                        <div class="vibe-desc">
+                        <div class="vibe-desc" data-lang-key="vibe_desc">
                             Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>
                             Skupienie na architekturze i logice biznesowej.
                         </div>
                     </div>
                 </div>
 
-                <p>
+                <p data-lang-key="about_bio">
                     Inżynier AI i Automatyzacji łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.
                 </p>
                 <div>
-                    <span class="skills-label">CORE SOFT SKILLS:</span>
+                    <span class="skills-label" data-lang-key="soft_label">CORE SOFT SKILLS:</span>
                     <div class="soft-skills-cloud">
-                        <span class="soft-pill">Samodzielność</span>
-                        <span class="soft-pill">Komunikatywność</span>
-                        <span class="soft-pill">Organizacja pracy</span>
-                        <span class="soft-pill">Kreatywność</span>
-                        <span class="soft-pill">Zarządzanie</span>
-                        <span class="soft-pill">Nieszablonowe myślenie</span>
-                        <span class="soft-pill">Analityczne myślenie</span>
-                        <span class="soft-pill">Odporność na stres</span>
-                        <span class="soft-pill">Angielski (B2/C1)</span>
+                        <span class="soft-pill" data-lang-key="soft_1">Samodzielność</span>
+                        <span class="soft-pill" data-lang-key="soft_2">Komunikatywność</span>
+                        <span class="soft-pill" data-lang-key="soft_3">Organizacja pracy</span>
+                        <span class="soft-pill" data-lang-key="soft_4">Kreatywność</span>
+                        <span class="soft-pill" data-lang-key="soft_5">Zarządzanie</span>
+                        <span class="soft-pill" data-lang-key="soft_6">Nieszablonowe myślenie</span>
+                        <span class="soft-pill" data-lang-key="soft_7">Analityczne myślenie</span>
+                        <span class="soft-pill" data-lang-key="soft_8">Odporność na stres</span>
+                        <span class="soft-pill" data-lang-key="soft_9">Angielski (B2/C1)</span>
                     </div>
                 </div>
             </div>
@@ -596,12 +638,12 @@
     <div class="why-me-container">
         <div class="why-me-grid">
             <div class="why-card primary">
-                <h5><i class="fa-solid fa-chart-line" style="color:var(--primary); margin-right:10px;"></i> Biznes + Technologia</h5>
-                <p>Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.</p>
+                <h5><i class="fa-solid fa-chart-line" style="color:var(--primary); margin-right:10px;"></i> <span data-lang-key="why_1_h">Biznes + Technologia</span></h5>
+                <p data-lang-key="why_1_p">Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.</p>
             </div>
             <div class="why-card secondary">
-                <h5><i class="fa-solid fa-rocket" style="color:var(--secondary); margin-right:10px;"></i> Szybkie Wdrożenia</h5>
-                <p>Łączę Python z narzędziami No-Code (n8n, Make), aby dostarczać działające MVP w dni, a nie w miesiące.</p>
+                <h5><i class="fa-solid fa-rocket" style="color:var(--secondary); margin-right:10px;"></i> <span data-lang-key="why_2_h">Szybkie Wdrożenia</span></h5>
+                <p data-lang-key="why_2_p">Łączę Python z narzędziami No-Code (n8n, Make), aby dostarczać działające MVP w dni, a nie w miesiące.</p>
             </div>
         </div>
     </div>
@@ -609,8 +651,8 @@
     <!-- Skills -->
     <section id="tech-stack">
         <div class="section-header">
-            <div class="section-subtitle">TECHNOLOGY KNOWLEDGE</div>
-            <h2 class="section-title">HARD SKILLS</h2>
+            <div class="section-subtitle" data-lang-key="sect_tech_sub">TECHNOLOGY KNOWLEDGE</div>
+            <h2 class="section-title" data-lang-key="sect_hard_skills">HARD SKILLS</h2>
         </div>
 
         <div class="tech-grid">
@@ -657,14 +699,14 @@
     <!-- Experience -->
     <section id="experience">
         <div class="section-header">
-            <div class="section-subtitle">CAREER PATH</div>
-            <h2 class="section-title">EXPERIENCE</h2>
+            <div class="section-subtitle" data-lang-key="sect_career_sub">CAREER PATH</div>
+            <h2 class="section-title" data-lang-key="sect_exp">DOŚWIADCZENIE</h2>
         </div>
         <div class="circuit-container">
             <div class="exp-card">
                 <span class="exp-company">2024 - 2025 | DopeClub</span>
-                <div class="exp-role">Przedsiębiorca</div>
-                <ul class="exp-list">
+                <div class="exp-role" data-lang-key="exp_1_role">Przedsiębiorca</div>
+                <ul class="exp-list" data-lang-key="exp_1_list">
                     <li>Zarządzanie 10-osobowym zespołem (delegowanie, KPI).</li>
                     <li>Optymalizacja Cashflow i analiza P&L.</li>
                     <li>Wdrażanie automatyzacji procesów wewnętrznych (No-Code).</li>
@@ -674,8 +716,8 @@
             </div>
             <div class="exp-card">
                 <span class="exp-company">2022 - 2025 | DopeDetailing</span>
-                <div class="exp-role">Przedsiębiorca</div>
-                <ul class="exp-list">
+                <div class="exp-role" data-lang-key="exp_2_role">Przedsiębiorca</div>
+                <ul class="exp-list" data-lang-key="exp_2_list">
                     <li>Social Media Marketing (Meta Ads, Content Strategy).</li>
                     <li>Analiza danych sprzedażowych i optymalizacja konwersji (CRO).</li>
                     <li>Budowanie wizerunku marki (Brand Identity).</li>
@@ -684,8 +726,8 @@
             </div>
             <div class="exp-card">
                 <span class="exp-company">2018 - Obecnie | DopeShop</span>
-                <div class="exp-role">Projekt E-commerce</div>
-                <ul class="exp-list">
+                <div class="exp-role" data-lang-key="exp_3_role">Projekt E-commerce</div>
+                <ul class="exp-list" data-lang-key="exp_3_list">
                     <li>Logistyka i zarządzanie łańcuchem dostaw (Supply Chain).</li>
                     <li>Obsługa systemów ERP i prognozowanie stanów magazynowych.</li>
                     <li>Negocjacje B2B z dostawcami międzynarodowymi.</li>
@@ -695,8 +737,8 @@
             </div>
             <div class="exp-card">
                 <span class="exp-company">2022 - 2023 | AS Lotus</span>
-                <div class="exp-role">Wsparcie Klienta</div>
-                <ul class="exp-list">
+                <div class="exp-role" data-lang-key="exp_4_role">Wsparcie Klienta</div>
+                <ul class="exp-list" data-lang-key="exp_4_list">
                     <li>Diagnostyka sprzętowa i software'owa maszyn.</li>
                     <li>Obsługa systemów ticketowych (Jira).</li>
                     <li>Bezpośrednia komunikacja z klientem i rozwiązywanie problemów.</li>
@@ -708,18 +750,18 @@
     <!-- Education -->
     <section id="education">
         <div class="section-header">
-            <div class="section-subtitle">KNOWLEDGE BASE</div>
-            <h2 class="section-title">EDUCATION</h2>
+            <div class="section-subtitle" data-lang-key="sect_kb_sub">KNOWLEDGE BASE</div>
+            <h2 class="section-title" data-lang-key="sect_edu">EDUKACJA</h2>
         </div>
         <div class="edu-grid">
             <div class="edu-node">
                 <i class="fa-solid fa-microchip"></i>
-                <span class="edu-date">2025 - Obecnie</span>
-                <h3 class="edu-school">Inżynieria AI & ML</h3>
-                <span class="edu-name">Wyższa Szkoła Kształcenia Zawodowego</span>
+                <span class="edu-date" data-lang-key="edu_1_date">2025 - Obecnie</span>
+                <h3 class="edu-school" data-lang-key="edu_1_title">Inżynieria AI & ML</h3>
+                <span class="edu-name" data-lang-key="edu_1_school">Wyższa Szkoła Kształcenia Zawodowego</span>
                 <div class="edu-data-panel">
                     <span class="edu-data-title">ACQUIRED_SKILLS:</span>
-                    <ul class="edu-list">
+                    <ul class="edu-list" data-lang-key="edu_1_list">
                         <li>Neural Networks (CNN/RNN/Transformers)</li>
                         <li>Deep Learning Frameworks (PyTorch/TensorFlow)</li>
                         <li>Computer Vision & NLP Algorithms</li>
@@ -731,11 +773,11 @@
             <div class="edu-node">
                 <i class="fa-solid fa-briefcase"></i>
                 <span class="edu-date">2021 - 2022</span>
-                <h3 class="edu-school">Zarządzanie</h3>
-                <span class="edu-name">Wyższa Szkoła Bankowa</span>
+                <h3 class="edu-school" data-lang-key="edu_2_title">Zarządzanie</h3>
+                <span class="edu-name" data-lang-key="edu_2_school">Wyższa Szkoła Bankowa</span>
                 <div class="edu-data-panel">
                     <span class="edu-data-title">COMPLETED_MODULES:</span>
-                    <ul class="edu-list">
+                    <ul class="edu-list" data-lang-key="edu_2_list">
                         <li>Zarządzanie Zasobami Ludzkimi (HRM)</li>
                         <li>Finanse Przedsiębiorstw i Controlling</li>
                         <li>Prawo Gospodarcze</li>
@@ -747,11 +789,11 @@
             <div class="edu-node">
                 <i class="fa-solid fa-network-wired"></i>
                 <span class="edu-date">2017 - 2021</span>
-                <h3 class="edu-school">Technik Informatyk</h3>
-                <span class="edu-name">CKZiU nr 2 (Elektronik)</span>
+                <h3 class="edu-school" data-lang-key="edu_3_title">Technik Informatyk</h3>
+                <span class="edu-name" data-lang-key="edu_3_school">CKZiU nr 2 (Elektronik)</span>
                 <div class="edu-data-panel">
                     <span class="edu-data-title">TECHNICAL_BASE:</span>
-                    <ul class="edu-list">
+                    <ul class="edu-list" data-lang-key="edu_3_list">
                         <li>Diagnostyka i serwis sprzętu komputerowego</li>
                         <li>Administracja Sieciami (LAN/WAN, Cisco)</li>
                         <li>Systemy Operacyjne (Linux/Windows Server)</li>
@@ -765,23 +807,22 @@
     <!-- Courses -->
     <section id="courses">
         <div class="section-header">
-            <div class="section-subtitle">CERTIFICATIONS</div>
-            <h2 class="section-title">COURSES</h2>
+            <div class="section-subtitle" data-lang-key="sect_cert_sub">CERTIFICATIONS</div>
+            <h2 class="section-title" data-lang-key="sect_cert">KURSY</h2>
         </div>
         <div class="courses-grid">
             <div class="vault-item">
                 <div>
                     <i class="fa-solid fa-robot vault-icon"></i>
-                    <h4 style="color:#fff;">Podstawy AI</h4>
+                    <h4 style="color:#fff;" data-lang-key="cert_1_h">Podstawy AI</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;">OPI - PIB</p>
-                    <ul class="vault-list">
+                    <ul class="vault-list" data-lang-key="cert_1_list">
                         <li>Machine Learning Fundamentals</li>
                         <li>Data Bias & Ethics</li>
                         <li>Intro to NLP</li>
                     </ul>
                 </div>
-                <!-- FIX: href changed to void(0) to prevent scrolling to top -->
-                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> Pokaż Certyfikat
+                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> <span data-lang-key="cert_show">Pokaż Certyfikat</span>
                     <div class="cert-popup"><img src="cert_podstawyai.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
@@ -790,15 +831,14 @@
                     <i class="fa-solid fa-wand-magic-sparkles vault-icon"></i>
                     <h4 style="color:#fff;">Generative AI</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;">Lubuskie Centrum Cyfryzacji</p>
-                    <ul class="vault-list">
+                    <ul class="vault-list" data-lang-key="cert_2_list">
                         <li>Prompt Engineering</li>
                         <li>LLM Limitations</li>
                         <li>RAG Concepts</li>
                         <li>AI Tools Efficiency</li>
                     </ul>
                 </div>
-                <!-- FIX: href changed to void(0) -->
-                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> Pokaż Certyfikat
+                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> <span data-lang-key="cert_show">Pokaż Certyfikat</span>
                     <div class="cert-popup"><img src="cert_podstawyai2.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
@@ -806,16 +846,15 @@
                 <div>
                     <i class="fa-brands fa-python vault-icon"></i>
                     <h4 style="color:#fff;">Python 3</h4>
-                    <p style="color:#666; font-size:0.8rem; margin-bottom:10px;">Uniwersytet Szczeciński</p>
-                    <ul class="vault-list">
+                    <p style="color:#666; font-size:0.8rem; margin-bottom:10px;" data-lang-key="cert_3_inst">Uniwersytet Szczeciński</p>
+                    <ul class="vault-list" data-lang-key="cert_3_list">
                         <li>Object-Oriented Programming</li>
                         <li>Data Structures & Algos</li>
                         <li>Pandas / NumPy Basics</li>
                         <li>API Integration</li>
                     </ul>
                 </div>
-                <!-- FIX: href changed to void(0) -->
-                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> Pokaż Certyfikat
+                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> <span data-lang-key="cert_show">Pokaż Certyfikat</span>
                     <div class="cert-popup"><img src="cert_podstawyprog.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
@@ -824,14 +863,13 @@
                     <i class="fa-solid fa-globe vault-icon"></i>
                     <h4 style="color:#fff;">English B2/C1</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;">Cambridge</p>
-                    <ul class="vault-list">
+                    <ul class="vault-list" data-lang-key="cert_4_list">
                         <li>Technical Documentation</li>
                         <li>Business Communication</li>
                         <li>International Relations</li>
                     </ul>
                 </div>
-                <!-- FIX: href changed to void(0) -->
-                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> Pokaż Certyfikat
+                <a href="javascript:void(0)" class="cert-link"><i class="fa-solid fa-eye"></i> <span data-lang-key="cert_show">Pokaż Certyfikat</span>
                     <div class="cert-popup"><img src="certyfikat angielski.jpg" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
@@ -841,8 +879,8 @@
     <!-- Projects -->
     <section id="portfolio">
         <div class="section-header">
-            <div class="section-subtitle">LIVE DEPLOYMENTS</div>
-            <h2 class="section-title">Projects</h2>
+            <div class="section-subtitle" data-lang-key="sect_live">LIVE DEPLOYMENTS</div>
+            <h2 class="section-title" data-lang-key="sect_proj">Projekty</h2>
         </div>
         <div class="portfolio-grid" id="github-projects">
             <!-- Dynamic Content -->
@@ -853,26 +891,26 @@
     <!-- Hobbies -->
     <section id="hobbies">
         <div class="section-header">
-            <div class="section-subtitle">PERSONAL INTERESTS</div>
-            <h2 class="section-title">Hobbies & Passions</h2>
+            <div class="section-subtitle" data-lang-key="sect_hobby_sub">PERSONAL INTERESTS</div>
+            <h2 class="section-title" data-lang-key="sect_hobby">Hobby i Pasje</h2>
         </div>
         <div class="hobby-cloud">
-            <span class="hobby-tag"><i class="fa-solid fa-brain"></i> AI & Nowe Technologie</span>
-            <span class="hobby-tag"><i class="fa-solid fa-gears"></i> Automatyzacje</span>
-            <span class="hobby-tag"><i class="fa-solid fa-code"></i> Aplikacje No-Code</span>
-            <span class="hobby-tag"><i class="fa-solid fa-dumbbell"></i> Siłownia</span>
-            <span class="hobby-tag"><i class="fa-solid fa-car"></i> Motoryzacja</span>
-            <span class="hobby-tag"><i class="fa-solid fa-briefcase"></i> Biznes</span>
-            <span class="hobby-tag"><i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie</span>
-            <span class="hobby-tag"><i class="fa-solid fa-user-graduate"></i> Psychologia</span>
+            <span class="hobby-tag" data-lang-key="hob_1"><i class="fa-solid fa-brain"></i> AI & Nowe Technologie</span>
+            <span class="hobby-tag" data-lang-key="hob_2"><i class="fa-solid fa-gears"></i> Automatyzacje</span>
+            <span class="hobby-tag" data-lang-key="hob_3"><i class="fa-solid fa-code"></i> Aplikacje No-Code</span>
+            <span class="hobby-tag" data-lang-key="hob_4"><i class="fa-solid fa-dumbbell"></i> Siłownia</span>
+            <span class="hobby-tag" data-lang-key="hob_5"><i class="fa-solid fa-car"></i> Motoryzacja</span>
+            <span class="hobby-tag" data-lang-key="hob_6"><i class="fa-solid fa-briefcase"></i> Biznes</span>
+            <span class="hobby-tag" data-lang-key="hob_7"><i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie</span>
+            <span class="hobby-tag" data-lang-key="hob_8"><i class="fa-solid fa-user-graduate"></i> Psychologia</span>
         </div>
     </section>
 
     <!-- Socials -->
     <section id="socials">
         <div class="section-header">
-            <div class="section-subtitle">ESTABLISH UPLINK</div>
-            <h2 class="section-title">Socials</h2>
+            <div class="section-subtitle" data-lang-key="sect_social_sub">ESTABLISH UPLINK</div>
+            <h2 class="section-title" data-lang-key="sect_social">Media Społecznościowe</h2>
         </div>
         
         <div class="socials-grid">
@@ -880,7 +918,7 @@
                 <div class="social-icon-box"><i class="fa-brands fa-github"></i></div>
                 <div class="social-info">
                     <h3>GitHub</h3>
-                    <p>Access Source Code & Repos</p>
+                    <p data-lang-key="social_git">Dostęp do repozytoriów i kodu</p>
                 </div>
                 <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
@@ -889,7 +927,7 @@
                 <div class="social-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
                 <div class="social-info">
                     <h3>LinkedIn</h3>
-                    <p>Check my Profile!</p>
+                    <p data-lang-key="social_lin">Sprawdź mój profil zawodowy</p>
                 </div>
                 <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
@@ -899,8 +937,8 @@
     <!-- Downloads -->
     <section id="downloads">
         <div class="section-header">
-            <div class="section-subtitle">OFFLINE DATA</div>
-            <h2 class="section-title">DOWNLOAD MY CV</h2>
+            <div class="section-subtitle" data-lang-key="sect_dl_sub">OFFLINE DATA</div>
+            <h2 class="section-title" data-lang-key="sect_dl">Pobierz moje CV</h2>
         </div>
 
         <div class="downloads-grid">
@@ -908,7 +946,7 @@
                 <div class="download-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
                 <div class="download-info">
                     <h3>CV (PDF)</h3>
-                    <p>VIEW ONLINE / DOWNLOAD / PRINT</p>
+                    <p data-lang-key="dl_desc">PODGLĄD / POBIERANIE / DRUK</p>
                 </div>
                 <div class="social-status"><i class="fa-solid fa-external-link-alt"></i></div>
             </a>
@@ -917,7 +955,7 @@
                 <div class="download-icon-box"><i class="fa-solid fa-file-word"></i></div>
                 <div class="download-info">
                     <h3>CV (DOCX)</h3>
-                    <p>DOWNLOAD / PRINT</p>
+                    <p data-lang-key="dl_desc_2">POBIERANIE / EDYCJA / DRUK</p>
                 </div>
                 <div class="social-status"><i class="fa-solid fa-download"></i></div>
             </a>
@@ -927,8 +965,8 @@
     <!-- Contact -->
     <section id="contact">
         <div class="section-header">
-            <div class="section-subtitle">INITIATE CONNECTION</div>
-            <h2 class="section-title">CONTACT WITH ME</h2>
+            <div class="section-subtitle" data-lang-key="sect_contact_sub">INITIATE CONNECTION</div>
+            <h2 class="section-title" data-lang-key="sect_contact">Skontaktuj się</h2>
         </div>
         <div class="terminal-window">
             <div class="term-header">
@@ -938,18 +976,18 @@
             <div class="term-body">
                 <form id="contact-form">
                     <div class="term-line">
-                        <span class="term-prompt">user_name</span>
-                        <input type="text" class="term-input" name="name" placeholder="Twoje Imię" required>
+                        <span class="term-prompt" data-lang-key="contact_label_name">nazwa_użytkownika</span>
+                        <input type="text" class="term-input" name="name" placeholder="Twoje Imię" required data-lang-ph="ph_name">
                     </div>
                     <div class="term-line">
-                        <span class="term-prompt">user_email</span>
+                        <span class="term-prompt" data-lang-key="contact_label_email">adres_email</span>
                         <input type="email" class="term-input" name="email" placeholder="email@domena.pl" required>
                     </div>
                     <div class="term-line">
-                        <span class="term-prompt">user_message</span>
-                        <textarea class="term-input" name="message" rows="1" placeholder="Treść wiadomości..." required></textarea>
+                        <span class="term-prompt" data-lang-key="contact_label_msg">treść_wiadomości</span>
+                        <textarea class="term-input" name="message" rows="1" placeholder="Treść wiadomości..." required data-lang-ph="ph_msg"></textarea>
                     </div>
-                    <button type="submit" class="btn-term"> > SEND_MESSAGE </button>
+                    <button type="submit" class="btn-term" data-lang-key="form_btn"> > WYŚLIJ_WIADOMOŚĆ </button>
                 </form>
                 <div style="margin-top:2rem; border-top:1px dashed #333; padding-top:1rem;">
                     <p style="color:#666; font-size:0.9rem;">
@@ -975,11 +1013,161 @@
     <!-- Application Logic -->
     <script>
         /**
+         * LANGUAGE CONFIGURATION
+         */
+        const translations = {
+            pl: {
+                nav_about: "O MNIE", nav_skills: "UMIEJĘTNOŚCI", nav_exp: "DOŚWIADCZENIE", nav_edu: "EDUKACJA", nav_certs: "CERTYFIKATY", nav_projects: "PROJEKTY", nav_contact: "KONTAKT",
+                hero_greeting: "Cześć, nazywam się",
+                hero_desc: "AI & Automation Engineer. Widzę rozwiązania tam, gdzie inni widzą dane. Tworzę systemy AI, które napędzają realny rozwój biznesu.",
+                hero_btn_projects: "ZOBACZ PROJEKTY",
+                hero_btn_resume: "POBIERZ CV",
+                stat_repos: "Repozytoria", stat_stars: "Gwiazdki", stat_stack: "Technologie", stat_loc: "Linii Kodu", stat_tokens: "Tokeny LLM", stat_models: "Modele AI",
+                sect_who: "KIM JESTEM", sect_profile: "Profil",
+                vibe_desc: "Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>Skupienie na architekturze i logice biznesowej.",
+                about_bio: "Inżynier AI i Automatyzacji łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.",
+                soft_label: "KOMPETENCJE MIĘKKIE:",
+                soft_1: "Samodzielność", soft_2: "Komunikatywność", soft_3: "Organizacja pracy", soft_4: "Kreatywność", soft_5: "Zarządzanie", soft_6: "Nieszablonowe myślenie", soft_7: "Analityczne myślenie", soft_8: "Odporność na stres", soft_9: "Angielski (B2/C1)",
+                why_1_h: "Biznes + Technologia", why_1_p: "Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.",
+                why_2_h: "Szybkie Wdrożenia", why_2_p: "Łączę Python z narzędziami No-Code (n8n, Make), aby dostarczać działające MVP w dni, a nie w miesiące.",
+                sect_tech_sub: "WIEDZA TECHNICZNA", sect_hard_skills: "UMIEJĘTNOŚCI TWARDE",
+                sect_career_sub: "ŚCIEŻKA KARIERY", sect_exp: "DOŚWIADCZENIE",
+                exp_1_role: "Przedsiębiorca",
+                exp_1_list: "<li>Zarządzanie 10-osobowym zespołem (delegowanie, KPI).</li><li>Optymalizacja Cashflow i analiza P&L.</li><li>Wdrażanie automatyzacji procesów wewnętrznych (No-Code).</li><li>Budowanie strategii retencji klientów.</li><li>Implementacja systemu CRM i obiegu dokumentów.</li>",
+                exp_2_role: "Przedsiębiorca",
+                exp_2_list: "<li>Social Media Marketing (Meta Ads, Content Strategy).</li><li>Analiza danych sprzedażowych i optymalizacja konwersji (CRO).</li><li>Budowanie wizerunku marki (Brand Identity).</li><li>Sprzedaż B2C i obsługa klienta premium.</li>",
+                exp_3_role: "Projekt E-commerce",
+                exp_3_list: "<li>Logistyka i zarządzanie łańcuchem dostaw (Supply Chain).</li><li>Obsługa systemów ERP i prognozowanie stanów magazynowych.</li><li>Negocjacje B2B z dostawcami międzynarodowymi.</li><li>Automatyzacja procesów sprzedażowych.</li><li>Wykorzystanie ML do optymalizacji contentu i predykcji trendów wyszukiwania</li>",
+                exp_4_role: "Wsparcie Klienta",
+                exp_4_list: "<li>Diagnostyka sprzętowa i software'owa maszyn.</li><li>Obsługa systemów ticketowych (Jira).</li><li>Bezpośrednia komunikacja z klientem i rozwiązywanie problemów.</li>",
+                sect_kb_sub: "BAZA WIEDZY", sect_edu: "EDUKACJA",
+                edu_1_date: "2025 - Obecnie", edu_1_title: "Inżynieria AI & ML", edu_1_school: "Wyższa Szkoła Kształcenia Zawodowego",
+                edu_1_list: "<li>Sieci Neuronowe (CNN/RNN/Transformers)</li><li>Frameworki Deep Learning (PyTorch/TensorFlow)</li><li>Algorytmy Computer Vision i NLP</li><li>Data Science i Inżynieria Cech</li><li>Matematyka: Algebra Liniowa, Statystyka</li>",
+                edu_2_title: "Zarządzanie", edu_2_school: "Wyższa Szkoła Bankowa",
+                edu_2_list: "<li>Zarządzanie Zasobami Ludzkimi (HRM)</li><li>Finanse Przedsiębiorstw i Controlling</li><li>Prawo Gospodarcze</li><li>Marketing Strategiczny</li><li>Zarządzanie Projektami (Agile/Scrum Basics)</li>",
+                edu_3_title: "Technik Informatyk", edu_3_school: "CKZiU nr 2 (Elektronik)",
+                edu_3_list: "<li>Diagnostyka i serwis sprzętu komputerowego</li><li>Administracja Sieciami (LAN/WAN, Cisco)</li><li>Systemy Operacyjne (Linux/Windows Server)</li><li>Podstawy Baz Danych (SQL)</li>",
+                sect_cert_sub: "CERTYFIKATY", sect_cert: "KURSY",
+                cert_1_h: "Podstawy AI", cert_3_inst: "Uniwersytet Szczeciński", cert_show: "Pokaż Certyfikat",
+                cert_1_list: "<li>Podstawy Machine Learning</li><li>Stronniczość Danych i Etyka</li><li>Wstęp do NLP</li>",
+                cert_2_list: "<li>Inżynieria Promptów</li><li>Ograniczenia LLM</li><li>Koncepcje RAG</li><li>Efektywność Narzędzi AI</li>",
+                cert_3_list: "<li>Programowanie Obiektowe</li><li>Struktury Danych i Algorytmy</li><li>Podstawy Pandas / NumPy</li><li>Integracja API</li>",
+                cert_4_list: "<li>Dokumentacja Techniczna</li><li>Komunikacja Biznesowa</li><li>Relacje Międzynarodowe</li>",
+                sect_live: "WDROŻENIA", sect_proj: "Projekty",
+                sect_hobby_sub: "ZAINTERESOWANIA", sect_hobby: "Hobby i Pasje",
+                hob_1: '<i class="fa-solid fa-brain"></i> AI & Nowe Technologie', hob_2: '<i class="fa-solid fa-gears"></i> Automatyzacje', hob_3: '<i class="fa-solid fa-code"></i> Aplikacje No-Code', hob_4: '<i class="fa-solid fa-dumbbell"></i> Siłownia',
+                hob_5: '<i class="fa-solid fa-car"></i> Motoryzacja', hob_6: '<i class="fa-solid fa-briefcase"></i> Biznes', hob_7: '<i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
+                sect_social_sub: "NWIĄŻ POŁĄCZENIE", sect_social: "Media Społecznościowe",
+                social_git: "Dostęp do repozytoriów i kodu", social_lin: "Sprawdź mój profil zawodowy",
+                sect_dl_sub: "DANE OFFLINE", sect_dl: "Pobierz moje CV",
+                dl_desc: "PODGLĄD / POBIERANIE / DRUK", dl_desc_2: "POBIERANIE / EDYCJA / DRUK",
+                sect_contact_sub: "INICJACJA POŁĄCZENIA", sect_contact: "Skontaktuj się",
+                contact_label_name: "nazwa_użytkownika", contact_label_email: "adres_email", contact_label_msg: "treść_wiadomości",
+                ph_name: "Twoje Imię", ph_msg: "Treść wiadomości...", form_btn: " > WYŚLIJ_WIADOMOŚĆ"
+            },
+            en: {
+                nav_about: "ABOUT", nav_skills: "SKILLS", nav_exp: "EXPERIENCE", nav_edu: "EDUCATION", nav_certs: "CERTS", nav_projects: "PROJECTS", nav_contact: "CONTACT",
+                hero_greeting: "Hello, I am",
+                hero_desc: "AI & Automation Engineer. I see solutions where others see data. I create AI systems that drive real business growth.",
+                hero_btn_projects: "EXPLORE PROJECTS",
+                hero_btn_resume: "GET RESUME",
+                stat_repos: "Repositories", stat_stars: "Total Stars", stat_stack: "Tech Stack", stat_loc: "Lines of Code", stat_tokens: "LLM Tokens", stat_models: "AI Models Trained",
+                sect_who: "WHO AM I", sect_profile: "Profile",
+                vibe_desc: "Faster delivery of solutions through LLM integration in workflow.<br>Focus on architecture and business logic.",
+                about_bio: "AI & Automation Engineer combining technical skills with business thinking. Experience in Python, Machine Learning, and e-commerce operations management allows me to design and implement solutions that address real organizational needs and deliver tangible results.",
+                soft_label: "CORE SOFT SKILLS:",
+                soft_1: "Independence", soft_2: "Communication", soft_3: "Work Organization", soft_4: "Creativity", soft_5: "Management", soft_6: "Out-of-box Thinking", soft_7: "Analytical Thinking", soft_8: "Stress Resistance", soft_9: "English (B2/C1)",
+                why_1_h: "Business + Technology", why_1_p: "I don't just write code. I understand P&L, ROI, and sales processes. I create solutions that actually earn or save money.",
+                why_2_h: "Rapid Deployment", why_2_p: "I combine Python with No-Code tools (n8n, Make) to deliver working MVPs in days, not months.",
+                sect_tech_sub: "TECHNOLOGY KNOWLEDGE", sect_hard_skills: "HARD SKILLS",
+                sect_career_sub: "CAREER PATH", sect_exp: "EXPERIENCE",
+                exp_1_role: "Entrepreneur",
+                exp_1_list: "<li>Managing a 10-person team (delegation, KPIs).</li><li>Cashflow optimization and P&L analysis.</li><li>Implementing internal process automation (No-Code).</li><li>Building customer retention strategies.</li><li>Implementing CRM and document workflow systems.</li>",
+                exp_2_role: "Entrepreneur",
+                exp_2_list: "<li>Social Media Marketing (Meta Ads, Content Strategy).</li><li>Sales data analysis and conversion optimization (CRO).</li><li>Brand Identity building.</li><li>B2C sales and premium customer service.</li>",
+                exp_3_role: "E-commerce Project",
+                exp_3_list: "<li>Logistics and Supply Chain management.</li><li>ERP system operation and inventory forecasting.</li><li>B2B negotiations with international suppliers.</li><li>Sales process automation.</li><li>Using ML for content optimization and search trend prediction.</li>",
+                exp_4_role: "Client Support",
+                exp_4_list: "<li>Hardware and software diagnostics of machines.</li><li>Handling ticketing systems (Jira).</li><li>Direct client communication and problem solving.</li>",
+                sect_kb_sub: "KNOWLEDGE BASE", sect_edu: "EDUCATION",
+                edu_1_date: "2025 - Present", edu_1_title: "AI & ML Engineering", edu_1_school: "Vocational Training College",
+                edu_1_list: "<li>Neural Networks (CNN/RNN/Transformers)</li><li>Deep Learning Frameworks (PyTorch/TensorFlow)</li><li>Computer Vision & NLP Algorithms</li><li>Data Science & Feature Engineering</li><li>Math: Linear Algebra, Statistics</li>",
+                edu_2_title: "Management", edu_2_school: "WSB University",
+                edu_2_list: "<li>Human Resource Management (HRM)</li><li>Corporate Finance and Controlling</li><li>Business Law</li><li>Strategic Marketing</li><li>Project Management (Agile/Scrum Basics)</li>",
+                edu_3_title: "IT Technician", edu_3_school: "CKZiU No. 2 (Electronics)",
+                edu_3_list: "<li>Computer hardware diagnostics and service</li><li>Network Administration (LAN/WAN, Cisco)</li><li>Operating Systems (Linux/Windows Server)</li><li>Database Basics (SQL)</li>",
+                sect_cert_sub: "CERTIFICATIONS", sect_cert: "COURSES",
+                cert_1_h: "AI Fundamentals", cert_3_inst: "University of Szczecin", cert_show: "Show Certificate",
+                cert_1_list: "<li>Machine Learning Fundamentals</li><li>Data Bias & Ethics</li><li>Intro to NLP</li>",
+                cert_2_list: "<li>Prompt Engineering</li><li>LLM Limitations</li><li>RAG Concepts</li><li>AI Tools Efficiency</li>",
+                cert_3_list: "<li>Object-Oriented Programming</li><li>Data Structures & Algos</li><li>Pandas / NumPy Basics</li><li>API Integration</li>",
+                cert_4_list: "<li>Technical Documentation</li><li>Business Communication</li><li>International Relations</li>",
+                sect_live: "LIVE DEPLOYMENTS", sect_proj: "Projects",
+                sect_hobby_sub: "PERSONAL INTERESTS", sect_hobby: "Hobbies & Passions",
+                hob_1: '<i class="fa-solid fa-brain"></i> AI & New Tech', hob_2: '<i class="fa-solid fa-gears"></i> Automations', hob_3: '<i class="fa-solid fa-code"></i> No-Code Apps', hob_4: '<i class="fa-solid fa-dumbbell"></i> Gym',
+                hob_5: '<i class="fa-solid fa-car"></i> Automotive', hob_6: '<i class="fa-solid fa-briefcase"></i> Business', hob_7: '<i class="fa-solid fa-chart-line"></i> Finance & Investing', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychology',
+                sect_social_sub: "ESTABLISH UPLINK", sect_social: "Socials",
+                social_git: "Access Source Code & Repos", social_lin: "Check my Profile!",
+                sect_dl_sub: "OFFLINE DATA", sect_dl: "DOWNLOAD MY CV",
+                dl_desc: "VIEW ONLINE / DOWNLOAD / PRINT", dl_desc_2: "DOWNLOAD / PRINT",
+                sect_contact_sub: "INITIATE CONNECTION", sect_contact: "CONTACT WITH ME",
+                contact_label_name: "user_name", contact_label_email: "user_email", contact_label_msg: "user_message",
+                ph_name: "User Name", ph_msg: "Message content...", form_btn: " > SEND_MESSAGE"
+            }
+        };
+
+        let currentLang = 'pl';
+        let typedInstance = null;
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const data = translations[lang];
+
+            // Toggle Buttons
+            document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.documentElement.lang = lang;
+
+            // Update text content
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if(data[key]) {
+                    if(key.includes('list') || key.includes('vibe') || key.includes('hob')) {
+                        el.innerHTML = data[key]; // For Lists/HTML
+                    } else {
+                        el.textContent = data[key]; // For simple text
+                    }
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-lang-ph]').forEach(el => {
+                const key = el.getAttribute('data-lang-ph');
+                if(data[key]) el.placeholder = data[key];
+            });
+
+            // Refresh Typed.js
+            initTyped(lang);
+        }
+
+        function initTyped(lang) {
+            if(typedInstance) typedInstance.destroy();
+            const str = 'Łukasz Szymankiewicz'; // Name stays the same
+            typedInstance = new Typed('#typed-name', {
+                strings: [str],
+                typeSpeed: 50,
+                startDelay: 200,
+                loop: false,
+                showCursor: true,
+                cursorChar: '|',
+                onComplete: function(self) { self.cursor.remove(); }
+            });
+        }
+
+        /**
          * CORE SYSTEM BOOTSTRAP
-         * Handles preloader, animations, and data fetching.
          */
         
-        // 1. SYSTEM INITIALIZATION
         window.addEventListener('load', () => {
             const bar = document.getElementById('loader-bar');
             const text = document.getElementById('loader-text');
@@ -992,9 +1180,11 @@
                 if(width > 100) width = 100;
                 bar.style.width = width + '%';
 
-                if(width < 30) text.innerText = "LOADING CORE MODULES...";
-                else if(width < 70) text.innerText = "FETCHING GITHUB DATA...";
-                else text.innerText = "RENDERING INTERFACE...";
+                const loadingText = currentLang === 'pl' ? 
+                    (width < 30 ? "ŁADOWANIE MODUŁÓW..." : (width < 70 ? "POBIERANIE DANYCH GITHUB..." : "RENDEROWANIE INTERFEJSU...")) :
+                    (width < 30 ? "LOADING CORE MODULES..." : (width < 70 ? "FETCHING GITHUB DATA..." : "RENDERING INTERFACE..."));
+
+                text.innerText = loadingText;
 
                 if(width === 100) {
                     clearInterval(interval);
@@ -1003,17 +1193,9 @@
                         body.classList.remove('loading-active');
                         setTimeout(() => preloader.style.display = 'none', 500);
                         
-                        // Initialize Typewriter
-                        new Typed('#typed-name', {
-                            strings: ['Łukasz Szymankiewicz'],
-                            typeSpeed: 50,
-                            startDelay: 500,
-                            loop: false,
-                            showCursor: true,
-                            cursorChar: '|',
-                            onComplete: function(self) { self.cursor.remove(); }
-                        });
-
+                        // Force Polish language on start to update all DOM elements
+                        setLanguage('pl');
+                        
                         // Start Dashboard Counters
                         initFunStats();
 
@@ -1151,9 +1333,7 @@
                 // Calculate Stats
                 let stars = myRepos.reduce((acc, r) => acc + r.stargazers_count, 0);
                 
-                /* --- CONFIG: TECH STACK COUNT --- */
                 const ACTIVE_TECH_COUNT = 7; 
-                /* -------------------------------- */
                 
                 animateValue(statReposElem, 0, myRepos.length, 1500);
                 animateValue(statStarsElem, 0, stars, 1500);
@@ -1312,7 +1492,7 @@
                     });
 
                     if (response.ok) {
-                        showCyberToast("Wiadomość wysłana! Odezwę się wkrótce.");
+                        showCyberToast(currentLang === 'pl' ? "Wiadomość wysłana! Odezwę się wkrótce." : "Message sent! I will reply soon.");
                         contactForm.reset(); 
                         btn.innerText = "> SENT_SUCCESSFULLY";
                         btn.style.color = "#27c93f"; 
@@ -1322,7 +1502,7 @@
                     }
                 } catch (error) {
                     console.error("Error:", error);
-                    showCyberToast("Błąd połączenia. Spróbuj później.", true);
+                    showCyberToast(currentLang === 'pl' ? "Błąd połączenia. Spróbuj później." : "Connection error. Try again later.", true);
                     btn.innerText = "> ERROR: CONNECTION_FAILED";
                     btn.style.color = "#ff5f56";
                     btn.style.borderColor = "#ff5f56";
