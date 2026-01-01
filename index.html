@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -164,7 +165,6 @@
         .hero-content { z-index: 1; max-width: 750px; width: 100%; }
         .hero-content h1 { font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; font-weight: 800; color: #fff; }
         
-        /* Greeting white, Name green */
         .hero-content h1 span { color: #fff; text-shadow: none; }
         .hero-content h1 span#typed-name { color: var(--primary); text-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
 
@@ -299,45 +299,286 @@
         }
         .tech-item:hover { border-color: var(--secondary); color: var(--secondary); box-shadow: 0 0 10px rgba(0, 204, 255, 0.1); }
         
-        /* --- EXPERIENCE --- */
-        .circuit-container { display: flex; flex-direction: column; gap: 2rem; position: relative; padding-left: 40px; }
-        .circuit-container::before { content: ''; position: absolute; top: 0; left: 19px; width: 2px; height: 100%; background: var(--primary); opacity: 0.3; }
-        .exp-card {
-            background: rgba(15, 15, 15, 0.9); border: 1px solid rgba(255,255,255,0.1); padding: 2rem;
-            margin-left: 20px; position: relative; border-left: 4px solid var(--primary); transition: 0.3s; backdrop-filter: blur(5px);
+        /* --- NEW EXPERIENCE (TIMELINE) --- */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
         }
-        .exp-card:hover { transform: translateX(10px); background: #141414; box-shadow: 0 0 30px rgba(0,255,136,0.05); }
-        .exp-card::before {
-            content: ''; position: absolute; left: -46px; top: 30px; width: 12px; height: 12px; background: #000;
-            border: 2px solid var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); z-index: 2;
-        }
-        .exp-card::after { content: ''; position: absolute; left: -40px; top: 35px; width: 40px; height: 2px; background: var(--primary); opacity: 0.5; }
-        .exp-role { font-size: 1.5rem; color: #fff; font-weight: 700; }
-        .exp-company { font-family: var(--font-code); color: var(--primary); font-size: 0.9rem; margin-bottom: 1rem; display: block; }
-        .exp-list li { margin-bottom: 0.5rem; color: #aaa; list-style: none; display: flex; gap: 10px; }
-        .exp-list li::before { content: '>'; color: var(--primary); font-family: var(--font-code); }
 
-        /* --- EDUCATION --- */
-        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .edu-node {
-            background: rgba(0, 204, 255, 0.05); border: 1px solid rgba(0, 204, 255, 0.1);
-            padding: 2rem; text-align: center; position: relative; overflow: hidden;
-            transition: 0.3s; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            border-top: 2px solid var(--secondary); backdrop-filter: blur(5px);
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 3rem;
+            position: relative;
+            opacity: 0.9;
+            transition: 0.3s;
         }
-        .edu-node:hover {
-            background: rgba(0, 204, 255, 0.1); border-color: rgba(0, 204, 255, 0.4);
-            box-shadow: 0 0 30px rgba(0, 204, 255, 0.1); transform: translateY(-5px);
+
+        .timeline-item:hover { opacity: 1; }
+
+        .timeline-left {
+            flex: 0 0 140px;
+            text-align: right;
+            padding-top: 15px;
         }
-        .edu-node i { font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem; display: block;}
-        .edu-date { font-family: var(--font-code); font-size: 0.8rem; color: var(--secondary); opacity: 0.8; margin-bottom: 0.5rem; display: block;}
-        .edu-school { font-weight: 700; color: #fff; margin-bottom: 0.5rem; font-size: 1.2rem; }
-        .edu-name { color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem; display: block; }
-        .edu-data-panel { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed rgba(0, 204, 255, 0.3); text-align: left; }
-        .edu-data-title { font-family: var(--font-code); color: var(--secondary); font-size: 0.75rem; margin-bottom: 0.8rem; display: block; text-transform: uppercase; letter-spacing: 1px; }
-        .edu-list { list-style: none; font-family: var(--font-code); font-size: 0.85rem; color: #ccc; }
-        .edu-list li { margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px; }
-        .edu-list li::before { content: '+'; color: var(--secondary); }
+
+        .timeline-date {
+            font-family: var(--font-code);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .timeline-duration {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .timeline-divider {
+            position: relative;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #0a0a0a;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            z-index: 2;
+            transition: 0.3s;
+            box-shadow: 0 0 10px var(--primary-dim);
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            position: relative;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .timeline-item:hover .timeline-content {
+            border-color: var(--primary);
+            transform: translateX(5px);
+            background: rgba(25, 25, 25, 0.8);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: -6px;
+            width: 10px;
+            height: 10px;
+            background: rgba(20, 20, 20, 0.6);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transform: rotate(45deg);
+            transition: 0.3s;
+        }
+
+        .timeline-item:hover .timeline-content::before {
+            border-color: var(--primary);
+            background: rgba(25, 25, 25, 0.8);
+        }
+
+        .t-role {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .t-company {
+            font-family: var(--font-code);
+            color: var(--secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .t-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .t-list li {
+            color: #bbb;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .t-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-family: var(--font-code);
+            font-weight: bold;
+        }
+
+        .t-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .t-tag {
+            font-size: 0.75rem;
+            font-family: var(--font-code);
+            color: #888;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+        }
+
+        .timeline-item:hover .t-tag {
+            border-color: rgba(0, 255, 136, 0.2);
+            color: #ccc;
+        }
+
+        /* --- NEW EDUCATION (DATA CARDS) --- */
+        .edu-modern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .edu-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border-color: var(--secondary);
+        }
+
+        .edu-card.highlight {
+            border-color: var(--primary);
+            background: linear-gradient(180deg, rgba(0,255,136,0.03) 0%, rgba(15,15,15,0.9) 100%);
+        }
+
+        .edu-card.highlight:hover {
+            box-shadow: 0 15px 40px rgba(0,255,136,0.1);
+        }
+
+        .edu-top {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .edu-icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .edu-card.highlight .edu-icon-box { color: var(--primary); border-color: rgba(0,255,136,0.3); background: rgba(0,255,136,0.05); }
+        .edu-card:not(.highlight) .edu-icon-box { color: var(--secondary); border-color: rgba(0,204,255,0.3); }
+
+        .edu-status {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-active { color: var(--primary); background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2); animation: pulse-green 2s infinite; }
+        .status-done { color: var(--secondary); background: rgba(0,204,255,0.1); border: 1px solid rgba(0,204,255,0.2); }
+
+        @keyframes pulse-green { 0% {box-shadow: 0 0 0 0 rgba(0,255,136,0.4);} 70% {box-shadow: 0 0 0 6px rgba(0,255,136,0);} 100% {box-shadow: 0 0 0 0 rgba(0,255,136,0);} }
+
+        .edu-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edu-years {
+            font-family: var(--font-code);
+            color: #777;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-degree {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.2rem;
+            line-height: 1.3;
+        }
+
+        .edu-school-name {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .edu-details {
+            margin-top: auto;
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .edu-label {
+            display: block;
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
 
         /* --- COURSES --- */
         .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -527,11 +768,14 @@
             .about-img { width: 100%; max-width: 320px; height: auto; aspect-ratio: 4/5; }
             .section-title { font-size: 2rem; }
             .socials-grid, .downloads-grid { grid-template-columns: 1fr; }
-            .circuit-container { padding-left: 20px; }
-            .circuit-container::before { left: 9px; }
-            .exp-card { margin-left: 10px; padding: 1.5rem; }
-            .exp-card::before { left: -26px; }
-            .exp-card::after { left: -20px; width: 20px; }
+            
+            /* Timeline Mobile Fix */
+            .timeline-item { flex-direction: column; gap: 0; padding-left: 30px; margin-bottom: 2.5rem; }
+            .timeline-left { text-align: left; padding: 0; margin-bottom: 10px; flex: auto; }
+            .timeline-divider { position: absolute; left: 0; top: 0; height: 100%; }
+            .timeline-dot { left: -7px; top: 5px; transform: none; }
+            .timeline-content::before { display: none; }
+
             #scroll-top-btn { bottom: 20px; right: 20px; }
 
             .hamburger { display: flex; z-index: 2000; }
@@ -759,109 +1003,168 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience Section (Redesigned) -->
     <section id="experience">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_career_sub">CAREER PATH</div>
             <h2 class="section-title" data-lang-key="sect_exp">DOŚWIADCZENIE</h2>
         </div>
-        <div class="circuit-container">
-            <div class="exp-card">
-                <span class="exp-company">2024 - 2025 | DopeClub</span>
-                <div class="exp-role" data-lang-key="exp_1_role">Przedsiębiorca</div>
-                <ul class="exp-list" data-lang-key="exp_1_list">
-                    <li>Zarządzanie 10-osobowym zespołem (delegowanie, KPI).</li>
-                    <li>Optymalizacja Cashflow i analiza P&L.</li>
-                    <li>Wdrażanie automatyzacji procesów wewnętrznych (No-Code).</li>
-                    <li>Budowanie strategii retencji klientów.</li>
-                    <li>Implementacja systemu CRM i obiegu dokumentów.</li>
-                </ul>
+        
+        <div class="timeline-container">
+            <!-- Item 1 -->
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-date">2024 - 2025</div>
+                    <span class="timeline-duration">1 rok</span>
+                </div>
+                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-content">
+                    <h3 class="t-role" data-lang-key="exp_1_role">Przedsiębiorca</h3>
+                    <div class="t-company"><i class="fa-solid fa-building"></i> DopeClub</div>
+                    <ul class="t-list" data-lang-key="exp_1_list">
+                        <!-- Content from JS -->
+                    </ul>
+                    <div class="t-tags">
+                        <span class="t-tag">Management</span>
+                        <span class="t-tag">KPI & P&L</span>
+                        <span class="t-tag">No-Code</span>
+                        <span class="t-tag">CRM</span>
+                    </div>
+                </div>
             </div>
-            <div class="exp-card">
-                <span class="exp-company">2022 - 2025 | DopeDetailing</span>
-                <div class="exp-role" data-lang-key="exp_2_role">Przedsiębiorca</div>
-                <ul class="exp-list" data-lang-key="exp_2_list">
-                    <li>Social Media Marketing (Meta Ads, Content Strategy).</li>
-                    <li>Analiza danych sprzedażowych i optymalizacja konwersji (CRO).</li>
-                    <li>Budowanie wizerunku marki (Brand Identity).</li>
-                    <li>Sprzedaż B2C i obsługa klienta premium.</li>
-                </ul>
+
+            <!-- Item 2 -->
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-date">2022 - 2025</div>
+                    <span class="timeline-duration">3 lata</span>
+                </div>
+                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-content">
+                    <h3 class="t-role" data-lang-key="exp_2_role">Przedsiębiorca</h3>
+                    <div class="t-company"><i class="fa-solid fa-car"></i> DopeDetailing</div>
+                    <ul class="t-list" data-lang-key="exp_2_list">
+                         <!-- Content from JS -->
+                    </ul>
+                    <div class="t-tags">
+                        <span class="t-tag">Marketing (Ads)</span>
+                        <span class="t-tag">Data Analysis</span>
+                        <span class="t-tag">Sales B2C</span>
+                        <span class="t-tag">Branding</span>
+                    </div>
+                </div>
             </div>
-            <div class="exp-card">
-                <span class="exp-company">2018 - Obecnie | DopeShop</span>
-                <div class="exp-role" data-lang-key="exp_3_role">Projekt E-commerce</div>
-                <ul class="exp-list" data-lang-key="exp_3_list">
-                    <li>Logistyka i zarządzanie łańcuchem dostaw (Supply Chain).</li>
-                    <li>Obsługa systemów ERP i prognozowanie stanów magazynowych.</li>
-                    <li>Negocjacje B2B z dostawcami międzynarodowymi.</li>
-                    <li>Automatyzacja procesów sprzedażowych.</li>
-                    <li>Wykorzystanie ML do optymalizacji contentu i predykcji trendów wyszukiwania</li>
-                </ul>
+
+            <!-- Item 3 -->
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-date">2018 - NOW</div>
+                    <span class="timeline-duration">7 lat</span>
+                </div>
+                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-content">
+                    <h3 class="t-role" data-lang-key="exp_3_role">Projekt E-commerce</h3>
+                    <div class="t-company"><i class="fa-solid fa-store"></i> DopeShop</div>
+                    <ul class="t-list" data-lang-key="exp_3_list">
+                         <!-- Content from JS -->
+                    </ul>
+                    <div class="t-tags">
+                        <span class="t-tag">Supply Chain</span>
+                        <span class="t-tag">ML Prediction</span>
+                        <span class="t-tag">ERP</span>
+                        <span class="t-tag">Automation</span>
+                    </div>
+                </div>
             </div>
-            <div class="exp-card">
-                <span class="exp-company">2022 - 2023 | AS Lotus</span>
-                <div class="exp-role" data-lang-key="exp_4_role">Wsparcie Klienta</div>
-                <ul class="exp-list" data-lang-key="exp_4_list">
-                    <li>Diagnostyka sprzętowa i software'owa maszyn.</li>
-                    <li>Obsługa systemów ticketowych (Jira).</li>
-                    <li>Bezpośrednia komunikacja z klientem i rozwiązywanie problemów.</li>
-                </ul>
+
+            <!-- Item 4 -->
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <span class="timeline-duration">1 rok</span>
+                </div>
+                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-content">
+                    <h3 class="t-role" data-lang-key="exp_4_role">Wsparcie Klienta</h3>
+                    <div class="t-company"><i class="fa-solid fa-headset"></i> AS Lotus</div>
+                    <ul class="t-list" data-lang-key="exp_4_list">
+                         <!-- Content from JS -->
+                    </ul>
+                    <div class="t-tags">
+                        <span class="t-tag">Jira</span>
+                        <span class="t-tag">Hardware Diag</span>
+                        <span class="t-tag">Soft Skills</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
+    <!-- Education Section (Redesigned) -->
     <section id="education">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_kb_sub">KNOWLEDGE BASE</div>
             <h2 class="section-title" data-lang-key="sect_edu">EDUKACJA</h2>
         </div>
-        <div class="edu-grid">
-            <div class="edu-node">
-                <i class="fa-solid fa-microchip"></i>
-                <span class="edu-date" data-lang-key="edu_1_date">2025 - Obecnie</span>
-                <h3 class="edu-school" data-lang-key="edu_1_title">Inżynieria AI & ML</h3>
-                <span class="edu-name" data-lang-key="edu_1_school">Wyższa Szkoła Kształcenia Zawodowego</span>
-                <div class="edu-data-panel">
-                    <span class="edu-data-title">ACQUIRED_SKILLS:</span>
-                    <ul class="edu-list" data-lang-key="edu_1_list">
-                        <li>Neural Networks (CNN/RNN/Transformers)</li>
-                        <li>Deep Learning Frameworks (PyTorch/TensorFlow)</li>
-                        <li>Computer Vision & NLP Algorithms</li>
-                        <li>Data Science & Feature Engineering</li>
-                        <li>Matematyka: Algebra Liniowa, Statystyka</li>
-                    </ul>
+        
+        <div class="edu-modern-grid">
+            <!-- Edu 1 -->
+            <div class="edu-card highlight">
+                <div class="edu-top">
+                    <div class="edu-icon-box"><i class="fa-solid fa-microchip"></i></div>
+                    <span class="edu-status status-active" data-lang-key="status_progress">W TRAKCIE</span>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-years">2025 - Obecnie</div>
+                    <h3 class="edu-degree" data-lang-key="edu_1_title">Inżynieria AI & ML</h3>
+                    <div class="edu-school-name" data-lang-key="edu_1_school">Wyższa Szkoła Kształcenia Zawodowego</div>
+                    
+                    <div class="edu-details">
+                        <span class="edu-label">KEY_MODULES:</span>
+                        <ul class="edu-list" data-lang-key="edu_1_list">
+                            <!-- Content from JS -->
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="edu-node">
-                <i class="fa-solid fa-briefcase"></i>
-                <span class="edu-date">2021 - 2022</span>
-                <h3 class="edu-school" data-lang-key="edu_2_title">Zarządzanie</h3>
-                <span class="edu-name" data-lang-key="edu_2_school">Wyższa Szkoła Bankowa</span>
-                <div class="edu-data-panel">
-                    <span class="edu-data-title">COMPLETED_MODULES:</span>
-                    <ul class="edu-list" data-lang-key="edu_2_list">
-                        <li>Zarządzanie Zasobami Ludzkimi (HRM)</li>
-                        <li>Finanse Przedsiębiorstw i Controlling</li>
-                        <li>Prawo Gospodarcze</li>
-                        <li>Marketing Strategiczny</li>
-                        <li>Zarządzanie Projektami (Agile/Scrum Basics)</li>
-                    </ul>
+
+            <!-- Edu 2 -->
+            <div class="edu-card">
+                <div class="edu-top">
+                    <div class="edu-icon-box"><i class="fa-solid fa-user-tie"></i></div>
+                    <span class="edu-status status-done" data-lang-key="status_done">UKOŃCZONE</span>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-years">2021 - 2022</div>
+                    <h3 class="edu-degree" data-lang-key="edu_2_title">Zarządzanie</h3>
+                    <div class="edu-school-name" data-lang-key="edu_2_school">Wyższa Szkoła Bankowa</div>
+                    
+                    <div class="edu-details">
+                        <span class="edu-label">KEY_MODULES:</span>
+                        <ul class="edu-list" data-lang-key="edu_2_list">
+                             <!-- Content from JS -->
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="edu-node">
-                <i class="fa-solid fa-network-wired"></i>
-                <span class="edu-date">2017 - 2021</span>
-                <h3 class="edu-school" data-lang-key="edu_3_title">Technik Informatyk</h3>
-                <span class="edu-name" data-lang-key="edu_3_school">CKZiU nr 2 (Elektronik)</span>
-                <div class="edu-data-panel">
-                    <span class="edu-data-title">TECHNICAL_BASE:</span>
-                    <ul class="edu-list" data-lang-key="edu_3_list">
-                        <li>Diagnostyka i serwis sprzętu komputerowego</li>
-                        <li>Administracja Sieciami (LAN/WAN, Cisco)</li>
-                        <li>Systemy Operacyjne (Linux/Windows Server)</li>
-                        <li>Podstawy Baz Danych (SQL)</li>
-                    </ul>
+
+            <!-- Edu 3 -->
+            <div class="edu-card">
+                <div class="edu-top">
+                    <div class="edu-icon-box"><i class="fa-solid fa-server"></i></div>
+                    <span class="edu-status status-done" data-lang-key="status_done">UKOŃCZONE</span>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-years">2017 - 2021</div>
+                    <h3 class="edu-degree" data-lang-key="edu_3_title">Technik Informatyk</h3>
+                    <div class="edu-school-name" data-lang-key="edu_3_school">CKZiU nr 2 (Elektronik)</div>
+                    
+                    <div class="edu-details">
+                        <span class="edu-label">KEY_MODULES:</span>
+                        <ul class="edu-list" data-lang-key="edu_3_list">
+                             <!-- Content from JS -->
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1131,7 +1434,9 @@
                 ph_name: "Twoje Imię", ph_msg: "Treść wiadomości...", form_btn: " > WYŚLIJ_WIADOMOŚĆ",
                 ach_4_t: "Osiągnięcie: Ostateczny Boss?", ach_4_d: "Dotarto do sekcji kontaktowej.",
                 tech_ai_aug: "Programowanie Wspierane AI",
-                tech_excel: "Excel (Zaawansowany)"
+                tech_excel: "Excel (Zaawansowany)",
+                status_progress: "W TRAKCIE",
+                status_done: "UKOŃCZONE"
             },
             en: {
                 nav_about: "ABOUT", nav_skills: "SKILLS", nav_exp: "EXPERIENCE", nav_edu: "EDUCATION", nav_certs: "CERTS", nav_projects: "PROJECTS", nav_contact: "CONTACT",
@@ -1173,7 +1478,7 @@
                 sect_live: "LIVE DEPLOYMENTS", sect_proj: "Projects",
                 sect_hobby_sub: "PERSONAL INTERESTS", sect_hobby: "Hobbies & Passions",
                 hob_1: '<i class="fa-solid fa-brain"></i> AI & New Tech', hob_2: '<i class="fa-solid fa-gears"></i> Automations', hob_3: '<i class="fa-solid fa-code"></i> No-Code Apps', hob_4: '<i class="fa-solid fa-dumbbell"></i> Gym',
-                hob_5: '<i class="fa-solid fa-car"></i> Automotive', hob_6: '<i class="fa-solid fa-briefcase"></i> Business', hob_7: '<i class="fa-solid fa-chart-line"></i> Finance & Investing', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychology',
+                hob_5: '<i class="fa-solid fa-car"></i> Automotive', hob_6: '<i class="fa-solid fa-briefcase"></i> Business', hob_7: '<i class="fa-solid fa-chart-line"></i> Finance & Investing', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
                 sect_social_sub: "ESTABLISH UPLINK", sect_social: "Socials",
                 social_git: "Access Source Code & Repos", social_lin: "Check my Profile!",
                 sect_dl_sub: "OFFLINE DATA", sect_dl: "DOWNLOAD MY CV",
@@ -1183,7 +1488,9 @@
                 ph_name: "User Name", ph_msg: "Message content...", form_btn: " > SEND_MESSAGE",
                 ach_4_t: "Achievement: Final Boss?", ach_4_d: "Reached contact section.",
                 tech_ai_aug: "AI-Augmented Development",
-                tech_excel: "Excel (Advanced)"
+                tech_excel: "Excel (Advanced)",
+                status_progress: "IN PROGRESS",
+                status_done: "COMPLETED"
             }
         };
 
