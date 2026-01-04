@@ -759,6 +759,127 @@
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
         .bar { display: block; width: 25px; height: 3px; background-color: var(--primary); transition: all 0.3s ease; }
 
+/* --- DUAL TERMINAL ANIMATION (FIXED) --- */
+.terminal-wrapper {
+    /* Dopasowanie do rozmiaru, jaki miało wcześniej zdjęcie */
+    width: 100%;
+    max-width: 350px; /* Nieco szersze, żeby kod się ładnie mieścił */
+    height: 420px;    /* Nieco wyższe, żeby widać było cały kod */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;        /* Odstęp między terminalami */
+    flex-shrink: 0;
+    margin: 0 auto;   /* Wyśrodkowanie w kontenerze rodzica */
+}
+
+.mini-term {
+    flex: 1; /* Rozciągnij się, by wypełnić dostępne miejsce */
+    background: #0f0f0f;
+    border: 1px solid #333;
+    border-radius: 8px; /* Nieco mniejsze zaokrąglenie */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.mini-term:hover {
+    border-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.ai-term {
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
+}
+
+/* Pasek nagłówka terminala */
+.term-header {
+    background: #1a1a1a;
+    padding: 6px 10px; /* Mniejszy padding, więcej miejsca na kod */
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #222;
+    flex-shrink: 0; /* Nagłówek nie może się kurczyć */
+}
+
+.term-dots {
+    display: flex;
+    gap: 5px;
+    margin-right: 10px;
+}
+
+.term-dots .dot { width: 8px; height: 8px; border-radius: 50%; } /* Upewniamy się, że kropki są małe */
+
+.term-title {
+    font-family: var(--font-code);
+    font-size: 0.65rem;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+/* Obszar z kodem */
+.term-content {
+    padding: 12px;
+    font-family: var(--font-code);
+    font-size: 0.7rem; /* Idealny rozmiar dla kodu w małym oknie */
+    color: #ccc;
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: pre; /* KLUCZOWE: Zachowuje formatowanie jak w prawdziwym edytorze */
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start; /* Kod zaczyna się od góry */
+}
+
+.term-footer {
+    padding: 4px 10px;
+    font-family: var(--font-code);
+    font-size: 0.6rem;
+    color: #444;
+    text-align: right;
+    background: #111;
+    border-top: 1px solid #222;
+    flex-shrink: 0;
+}
+
+.code-output {
+    color: #a9b7c6;
+    display: inline-block;
+}
+
+.ai-term .code-output {
+    color: var(--primary);
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.2);
+}
+
+.cursor {
+    display: inline-block;
+    width: 5px;
+    height: 1em;
+    background: #ccc;
+    animation: blink 1s infinite;
+    vertical-align: bottom;
+    margin-left: 2px;
+}
+
+.ai-term .cursor { background: var(--primary); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Responsywność */
+@media (max-width: 900px) {
+    .terminal-wrapper {
+        width: 100%;
+        max-width: 100%; /* Na mobilu na całą szerokość */
+        height: 400px;
+        margin-bottom: 20px;
+    }
+}
+
         @media (max-width: 900px) {
             :root { --section-spacing: 60px; }
             #home { flex-direction: column-reverse; text-align: center; padding-top: 100px; padding-bottom: 50px; }
@@ -931,13 +1052,41 @@
     <!-- Profile Section -->
     <section id="about">
         <div class="section-header">
-            <div class="section-subtitle" data-lang-key="sect_who">KIM JESTEM</div>
-            <h2 class="section-title" data-lang-key="sect_profile">Profil</h2>
+            <div class="section-subtitle" data-lang-key="sect_who">CO ROBIĘ</div>
+            <h2 class="section-title" data-lang-key="sect_profile">O MNIE</h2>
         </div>
         <div class="about-tech-card">
-            <div class="about-image-wrapper">
-                <img src="cvhtmlphoto.png" alt="About" class="about-img" loading="lazy" onload="this.classList.add('lazy-loaded')">
+           <div class="about-image-wrapper terminal-wrapper">
+    
+    <!-- Terminal 1: Human (Slow) -->
+    <div class="mini-term human-term">
+        <div class="term-header">
+            <div class="term-dots">
+                <div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div>
             </div>
+            <span class="term-title">dev@human:~/logic</span>
+        </div>
+        <div class="term-content">
+            <span class="code-output" id="code-human"></span><span class="cursor">|</span>
+        </div>
+        <div class="term-footer">SPEED: 10 wpm (Manual)</div>
+    </div>
+
+    <!-- Terminal 2: AI (Fast) -->
+    <div class="mini-term ai-term">
+        <div class="term-header">
+            <div class="term-dots">
+                <div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div>
+            </div>
+            <span class="term-title">ai@llm:~/generation</span>
+        </div>
+        <div class="term-content">
+            <span class="code-output" id="code-ai"></span><span class="cursor">|</span>
+        </div>
+        <div class="term-footer" style="color: var(--primary);">SPEED: 1500 wpm (AI Augmented)</div>
+    </div>
+
+</div>
             <div class="about-text">
                 <h3>"Data-driven logic, <span>AI-powered execution</span>."</h3>
                 
@@ -985,7 +1134,7 @@
             </div>
             <div class="why-card secondary">
                 <h5><i class="fa-solid fa-rocket" style="color:var(--secondary); margin-right:10px;"></i> <span data-lang-key="why_2_h">Szybkie Wdrożenia</span></h5>
-                <p data-lang-key="why_2_p">Łączę Python z narzędziami No-Code (n8n, Make), aby dostarczać działające MVP w dni, a nie w miesiące.</p>
+                <p data-lang-key="why_2_p">Łączę wiedzę z LLM, aby dostarczać działające MVP w dni, a nie w miesiące.</p>
             </div>
         </div>
     </div>
@@ -1430,13 +1579,13 @@
                 hero_btn_projects: "ZOBACZ PROJEKTY",
                 hero_btn_resume: "POBIERZ CV",
                 stat_repos: "Repozytoria", stat_stars: "Gwiazdki", stat_stack: "Technologie", stat_loc: "Linii Kodu", stat_tokens: "Tokeny LLM", stat_models: "Modele AI",
-                sect_who: "KIM JESTEM", sect_profile: "Profil",
+                sect_who: "CO ROBIĘ", sect_profile: "O MNIE",
                 vibe_desc: "Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>Skupienie na architekturze i logice biznesowej.",
                 about_bio: "Inżynier AI i Automatyzacji łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.",
                 soft_label: "KOMPETENCJE MIĘKKIE:",
                 soft_1: "Samodzielność", soft_2: "Komunikatywność", soft_3: "Organizacja pracy", soft_4: "Kreatywność", soft_5: "Zarządzanie", soft_6: "Nieszablonowe myślenie", soft_7: "Analityczne myślenie", soft_8: "Odporność na stres", soft_9: "Angielski (B2/C1)",
                 why_1_h: "Biznes + Technologia", why_1_p: "Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.",
-                why_2_h: "Szybkie Wdrożenia", why_2_p: "Łączę Python z narzędziami No-Code (n8n, Make), aby dostarczać działające MVP w dni, a nie w miesiące.",
+                why_2_h: "Szybkie Wdrożenia", why_2_p: "Łączę wiedzę z LLM, aby dostarczać działające MVP w dni, a nie w miesiące.",
                 sect_tech_sub: "WIEDZA TECHNICZNA", sect_hard_skills: "UMIEJĘTNOŚCI TWARDE",
                 sect_career_sub: "ŚCIEŻKA KARIERY", sect_exp: "DOŚWIADCZENIE",
                 exp_1_role: "Przedsiębiorca",
@@ -1484,13 +1633,13 @@
                 hero_btn_projects: "EXPLORE PROJECTS",
                 hero_btn_resume: "GET RESUME",
                 stat_repos: "Repositories", stat_stars: "Total Stars", stat_stack: "Tech Stack", stat_loc: "Lines of Code", stat_tokens: "LLM Tokens", stat_models: "AI Models Trained",
-                sect_who: "WHO AM I", sect_profile: "Profile",
+                sect_who: "WHAT I DO", sect_profile: "ABOUT ME",
                 vibe_desc: "Faster delivery of solutions through LLM integration in workflow.<br>Focus on architecture and business logic.",
                 about_bio: "AI & Automation Engineer combining technical skills with business thinking. Experience in Python, Machine Learning, and e-commerce operations management allows me to design and implement solutions that address real organizational needs and deliver tangible results.",
                 soft_label: "CORE SOFT SKILLS:",
                 soft_1: "Independence", soft_2: "Communication", soft_3: "Work Organization", soft_4: "Creativity", soft_5: "Management", soft_6: "Out-of-box Thinking", soft_7: "Analytical Thinking", soft_8: "Stress Resistance", soft_9: "English (B2/C1)",
                 why_1_h: "Business + Technology", why_1_p: "I don't just write code. I understand P&L, ROI, and sales processes. I create solutions that actually earn or save money.",
-                why_2_h: "Rapid Deployment", why_2_p: "I combine Python with No-Code tools (n8n, Make) to deliver working MVPs in days, not months.",
+                why_2_h: "Rapid Deployment", why_2_p: "I combine knowledge with LLM's to deliver working MVPs in days, not months.",
                 sect_tech_sub: "TECHNOLOGY KNOWLEDGE", sect_hard_skills: "HARD SKILLS",
                 sect_career_sub: "CAREER PATH", sect_exp: "EXPERIENCE",
                 exp_1_role: "Entrepreneur",
@@ -1925,6 +2074,73 @@
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
         }));
+
+/* --- DUAL TERMINAL TYPING LOGIC --- */
+
+// Kod zoptymalizowany pod szerokość okna
+const humanCode = `names = ["Anna", "Tom"]
+msgs = []
+
+# Formatting strings...
+for name in names:
+    txt = "Hello " + name
+    msgs.append(txt)
+    
+print(msgs)`;
+
+const aiCode = `names = ["Anna", "Tom"]
+
+# Fast generation with f-strings
+msgs = [f"Hello {name}" for name in names]
+
+print(msgs)
+# Done.`;
+
+async function typeWriterEffect(elementId, text, speedMin, speedMax) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    element.textContent = "";
+    
+    for (let i = 0; i < text.length; i++) {
+        element.textContent += text.charAt(i);
+        
+        // Losowa prędkość
+        const delay = Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
+        await new Promise(r => setTimeout(r, delay));
+    }
+}
+
+async function runTerminalLoop() {
+    const humanEl = document.getElementById('code-human');
+    const aiEl = document.getElementById('code-ai');
+    
+    if(!humanEl || !aiEl) return;
+
+    while(true) {
+        // 1. Reset
+        humanEl.textContent = "";
+        aiEl.textContent = "";
+        
+        // 2. Start
+        const humanPromise = typeWriterEffect('code-human', humanCode, 50, 150);
+        
+        await new Promise(r => setTimeout(r, 500)); 
+        const aiPromise = typeWriterEffect('code-ai', aiCode, 5, 20);
+        
+        await Promise.all([humanPromise, aiPromise]);
+        
+        // 3. Dłuższa pauza, żeby użytkownik zdążył przeczytać
+        await new Promise(r => setTimeout(r, 4000));
+    }
+}
+
+// Uruchomienie
+window.addEventListener('load', () => {
+    // Inne funkcje...
+    setTimeout(runTerminalLoop, 1000); 
+});
+
     </script>
 </body>
 </html>
