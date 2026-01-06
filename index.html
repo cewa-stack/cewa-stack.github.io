@@ -690,6 +690,15 @@
         .social-card.linkedin:hover { border-color: var(--secondary); box-shadow: 0 0 30px rgba(0, 204, 255, 0.15); transform: translateY(-5px); }
         .social-card.linkedin:hover .social-icon-box { color: var(--secondary); border-color: var(--secondary); }
         .social-card.linkedin:hover .social-status { color: var(--secondary); opacity: 1; transform: translateX(0); }
+
+        /* --- Dodane style dla Kaggle i Hugging Face --- */
+        .social-card.kaggle:hover { border-color: #20BEFF; box-shadow: 0 0 30px rgba(32, 190, 255, 0.15); transform: translateY(-5px); }
+        .social-card.kaggle:hover .social-icon-box { color: #20BEFF; border-color: #20BEFF; }
+        .social-card.kaggle:hover .social-status { color: #20BEFF; opacity: 1; transform: translateX(0); }
+
+        .social-card.huggingface:hover { border-color: #FFD21E; box-shadow: 0 0 30px rgba(255, 210, 30, 0.15); transform: translateY(-5px); }
+        .social-card.huggingface:hover .social-icon-box { color: #FFD21E; border-color: #FFD21E; }
+        .social-card.huggingface:hover .social-status { color: #FFD21E; opacity: 1; transform: translateX(0); }
         
         .download-card.pdf:hover { border-color: var(--primary); box-shadow: 0 0 30px rgba(0, 255, 136, 0.15); transform: translateY(-5px); }
         .download-card.pdf:hover .download-icon-box { color: var(--primary); border-color: var(--primary); }
@@ -1485,6 +1494,25 @@
                 </div>
                 <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
+
+            <!-- NOWE PRZYCISKI -->
+            <a href="https://www.kaggle.com/cewastack" target="_blank" class="social-card kaggle">
+                <div class="social-icon-box"><i class="fa-brands fa-kaggle"></i></div>
+                <div class="social-info">
+                    <h3>Kaggle</h3>
+                    <p data-lang-key="social_kag">Notebooki i Zbiory Danych</p>
+                </div>
+                <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <a href="https://huggingface.co/cewastack" target="_blank" class="social-card huggingface">
+                <div class="social-icon-box"><i class="fa-solid fa-brain"></i></div>
+                <div class="social-info">
+                    <h3>Hugging Face</h3>
+                    <p data-lang-key="social_hf">Modele i Space'y</p>
+                </div>
+                <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
         </div>
     </section>
 
@@ -1615,6 +1643,7 @@
                 hob_5: '<i class="fa-solid fa-car"></i> Motoryzacja', hob_6: '<i class="fa-solid fa-briefcase"></i> Biznes', hob_7: '<i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
                 sect_social_sub: "SOCIALE", sect_social: "Media Społecznościowe",
                 social_git: "Dostęp do repozytoriów i kodu", social_lin: "Sprawdź mój profil zawodowy",
+                social_kag: "Notebooki i Zbiory Danych", social_hf: "Modele i Space'y",
                 sect_dl_sub: "PLIKI DO POBRANIA", sect_dl: "Pobierz moje CV",
                 dl_desc: "PODGLĄD / POBIERANIE / DRUK", dl_desc_2: "POBIERANIE / EDYCJA / DRUK",
                 sect_contact_sub: "KONTAKT", sect_contact: "Napisz do mnie!",
@@ -1669,6 +1698,7 @@
                 hob_5: '<i class="fa-solid fa-car"></i> Automotive', hob_6: '<i class="fa-solid fa-briefcase"></i> Business', hob_7: '<i class="fa-solid fa-chart-line"></i> Finance & Investing', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
                 sect_social_sub: "ESTABLISH UPLINK", sect_social: "Socials",
                 social_git: "Access Source Code & Repos", social_lin: "Check my Profile!",
+                social_kag: "Notebooks & Datasets", social_hf: "Models, Spaces & Datasets",
                 sect_dl_sub: "OFFLINE DATA", sect_dl: "DOWNLOAD MY CV",
                 dl_desc: "VIEW ONLINE / DOWNLOAD / PRINT", dl_desc_2: "DOWNLOAD / PRINT",
                 sect_contact_sub: "INITIATE CONNECTION", sect_contact: "CONTACT WITH ME",
