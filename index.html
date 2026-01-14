@@ -296,15 +296,12 @@
         .why-card p { font-size: 0.95rem; color: #bbb; line-height: 1.6; }
 
         /* --- TECH STACK --- */
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .tech-grid {  display: grid;  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));   gap: 2rem;}
         .tech-card { background: rgba(20, 20, 20, 0.5); border: 1px solid rgba(255,255,255,0.05); padding: 2rem; border-radius: 16px; }
         .tech-card h4 { color: #fff; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; font-family: var(--font-code); text-transform: uppercase; letter-spacing: 1px; font-size: 1rem; }
         .tech-card h4 i { color: var(--secondary); }
         .tech-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .tech-item {
-            background: rgba(0, 204, 255, 0.05); border: 1px solid rgba(0, 204, 255, 0.15); color: #ccc;
-            padding: 6px 14px; border-radius: 4px; font-size: 0.85rem; font-family: var(--font-code); transition: 0.3s;
-        }
+        .tech-item {  background: rgba(0, 204, 255, 0.05); border: 1px solid rgba(0, 204, 255, 0.15); color: #ccc;  padding: 6px 14px; border-radius: 4px; font-size: 0.85rem; font-family: var(--font-code); transition: 0.3s;}   
         .tech-item:hover { border-color: var(--secondary); color: var(--secondary); box-shadow: 0 0 10px rgba(0, 204, 255, 0.1); }
         
         /* --- NEW EXPERIENCE (TIMELINE) --- */
@@ -1137,7 +1134,7 @@
                 </div>
 
                 <p data-lang-key="about_bio">
-                    Inżynier AI i Automatyzacji łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.
+                    Inżynier AI i Machine Learning łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.
                 </p>
                 <div>
                     <span class="skills-label" data-lang-key="soft_label">CORE SOFT SKILLS:</span>
@@ -1179,45 +1176,52 @@
         </div>
 
         <div class="tech-grid">
+            <!-- 1. AI & ML -->
             <div class="tech-card">
-                <h4><i class="fa-solid fa-code"></i> AI & Development</h4>
+                <h4 data-lang-key="cat_ml_ai"><i class="fa-solid fa-brain"></i> Machine Learning & AI</h4>
+                <div class="tech-list">
+                    <span class="tech-item">LLMs & RAG</span>
+                    <span class="tech-item">PyTorch / TensorFlow</span>
+                    <span class="tech-item">Computer Vision</span>
+                    <span class="tech-item">NLP & Transformers</span>
+                    <span class="tech-item">OpenAI / Gemini API</span>
+                    <span class="tech-item">Ollama (Local LLM)</span>
+                </div>
+            </div>
+
+            <!-- 2. Python & Backend -->
+            <div class="tech-card">
+                <h4 data-lang-key="cat_python_dev"><i class="fa-solid fa-code"></i> Python & Dev</h4>
                 <div class="tech-list">
                     <span class="tech-item">Python</span>
-                    <span class="tech-item" data-lang-key="tech_ai_aug">AI-Augmented Development</span>
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">OpenAI API</span>
-                    <span class="tech-item">Gemini API</span>
-                    <span class="tech-item">Google API</span>
-                    <span class="tech-item">Chat AI</span>
-                    <span class="tech-item">GitHub</span>
-                    <span class="tech-item">Git</span>
+                    <span class="tech-item">FastAPI / Django</span>
+                    <span class="tech-item">SQL / NoSQL</span>
+                    <span class="tech-item">Vector Databases</span>
                     <span class="tech-item">C++</span>
-                    <span class="tech-item">HTML</span>
-                    <span class="tech-item">Ollama</span>
-                    <span class="tech-item">ngrok</span>
-                    <span class="tech-item">anaconda</span>
-                    <span class="tech-item">Arduino</span>                    
+                    <span class="tech-item">JavaScript</span>
                 </div>
             </div>
 
+            <!-- 3. Cloud & Data -->
             <div class="tech-card">
-                <h4><i class="fa-solid fa-gears"></i> Automation & No-Code</h4>
+                <h4 data-lang-key="cat_cloud_data"><i class="fa-solid fa-cloud"></i> Cloud & Data</h4>
                 <div class="tech-list">
-                    <span class="tech-item">n8n</span>
-                    <span class="tech-item">Make.com</span>
-                    <span class="tech-item">Glide Apps</span>
-                    <span class="tech-item">Airtable</span>
-                    <span class="tech-item">Tally Forms</span>
+                    <span class="tech-item">Pandas & NumPy</span>
+                    <span class="tech-item">Data Analysis</span>
+                    <span class="tech-item">Statistics</span>
+                    <span class="tech-item">Web Scraping</span>
                 </div>
             </div>
 
+            <!-- 4. Infra & Automation -->
             <div class="tech-card">
-                <h4><i class="fa-solid fa-briefcase"></i> Business & Tools</h4>
+                <h4 data-lang-key="cat_infra_ops"><i class="fa-solid fa-server"></i> Infrastructure & Automation/h4>
                 <div class="tech-list">
-                    <span class="tech-item">Microsoft Office</span>
-                    <span class="tech-item" data-lang-key="tech_excel">Excel (Advanced)</span>
-                    <span class="tech-item">SEO</span>
-                    <span class="tech-item">Copywriting</span>
+                    <span class="tech-item">Docker</span>
+                    <span class="tech-item">Git</span>
+                    <span class="tech-item">Linux / Bash</span>
+                    <span class="tech-item">n8n / Make.com</span>
+                    <span class="tech-item">MLflow</span>
                 </div>
             </div>
         </div>
@@ -1632,12 +1636,20 @@
                 stat_repos: "Repozytoria", stat_stars: "Gwiazdki", stat_stack: "Technologie", stat_loc: "Linii Kodu", stat_tokens: "Tokeny LLM", stat_models: "Modele AI",
                 sect_who: "CO ROBIĘ", sect_profile: "O MNIE",
                 vibe_desc: "Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>Skupienie na architekturze i logice biznesowej.",
-                about_bio: "Inżynier AI i Automatyzacji łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.",
+                about_bio: "Inżynier AI i Uczenia maszynowego łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.",
                 soft_label: "KOMPETENCJE MIĘKKIE:",
                 soft_1: "Samodzielność", soft_2: "Komunikatywność", soft_3: "Organizacja pracy", soft_4: "Kreatywność", soft_5: "Zarządzanie", soft_6: "Nieszablonowe myślenie", soft_7: "Analityczne myślenie", soft_8: "Odporność na stres", soft_9: "Angielski (B2/C1)",
                 why_1_h: "Biznes + Technologia", why_1_p: "Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.",
                 why_2_h: "Szybkie Wdrożenia", why_2_p: "Łączę wiedzę z LLM, aby dostarczać działające MVP w dni, a nie w miesiące.",
-                sect_tech_sub: "WIEDZA TECHNICZNA", sect_hard_skills: "UMIEJĘTNOŚCI TWARDE",
+                
+                // --- NOWE KATEGORIE UMIEJĘTNOŚCI ---
+                sect_tech_sub: "TECHNOLOGIE", sect_hard_skills: "KOMPETENCJE TECHNICZNE",
+                cat_ml_ai: '<i class="fa-solid fa-brain"></i> Uczenie Maszynowe & AI',
+                cat_python_dev: '<i class="fa-solid fa-code"></i> Python & Dev',
+                cat_cloud_data: '<i class="fa-solid fa-cloud"></i> Chmura & Dane',
+                cat_infra_ops: '<i class="fa-solid fa-server"></i> Infrastruktura i Automatyzacje',
+                // ------------------------------------
+
                 sect_career_sub: "ŚCIEŻKA KARIERY", sect_exp: "DOŚWIADCZENIE",
                 exp_1_role: "Przedsiębiorca",
                 exp_1_list: "<li>Zarządzanie 10-osobowym zespołem (delegowanie, KPI).</li><li>Optymalizacja Cashflow i analiza P&L.</li><li>Wdrażanie automatyzacji procesów wewnętrznych (No-Code).</li><li>Budowanie strategii retencji klientów.</li><li>Implementacja systemu CRM i obiegu dokumentów.</li>",
@@ -1687,12 +1699,20 @@
                 stat_repos: "Repositories", stat_stars: "Total Stars", stat_stack: "Tech Stack", stat_loc: "Lines of Code", stat_tokens: "LLM Tokens", stat_models: "AI Models Trained",
                 sect_who: "WHAT I DO", sect_profile: "ABOUT ME",
                 vibe_desc: "Faster delivery of solutions through LLM integration in workflow.<br>Focus on architecture and business logic.",
-                about_bio: "AI & Automation Engineer combining technical skills with business thinking. Experience in Python, Machine Learning, and e-commerce operations management allows me to design and implement solutions that address real organizational needs and deliver tangible results.",
+                about_bio: "AI & Machine Learning Engineer combining technical skills with business thinking. Experience in Python, Machine Learning, and e-commerce operations management allows me to design and implement solutions that address real organizational needs and deliver tangible results.",
                 soft_label: "CORE SOFT SKILLS:",
                 soft_1: "Independence", soft_2: "Communication", soft_3: "Work Organization", soft_4: "Creativity", soft_5: "Management", soft_6: "Out-of-box Thinking", soft_7: "Analytical Thinking", soft_8: "Stress Resistance", soft_9: "English (B2/C1)",
                 why_1_h: "Business + Technology", why_1_p: "I don't just write code. I understand P&L, ROI, and sales processes. I create solutions that actually earn or save money.",
                 why_2_h: "Rapid Deployment", why_2_p: "I combine knowledge with LLM's to deliver working MVPs in days, not months.",
+                
+                // --- NOWE KATEGORIE EN ---
                 sect_tech_sub: "TECHNOLOGY KNOWLEDGE", sect_hard_skills: "HARD SKILLS",
+                cat_ml_ai: '<i class="fa-solid fa-brain"></i> Machine Learning & AI',
+                cat_python_dev: '<i class="fa-solid fa-code"></i> Python & Dev',
+                cat_cloud_data: '<i class="fa-solid fa-cloud"></i> Cloud & Data',
+                cat_infra_ops: '<i class="fa-solid fa-server"></i> Infrastructure & Automations',
+                // -------------------------
+
                 sect_career_sub: "CAREER PATH", sect_exp: "EXPERIENCE",
                 exp_1_role: "Entrepreneur",
                 exp_1_list: "<li>Managing a 10-person team (delegation, KPIs).</li><li>Cashflow optimization and P&L analysis.</li><li>Implementing internal process automation (No-Code).</li><li>Building customer retention strategies.</li><li>Implementing CRM and document workflow systems.</li>",
@@ -1749,7 +1769,8 @@
             document.querySelectorAll('[data-lang-key]').forEach(el => {
                 const key = el.getAttribute('data-lang-key');
                 if(data[key]) {
-                    if(key.includes('list') || key.includes('vibe') || key.includes('hob')) {
+                    // FIX: Dodano 'cat' do warunku, aby nagłówki kategorii interpretowały HTML
+                    if(key.includes('list') || key.includes('vibe') || key.includes('hob') || key.includes('cat')) {
                         el.innerHTML = data[key]; 
                     } else {
                         el.textContent = data[key]; 
@@ -1795,7 +1816,7 @@
 
             // Simulated Loading
             const interval = setInterval(() => {
-                width += Math.random() * 5 + 1;
+                width += Math.random() * 10 + 5;
                 if(width > 100) width = 100;
                 bar.style.width = width + '%';
 
@@ -1819,9 +1840,9 @@
                         initFunStats();
                         initGamification();
 
-                    }, 500);
+                    }, 200);
                 }
-            }, 50);
+            }, 30);
         });
 
         // --- Visual Effects & Interactivity ---
@@ -2128,10 +2149,10 @@
             navMenu.classList.remove("active");
         }));
 
-/* --- DUAL TERMINAL TYPING LOGIC --- */
+        /* --- DUAL TERMINAL TYPING LOGIC --- */
 
-// Kod zoptymalizowany pod szerokość okna
-const humanCode = `names = ["Anna", "Tom"]
+        // Kod zoptymalizowany pod szerokość okna
+        const humanCode = `names = ["Anna", "Tom"]
 msgs = []
 
 # Formatting strings...
@@ -2141,7 +2162,7 @@ for name in names:
     
 print(msgs)`;
 
-const aiCode = `names = ["Anna", "Tom"]
+        const aiCode = `names = ["Anna", "Tom"]
 
 # Fast generation with f-strings
 msgs = [f"Hello {name}" for name in names]
@@ -2149,51 +2170,48 @@ msgs = [f"Hello {name}" for name in names]
 print(msgs)
 # Done.`;
 
-async function typeWriterEffect(elementId, text, speedMin, speedMax) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
-    
-    element.textContent = "";
-    
-    for (let i = 0; i < text.length; i++) {
-        element.textContent += text.charAt(i);
-        
-        // Losowa prędkość
-        const delay = Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
-        await new Promise(r => setTimeout(r, delay));
-    }
-}
+        async function typeWriterEffect(elementId, text, speedMin, speedMax) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            element.textContent = "";
+            
+            for (let i = 0; i < text.length; i++) {
+                element.textContent += text.charAt(i);
+                
+                // Losowa prędkość
+                const delay = Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
+                await new Promise(r => setTimeout(r, delay));
+            }
+        }
 
-async function runTerminalLoop() {
-    const humanEl = document.getElementById('code-human');
-    const aiEl = document.getElementById('code-ai');
-    
-    if(!humanEl || !aiEl) return;
+        async function runTerminalLoop() {
+            const humanEl = document.getElementById('code-human');
+            const aiEl = document.getElementById('code-ai');
+            
+            if(!humanEl || !aiEl) return;
 
-    while(true) {
-        // 1. Reset
-        humanEl.textContent = "";
-        aiEl.textContent = "";
-        
-        // 2. Start
-        const humanPromise = typeWriterEffect('code-human', humanCode, 50, 150);
-        
-        await new Promise(r => setTimeout(r, 500)); 
-        const aiPromise = typeWriterEffect('code-ai', aiCode, 5, 20);
-        
-        await Promise.all([humanPromise, aiPromise]);
-        
-        // 3. Dłuższa pauza, żeby użytkownik zdążył przeczytać
-        await new Promise(r => setTimeout(r, 4000));
-    }
-}
+            while(true) {
+                // 1. Reset
+                humanEl.textContent = "";
+                aiEl.textContent = "";
+                
+                // 2. Start
+                const humanPromise = typeWriterEffect('code-human', humanCode, 50, 150);
+                
+                await new Promise(r => setTimeout(r, 500)); 
+                const aiPromise = typeWriterEffect('code-ai', aiCode, 5, 20);
+                
+                await Promise.all([humanPromise, aiPromise]);
+                
+                // 3. Dłuższa pauza, żeby użytkownik zdążył przeczytać
+                await new Promise(r => setTimeout(r, 4000));
+            }
+        }
 
-// Uruchomienie
-window.addEventListener('load', () => {
-    // Inne funkcje...
-    setTimeout(runTerminalLoop, 1000); 
-});
+        // Uruchomienie
+        window.addEventListener('load', () => {
+            setTimeout(runTerminalLoop, 1000); 
+        });
 
     </script>
-</body>
-</html>
