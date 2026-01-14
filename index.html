@@ -1886,6 +1886,7 @@
         const humanCode = 
 `names = ["Anna", "Tom"]
 msgs = []
+
 # Formatting strings...
 for name in names:
 txt = "Hello " + name
@@ -1894,6 +1895,7 @@ print(msgs)`;
 
         const aiCode = 
 `names = ["Anna", "Tom"]
+
 # Fast generation with f-strings
 msgs = [f"Hello {name}" for name in names]
 print(msgs)
