@@ -115,6 +115,24 @@
             100% { text-shadow: 2px -2px var(--secondary); transform: translate(0,0); }
         }
 
+        /* --- SCROLL REVEAL ANIMATION (NEW) --- */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal-item.reveal-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered delays for grid items */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
         /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 1.5rem 5%;
@@ -371,8 +389,6 @@
             font-family: var(--font-code);
         }
 
-        /* Usunięto styl flip-hint */
-
         /* BACK */
         .flip-back {
             background: linear-gradient(145deg, rgba(15,15,15,0.95), rgba(25,25,25,0.95));
@@ -428,47 +444,6 @@
         .timeline-item:hover .t-tag { border-color: rgba(0, 255, 136, 0.2); color: #ccc; }
 
         /* --- EDUCATION --- */
-        .edu-modern-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
-        .edu-card {
-            background: rgba(15, 15, 15, 0.8); border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px; padding: 0; overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; display: flex; flex-direction: column;
-        }
-        .edu-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); border-color: var(--secondary); }
-        
-        /* ZMIANA: Highlight (Active) teraz używa koloru niebieskiego (secondary) */
-        .edu-card.highlight { border-color: var(--secondary); background: linear-gradient(180deg, rgba(0,204,255,0.03) 0%, rgba(15,15,15,0.9) 100%); }
-        .edu-card.highlight:hover { box-shadow: 0 15px 40px rgba(0,204,255,0.1); }
-        
-        .edu-top { padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: flex-start; }
-        
-        .edu-icon-box { width: 50px; height: 50px; background: rgba(255,255,255,0.03); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #fff; border: 1px solid rgba(255,255,255,0.1); }
-        
-        /* ZMIANA: Highlight/Active ikonka jest niebieska */
-        .edu-card.highlight .edu-icon-box { color: var(--secondary); border-color: rgba(0,204,255,0.3); background: rgba(0,204,255,0.05); }
-        /* ZMIANA: Not Highlight/Done ikonka jest zielona */
-        .edu-card:not(.highlight) .edu-icon-box { color: var(--primary); border-color: rgba(0,255,136,0.3); }
-
-        .edu-status { font-family: var(--font-code); font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* ZMIANA: Active -> Niebieski */
-        .status-active { color: var(--secondary); background: rgba(0,204,255,0.1); border: 1px solid rgba(0,204,255,0.2); animation: pulse-blue 2s infinite; }
-        /* ZMIANA: Done -> Zielony */
-        .status-done { color: var(--primary); background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2); }
-        
-        /* ZMIANA: Animacja pulsu na niebiesko */
-        @keyframes pulse-blue { 0% {box-shadow: 0 0 0 0 rgba(0,204,255,0.4);} 70% {box-shadow: 0 0 0 6px rgba(0,204,255,0);} 100% {box-shadow: 0 0 0 0 rgba(0,204,255,0);} }
-
-        .edu-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .edu-years { font-family: var(--font-code); color: #777; font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .edu-degree { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; line-height: 1.3; }
-        .edu-school-name { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
-        
-        .edu-details { margin-top: auto; background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
-        .edu-label { display: block; font-family: var(--font-code); font-size: 0.7rem; color: #666; margin-bottom: 8px; text-transform: uppercase; }
-
-/* --- EDUCATION (POPRAWIONE) --- */
         .edu-modern-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
         
         .edu-card {
@@ -854,28 +829,28 @@
             </div>
 
             <div class="hero-dashboard">
-                <div class="dash-item">
+                <div class="dash-item reveal-item delay-100">
                     <div class="dash-label"><i class="fa-solid fa-code-branch"></i> <span data-lang-key="stat_repos">Repositories</span></div>
                     <span class="dash-num" id="stat-repos">0</span>
                 </div>
-                <div class="dash-item">
+                <div class="dash-item reveal-item delay-200">
                     <div class="dash-label"><i class="fa-solid fa-star"></i> <span data-lang-key="stat_stars">Total Stars</span></div>
                     <span class="dash-num" id="stat-stars">0</span>
                 </div>
-                <div class="dash-item">
+                <div class="dash-item reveal-item delay-300">
                     <div class="dash-label"><i class="fa-solid fa-layer-group"></i> <span data-lang-key="stat_stack">Tech Stack</span></div>
                     <span class="dash-num" id="stat-tech">0</span>
                 </div>
                 
-                <div class="dash-item">
+                <div class="dash-item reveal-item delay-100">
                     <div class="dash-label"><i class="fa-solid fa-file-code"></i> <span data-lang-key="stat_loc">Lines of Code</span> <span class="live-dot"></span></div>
                     <span class="dash-num" id="stat-loc">1K+</span>
                 </div>
-                <div class="dash-item">
+                <div class="dash-item reveal-item delay-200">
                     <div class="dash-label"><i class="fa-solid fa-microchip"></i> <span data-lang-key="stat_tokens">LLM Tokens</span></div>
                    <span class="dash-num" id="stat-tokens">0</span>
                 </div>
-                <div class="dash-item">
+                <div class="dash-item reveal-item delay-300">
                     <div class="dash-label"><i class="fa-solid fa-robot"></i> <span data-lang-key="stat_models">AI Models Trained</span></div>
                     <span class="dash-num">4</span>
                 </div>
@@ -895,7 +870,7 @@
             <div class="section-subtitle" data-lang-key="sect_who">CO ROBIĘ</div>
             <h2 class="section-title" data-lang-key="sect_profile">O MNIE</h2>
         </div>
-        <div class="about-tech-card">
+        <div class="about-tech-card reveal-item">
            <div class="about-image-wrapper terminal-wrapper">
                 <div class="mini-term human-term">
                     <div class="term-header">
@@ -953,11 +928,11 @@
     <!-- Value Proposition -->
     <div class="why-me-container">
         <div class="why-me-grid">
-            <div class="why-card primary">
+            <div class="why-card primary reveal-item delay-100">
                 <h5><i class="fa-solid fa-chart-line" style="color:var(--primary); margin-right:10px;"></i> <span data-lang-key="why_1_h">Biznes + Technologia</span></h5>
                 <p data-lang-key="why_1_p">Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.</p>
             </div>
-            <div class="why-card secondary">
+            <div class="why-card secondary reveal-item delay-300">
                 <h5><i class="fa-solid fa-rocket" style="color:var(--secondary); margin-right:10px;"></i> <span data-lang-key="why_2_h">Szybkie Wdrożenia</span></h5>
                 <p data-lang-key="why_2_p">Łączę wiedzę z LLM, aby dostarczać działające MVP w dni, a nie w miesiące.</p>
             </div>
@@ -973,7 +948,7 @@
 
         <div class="tech-grid">
             <!-- Card 1: AI & ML -->
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card reveal-item delay-100" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <!-- FRONT -->
                     <div class="flip-front">
@@ -994,7 +969,7 @@
             </div>
 
             <!-- Card 2: Python & Backend -->
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card reveal-item delay-200" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-brands fa-python"></i></div>
@@ -1012,7 +987,7 @@
             </div>
 
             <!-- Card 3: Cloud & Data -->
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card reveal-item delay-300" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-solid fa-cloud"></i></div>
@@ -1030,7 +1005,7 @@
             </div>
 
             <!-- Card 4: Infra & Automation -->
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card reveal-item delay-400" onclick="this.classList.toggle('flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-solid fa-server"></i></div>
@@ -1058,7 +1033,7 @@
         
         <div class="timeline-container">
             <!-- Item 1 -->
-            <div class="timeline-item">
+            <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2024 - 2025</div>
                     <span class="timeline-duration">1 rok</span>
@@ -1078,7 +1053,7 @@
             </div>
 
             <!-- Item 2 -->
-            <div class="timeline-item">
+            <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2022 - 2025</div>
                     <span class="timeline-duration">3 lata</span>
@@ -1098,7 +1073,7 @@
             </div>
 
             <!-- Item 3 -->
-            <div class="timeline-item">
+            <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2018 - NOW</div>
                     <span class="timeline-duration">7 lat</span>
@@ -1118,7 +1093,7 @@
             </div>
 
             <!-- Item 4 -->
-            <div class="timeline-item">
+            <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2022 - 2023</div>
                     <span class="timeline-duration">1 rok</span>
@@ -1147,7 +1122,7 @@
         
         <div class="edu-modern-grid">
             <!-- Edu 1 -->
-            <div class="edu-card highlight">
+            <div class="edu-card highlight reveal-item delay-100">
                 <div class="edu-top">
                     <div class="edu-icon-box"><i class="fa-solid fa-microchip"></i></div>
                     <span class="edu-status status-active" data-lang-key="status_progress">W TRAKCIE</span>
@@ -1164,7 +1139,7 @@
             </div>
 
             <!-- Edu 2 -->
-            <div class="edu-card">
+            <div class="edu-card reveal-item delay-200">
                 <div class="edu-top">
                     <div class="edu-icon-box"><i class="fa-solid fa-user-tie"></i></div>
                     <span class="edu-status status-done" data-lang-key="status_done">ZAKOŃCZONO</span>
@@ -1181,7 +1156,7 @@
             </div>
 
             <!-- Edu 3 -->
-            <div class="edu-card">
+            <div class="edu-card reveal-item delay-300">
                 <div class="edu-top">
                     <div class="edu-icon-box"><i class="fa-solid fa-server"></i></div>
                     <span class="edu-status status-done" data-lang-key="status_done">UKOŃCZONE</span>
@@ -1206,7 +1181,7 @@
             <h2 class="section-title" data-lang-key="sect_cert">KURSY</h2>
         </div>
         <div class="courses-grid">
-            <div class="vault-item">
+            <div class="vault-item reveal-item delay-100">
                 <div>
                     <i class="fa-solid fa-robot vault-icon"></i>
                     <h4 style="color:#fff;" data-lang-key="cert_1_h">Podstawy AI</h4>
@@ -1217,7 +1192,7 @@
                     <div class="cert-popup"><img src="cert_podstawyai.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
-            <div class="vault-item">
+            <div class="vault-item reveal-item delay-200">
                 <div>
                     <i class="fa-solid fa-wand-magic-sparkles vault-icon"></i>
                     <h4 style="color:#fff;">Generative AI</h4>
@@ -1228,7 +1203,7 @@
                     <div class="cert-popup"><img src="cert_podstawyai2.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
-            <div class="vault-item">
+            <div class="vault-item reveal-item delay-300">
                 <div>
                     <i class="fa-brands fa-python vault-icon"></i>
                     <h4 style="color:#fff;">Python 3</h4>
@@ -1239,7 +1214,7 @@
                     <div class="cert-popup"><img src="cert_podstawyprog.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
-            <div class="vault-item">
+            <div class="vault-item reveal-item delay-400">
                 <div>
                     <i class="fa-solid fa-globe vault-icon"></i>
                     <h4 style="color:#fff;">English B2/C1</h4>
@@ -1270,7 +1245,7 @@
             <div class="section-subtitle" data-lang-key="sect_hobby_sub">PERSONAL INTERESTS</div>
             <h2 class="section-title" data-lang-key="sect_hobby">Hobby i Pasje</h2>
         </div>
-        <div class="hobby-cloud">
+        <div class="hobby-cloud reveal-item">
             <span class="hobby-tag" data-lang-key="hob_1"><i class="fa-solid fa-brain"></i> AI & Nowe Technologie</span>
             <span class="hobby-tag" data-lang-key="hob_2"><i class="fa-solid fa-gears"></i> Automatyzacje</span>
             <span class="hobby-tag" data-lang-key="hob_3"><i class="fa-solid fa-code"></i> Aplikacje No-Code</span>
@@ -1290,7 +1265,7 @@
         </div>
         
         <div class="socials-grid">
-            <a href="https://github.com/cewa-stack" target="_blank" class="social-card github">
+            <a href="https://github.com/cewa-stack" target="_blank" class="social-card github reveal-item delay-100">
                 <div class="social-icon-box"><i class="fa-brands fa-github"></i></div>
                 <div class="social-info">
                     <h3>GitHub</h3>
@@ -1299,7 +1274,7 @@
                 <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <a href="https://linkedin.com/in/cewai" target="_blank" class="social-card linkedin">
+            <a href="https://linkedin.com/in/cewai" target="_blank" class="social-card linkedin reveal-item delay-200">
                 <div class="social-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
                 <div class="social-info">
                     <h3>LinkedIn</h3>
@@ -1308,7 +1283,7 @@
                 <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <a href="https://www.kaggle.com/cewastack" target="_blank" class="social-card kaggle">
+            <a href="https://www.kaggle.com/cewastack" target="_blank" class="social-card kaggle reveal-item delay-300">
                 <div class="social-icon-box"><i class="fa-brands fa-kaggle"></i></div>
                 <div class="social-info">
                     <h3>Kaggle</h3>
@@ -1317,7 +1292,7 @@
                 <div class="social-status"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <a href="https://huggingface.co/cewastack" target="_blank" class="social-card huggingface">
+            <a href="https://huggingface.co/cewastack" target="_blank" class="social-card huggingface reveal-item delay-400">
                 <div class="social-icon-box"><i class="fa-solid fa-brain"></i></div>
                 <div class="social-info">
                     <h3>Hugging Face</h3>
@@ -1336,7 +1311,7 @@
         </div>
 
         <div class="downloads-grid">
-            <a href="cv_pdf.pdf" target="_blank" class="download-card pdf" id="dl-pdf">
+            <a href="cv_pdf.pdf" target="_blank" class="download-card pdf reveal-item delay-100" id="dl-pdf">
                 <div class="download-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
                 <div class="download-info">
                     <h3>CV (PDF)</h3>
@@ -1345,7 +1320,7 @@
                 <div class="social-status"><i class="fa-solid fa-external-link-alt"></i></div>
             </a>
 
-            <a href="cv_docx.docx" download target="_blank" class="download-card docx" id="dl-docx">
+            <a href="cv_docx.docx" download target="_blank" class="download-card docx reveal-item delay-200" id="dl-docx">
                 <div class="download-icon-box"><i class="fa-solid fa-file-word"></i></div>
                 <div class="download-info">
                     <h3>CV (DOCX)</h3>
@@ -1362,7 +1337,7 @@
             <div class="section-subtitle" data-lang-key="sect_contact_sub">INITIATE CONNECTION</div>
             <h2 class="section-title" data-lang-key="sect_contact">Skontaktuj się</h2>
         </div>
-        <div class="terminal-window">
+        <div class="terminal-window reveal-item">
             <div class="term-header">
                 <div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div>
                 <span style="color:#888; font-size:0.8rem; margin-left:10px;">bash -- contact.sh</span>
@@ -1653,13 +1628,28 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         });
 
-        // 2. Scroll Animations (Reveal)
+        // 2. Section Scroll Animations (Large Blocks)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-        // 3. Stats Counter
+        // 3. Element Scroll Animations (Inner Items) - NEW
+        const elObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    // Opcjonalnie: odłącz obserwator, jeśli animacja ma być jednorazowa
+                    elObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); // 10% elementu widoczne = start animacji
+
+        // Apply observer to all elements with class .reveal-item
+        document.querySelectorAll('.reveal-item').forEach(el => elObserver.observe(el));
+
+
+        // 4. Stats Counter
         function initFunStats() {
             const el = document.getElementById('stat-tokens');
             const target = 55000000; 
@@ -1684,7 +1674,7 @@
             requestAnimationFrame(step);
         }
 
-        // 4. Gamification (Final Boss)
+        // 5. Gamification (Final Boss)
         const unlockedAchievements = new Set();
         function initGamification() {
             const achObserver = new IntersectionObserver((entries) => {
@@ -1728,7 +1718,7 @@
             }, 4000);
         }
 
-        // 5. GitHub Data Fetching
+        // 6. GitHub Data Fetching
         const githubUsername = 'cewa-stack';
         const container = document.getElementById('github-projects');
         const statReposElem = document.getElementById('stat-repos');
@@ -1753,7 +1743,7 @@
             "finance-predictor-ai-bot": { img: "projekt6.png", metrics: [{v:"ML", l:"MODEL"}, {v:"LIVE", l:"DATA"}] }
         };
 
-        function createProjectCard(repo) {
+        function createProjectCard(repo, index) {
             const cfg = projectConfig[repo.name] || {};
             const imgHTML = cfg.img 
                 ? `<img src="${cfg.img}" class="cmd-img" loading="lazy" onload="this.classList.add('lazy-loaded')">`
@@ -1775,8 +1765,11 @@
                    </div>`
                 : '';
 
+            // Calculate delay based on index for stagger effect
+            const delayClass = `delay-${Math.min((index % 4) * 100 + 100, 400)}`;
+
             return `
-            <div class="cmd-card">
+            <div class="cmd-card reveal-item ${delayClass}">
                 <div class="cmd-header">
                     <div class="cmd-status"><div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div></div>
                     <div style="color:#555; font-size:0.7rem; font-family:var(--font-code);">ID: ${repo.id}</div>
@@ -1798,7 +1791,13 @@
                 const repos = await res.json();
                 container.innerHTML = '';
                 const myRepos = repos.filter(r => !r.fork && !ignoredRepos.includes(r.name));
-                myRepos.forEach(r => container.insertAdjacentHTML('beforeend', createProjectCard(r)));
+                
+                myRepos.forEach((r, index) => {
+                    container.insertAdjacentHTML('beforeend', createProjectCard(r, index));
+                });
+                
+                // Re-attach observer for dynamically added items
+                document.querySelectorAll('#github-projects .reveal-item').forEach(el => elObserver.observe(el));
 
                 let stars = myRepos.reduce((acc, r) => acc + r.stargazers_count, 0);
                 animateValue(statReposElem, 0, myRepos.length, 1500);
@@ -1821,7 +1820,7 @@
             window.requestAnimationFrame(step);
         }
 
-        // 6. Background Particles
+        // 7. Background Particles
         const canvas = document.getElementById('neuro-bg');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -1867,7 +1866,7 @@
         initParticles(); loop();
         fetchGitHubRepos();
 
-        // 7. Toast & Form
+        // 8. Toast & Form
         function showCyberToast(message, isError = false) {
             let toast = document.getElementById("cyber-toast");
             if (!toast) {
