@@ -13,21 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>❖ Lukas Resume ❖</title>
     
-    <!-- SEO & Meta -->
-    <meta name="description" content="Portfolio: Łukasz Szymankiewicz - AI/ML Engineer & Automation Specialist. Python, NLP, LLM Integration.">
-    <meta name="keywords" content="AI Engineer, Python Developer, Automation, Portfolio, Machine Learning">
-    <meta name="author" content="Łukasz Szymankiewicz">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://cewa-stack.github.io/">
-    <meta property="og:title" content="Łukasz Szymankiewicz | AI & ML Engineer">
-    <meta property="og:description" content="AI Systems, Automation & Business Logic. Check my projects.">
-    <meta property="og:image" content="https://cewa-stack.github.io/og-image.png">
-
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0a0a%22/><path d=%22M30 30 L70 30 L70 70 L30 70 Z%22 fill=%22none%22 stroke=%22%2300ff88%22 stroke-width=%228%22/><circle cx=%2250%22 cy=%2250%22 r=%2212%22 fill=%22%2300ccff%22/><rect x=%2245%22 y=%2210%22 width=%2210%22 height=%2220%22 fill=%22%2300ff88%22/><rect x=%2245%22 y=%2270%22 width=%2210%22 height=%2220%22 fill=%22%2300ff88%22/><rect x=%2210%22 y=%2245%22 width=%2220%22 height=%2210%22 fill=%22%2300ff88%22/><rect x=%2270%22 y=%2245%22 width=%2220%22 height=%2210%22 fill=%22%2300ff88%22/></svg>">
-    
     <!-- Dependencies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -115,7 +100,7 @@
             100% { text-shadow: 2px -2px var(--secondary); transform: translate(0,0); }
         }
 
-        /* --- SCROLL REVEAL ANIMATION (NEW) --- */
+        /* --- SCROLL REVEAL ANIMATION --- */
         .reveal-item {
             opacity: 0;
             transform: translateY(30px);
@@ -125,8 +110,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Staggered delays for grid items */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
@@ -159,7 +142,7 @@
         .lang-btn.active { color: var(--primary); text-shadow: 0 0 5px var(--primary); }
         .lang-sep { color: #444; margin: 0 5px; }
 
-        /* --- SECTIONS & ANIMATION --- */
+        /* --- SECTIONS --- */
         section {
             padding: var(--section-spacing) 5%; max-width: 1400px; margin: 0 auto;
             opacity: 0; transform: translateY(40px) scale(0.98); filter: blur(3px);
@@ -255,7 +238,8 @@
         .about-tech-card {
             background: rgba(18, 18, 18, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); 
             border-radius: 24px; padding: 3rem;
-            display: flex; gap: 4rem; align-items: center; position: relative; overflow: hidden;
+            display: flex; gap: 4rem; align-items: stretch; /* WAŻNE: Wyrównuje wysokość kolumn */
+            position: relative; overflow: hidden;
             backdrop-filter: blur(15px); box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         .about-tech-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); }
@@ -275,10 +259,40 @@
         .vibe-desc { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
         @keyframes pulse-icon { 0% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.5; transform: scale(1); } }
         
-        .about-text p { color: #b0b0b0; font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.7; }
-        
+        /* New Compact List Style for About Section */
+        .about-compact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        .about-compact-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .about-compact-icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+            min-width: 20px;
+            text-align: center;
+        }
+        .about-compact-content h4 {
+            font-size: 1rem;
+            margin: 0 0 2px 0;
+            color: #fff;
+            font-family: var(--font-main);
+        }
+        .about-compact-content p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin: 0;
+            line-height: 1.5;
+        }
+
         .skills-label { font-family: var(--font-code); color: var(--secondary); font-size: 0.85rem; margin-bottom: 1rem; display: block; text-transform: uppercase; letter-spacing: 2px; }
-        .soft-skills-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
+        .soft-skills-cloud { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2rem; }
         .soft-pill {
             background: rgba(0,0,0,0.3); padding: 8px 18px; border-radius: 4px; 
             font-size: 0.85rem; font-weight: 500; color: #ddd; 
@@ -374,7 +388,7 @@
 
         .flip-front i {
             font-size: 2.5rem;
-            color: var(--primary); /* ZMIANA: Na zielony */
+            color: var(--primary);
             transition: 0.3s;
         }
 
@@ -385,7 +399,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--primary); /* ZMIANA: Na zielony */
+            color: var(--primary);
             font-family: var(--font-code);
         }
 
@@ -420,20 +434,138 @@
             text-shadow: 0 0 5px var(--primary);
         }
 
-        /* --- EXPERIENCE --- */
-        .timeline-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 20px 0; }
-        .timeline-item { display: flex; gap: 30px; margin-bottom: 3rem; position: relative; opacity: 0.9; transition: 0.3s; }
-        .timeline-item:hover { opacity: 1; }
-        .timeline-left { flex: 0 0 140px; text-align: right; padding-top: 15px; }
-        .timeline-date { font-family: var(--font-code); color: var(--primary); font-weight: 700; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
-        .timeline-duration { display: block; font-size: 0.75rem; color: #666; margin-top: 5px; text-transform: uppercase; }
-        .timeline-divider { position: relative; width: 2px; background: rgba(255, 255, 255, 0.1); }
-        .timeline-dot { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: #0a0a0a; border: 2px solid var(--primary); border-radius: 50%; z-index: 2; transition: 0.3s; box-shadow: 0 0 10px var(--primary-dim); }
-        .timeline-item:hover .timeline-dot { background: var(--primary); box-shadow: 0 0 20px var(--primary); }
-        .timeline-content { flex: 1; background: rgba(20, 20, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.5rem 2rem; position: relative; backdrop-filter: blur(5px); transition: 0.3s; }
-        .timeline-item:hover .timeline-content { border-color: var(--primary); transform: translateX(5px); background: rgba(25, 25, 25, 0.8); }
-        .timeline-content::before { content: ''; position: absolute; top: 25px; left: -6px; width: 10px; height: 10px; background: rgba(20, 20, 20, 0.6); border-left: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); transform: rotate(45deg); transition: 0.3s; }
-        .timeline-item:hover .timeline-content::before { border-color: var(--primary); background: rgba(25, 25, 25, 0.8); }
+        /* --- EXPERIENCE (INTERACTIVE TIMELINE) --- */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* The background static line */
+        .timeline-line-bg {
+            position: absolute;
+            top: 20px;
+            left: 140px; /* Aligned with divider */
+            width: 2px;
+            height: calc(100% - 40px);
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+
+        /* The fill-up neon line */
+        .timeline-line-progress {
+            position: absolute;
+            top: 20px;
+            left: 140px;
+            width: 2px;
+            height: 0%; /* JS will animate this */
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            z-index: 1;
+            transition: height 0.1s linear;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            position: relative;
+            z-index: 2; /* Above lines */
+        }
+
+        /* Left date part */
+        .timeline-left {
+            flex: 0 0 140px;
+            text-align: right;
+            padding-top: 15px;
+            position: relative;
+            padding-right: 40px; /* Dodany odstęp od linii (daty odsunięte w lewo) */
+        }
+        .timeline-date {
+            font-family: var(--font-code);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem; /* Zmniejszona czcionka (było 1.1rem) */
+            white-space: nowrap; /* Wymuszenie jednej linii */
+            transition: all 0.3s;
+        }
+        .timeline-duration {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* The node (dot) */
+        .timeline-node {
+            position: absolute;
+            right: -16px; /* Half of gap (30) + 1px for center align */
+            top: 22px;
+            width: 14px;
+            height: 14px;
+            background: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            z-index: 3;
+        }
+        /* Active state for node (added by JS) */
+        .timeline-item.active .timeline-node {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* The Card */
+        .timeline-content {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            position: relative;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Corner clip effect */
+            clip-path: polygon(
+                20px 0, 100% 0, 
+                100% calc(100% - 20px), calc(100% - 20px) 100%, 
+                0 100%, 0 20px
+            );
+        }
+        
+        .timeline-content::before {
+            /* Decorative small line */
+            content: ''; position: absolute; top: 0; left: 0; 
+            width: 4px; height: 100%; 
+            background: rgba(255,255,255,0.05); 
+            transition: 0.3s;
+        }
+
+        /* Hover effects */
+        .timeline-item:hover .timeline-content,
+        .timeline-item.active .timeline-content {
+            background: rgba(25, 25, 25, 0.9);
+            border-color: var(--primary);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+        }
+        .timeline-item:hover .timeline-content::before,
+        .timeline-item.active .timeline-content::before {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+        .timeline-item:hover .timeline-date {
+            text-shadow: 0 0 15px var(--primary);
+            color: #fff;
+        }
+
+        /* Typography inside card */
         .t-role { font-size: 1.4rem; color: #fff; font-weight: 700; margin-bottom: 0.3rem; }
         .t-company { font-family: var(--font-code); color: var(--secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
         .t-list { list-style: none; margin-bottom: 1.5rem; }
@@ -442,6 +574,7 @@
         .t-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
         .t-tag { font-size: 0.75rem; font-family: var(--font-code); color: #888; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px; border: 1px solid transparent; }
         .timeline-item:hover .t-tag { border-color: rgba(0, 255, 136, 0.2); color: #ccc; }
+
 
         /* --- EDUCATION --- */
         .edu-modern-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
@@ -519,7 +652,7 @@
             text-shadow: 0 0 8px rgba(0, 204, 255, 0.4);
         }
 
-        @keyframes pulse-marker { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        @keyframes pulse-marker { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.5; transform: scale(1); } }
 
         /* --- COURSES --- */
         .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -697,21 +830,120 @@
         img[loading="lazy"] { opacity: 0; filter: blur(10px) grayscale(100%); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: scale(0.95); }
         img.lazy-loaded { opacity: 1; filter: blur(0) grayscale(0%); transform: scale(1); }
 
-        /* --- DUAL TERMINAL --- */
-        .terminal-wrapper { width: 100%; max-width: 350px; height: 420px; display: flex; flex-direction: column; gap: 20px; flex-shrink: 0; margin: 0 auto; }
-        .mini-term { flex: 1; background: #0f0f0f; border: 1px solid #333; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.3s; position: relative; }
-        .mini-term:hover { border-color: #555; transform: translateY(-2px); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .ai-term { border: 1px solid rgba(0, 255, 136, 0.2); box-shadow: 0 0 20px rgba(0, 255, 136, 0.05); }
-        .term-header { background: #1a1a1a; padding: 6px 10px; display: flex; align-items: center; border-bottom: 1px solid #222; flex-shrink: 0; }
-        .term-dots { display: flex; gap: 5px; margin-right: 10px; }
-        .term-title { font-family: var(--font-code); font-size: 0.65rem; color: #666; letter-spacing: 1px; }
-        .term-content { padding: 10px 15px; padding-top: 5px; font-family: var(--font-code); font-size: 0.7rem; color: #ccc; flex-grow: 1; overflow: hidden; white-space: pre; line-height: 1.5; display: block; text-align: left; width: 100%; }
-        .term-footer { padding: 4px 10px; font-family: var(--font-code); font-size: 0.6rem; color: #444; text-align: right; background: #111; border-top: 1px solid #222; flex-shrink: 0; }
-        .code-output { color: #a9b7c6; display: inline; }
-        .ai-term .code-output { color: var(--primary); text-shadow: 0 0 5px rgba(0, 255, 136, 0.2); }
-        .cursor { display: inline-block; width: 6px; height: 1em; background: #ccc; animation: blink 1s infinite; vertical-align: text-bottom; margin-left: 0; }
+        /* --- DUAL TERMINAL (REDESIGNED - EQUAL SIZE) --- */
+        .terminal-wrapper {
+            width: 100%;
+            max-width: 450px; 
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: space-between; 
+        }
+
+        .mini-term {
+            flex: 1 1 0; /* Forces equal height split (50/50) */
+            height: auto; 
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        /* Hover effect */
+        .mini-term:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+        }
+
+        /* AI Terminal Specifics */
+        .ai-term {
+            border: 1px solid rgba(0, 255, 136, 0.15); 
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.05); 
+        }
+        .ai-term:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.15);
+        }
+
+        .term-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            flex-shrink: 0;
+        }
+
+        .term-dots {
+            display: flex;
+            gap: 6px;
+            margin-right: 12px;
+        }
+        .term-dots .dot { width: 10px; height: 10px; }
+
+        .term-title {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .term-content {
+            padding: 15px;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            color: #ccc;
+            flex-grow: 1; /* Allows content area to fill the flex item */
+            overflow: hidden;
+            white-space: pre;
+            line-height: 1.6;
+            display: block;
+            text-align: left;
+            width: 100%;
+        }
+
+        .term-footer {
+            padding: 6px 12px;
+            font-family: var(--font-code);
+            font-size: 0.65rem;
+            color: #555;
+            text-align: right;
+            background: rgba(0,0,0,0.2);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            flex-shrink: 0;
+        }
+
+        .code-output {
+            color: #a9b7c6;
+            display: inline;
+        }
+        .ai-term .code-output {
+            color: var(--primary);
+            text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            background: #ccc;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
         .ai-term .cursor { background: var(--primary); }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
         /* RESPONSIVE */
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
@@ -725,19 +957,29 @@
             .hero-dashboard { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .hero-image-container { width: 220px; height: 220px; margin-bottom: 30px; }
             .btn-group { justify-content: center; gap: 10px; }
+            
+            /* ABOUT SECTION MOBILE */
             .about-tech-card { flex-direction: column; text-align: center; padding: 1.5rem; gap: 2rem; }
             .about-img { width: 100%; max-width: 260px; height: auto; aspect-ratio: 4/5; }
             .about-text h3 { font-size: 1.5rem; }
+            .about-compact-item { text-align: left; }
+            
+            .terminal-wrapper {
+                width: 100%;
+                max-width: 100%;
+                height: 450px; /* Fixed height for mobile stack */
+                margin-bottom: 20px;
+            }
+
             .section-title { font-size: 2rem; }
             .socials-grid, .downloads-grid { grid-template-columns: 1fr; gap: 1rem; }
             
-            .timeline-item { flex-direction: column; gap: 0; padding-left: 25px; margin-bottom: 2rem; }
-            .timeline-left { text-align: left; padding: 0; margin-bottom: 5px; flex: auto; }
-            .timeline-divider { position: absolute; left: 0; top: 0; height: 100%; }
-            .timeline-dot { left: -7px; top: 5px; transform: none; }
-            .timeline-content { padding: 1.2rem; }
-            .timeline-content::before { display: none; }
-
+            /* TIMELINE MOBILE FIX */
+            .timeline-line-bg, .timeline-line-progress { left: 20px; }
+            .timeline-item { flex-direction: column; gap: 0; padding-left: 50px; margin-bottom: 2rem; }
+            .timeline-left { text-align: left; padding: 0; padding-right: 0; margin-bottom: 5px; flex: auto; }
+            .timeline-node { left: 14px; right: auto; top: 5px; } 
+            
             .why-me-grid, .tech-grid, .edu-modern-grid, .courses-grid, .portfolio-grid { grid-template-columns: 1fr; }
             .flip-card { height: 340px; } /* Mobile adjustment for flip cards */
             
@@ -753,8 +995,6 @@
             .hamburger.active .bar:nth-child(2) { opacity: 0; }
             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            
-            .terminal-wrapper { width: 100%; max-width: 100%; height: 400px; margin-bottom: 20px; }
         }
 
         @media (max-width: 480px) {
@@ -864,13 +1104,14 @@
         </div>
     </section>
 
-    <!-- Profile Section -->
+    <!-- Profile Section (UPDATED) -->
     <section id="about">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_who">CO ROBIĘ</div>
             <h2 class="section-title" data-lang-key="sect_profile">O MNIE</h2>
         </div>
         <div class="about-tech-card reveal-item">
+           <!-- Terminal Animation: How I work (Left Side) -->
            <div class="about-image-wrapper terminal-wrapper">
                 <div class="mini-term human-term">
                     <div class="term-header">
@@ -889,8 +1130,12 @@
                     <div class="term-footer" style="color: var(--primary);">SPEED: 1500 wpm (AI Augmented)</div>
                 </div>
             </div>
+
+            <!-- Right Side Content -->
             <div class="about-text">
                 <h3>"Data-driven logic, <span>AI-powered execution</span>."</h3>
+                
+                <!-- Work Mode Box -->
                 <div class="vibe-box">
                     <div class="vibe-header">
                         <i class="fa-solid fa-bolt"></i> 
@@ -904,9 +1149,32 @@
                         </div>
                     </div>
                 </div>
-                <p data-lang-key="about_bio">
-                    Junior Inżynier AI i Machine Learning łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.
-                </p>
+
+                <!-- NEW COMPACT CONTENT (Replaces the bio paragraph) -->
+                <div class="about-compact-list">
+                    <div class="about-compact-item">
+                        <div class="about-compact-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="about-compact-content">
+                            <h4 data-lang-key="about_h1">AI-Augmented Workflow</h4>
+                            <p data-lang-key="about_p1">Nie wymyślam koła na nowo. Wykorzystuję LLM jako "drugi mózg", by dostarczać kod 3x szybciej, skupiając się na architekturze i logice.</p>
+                        </div>
+                    </div>
+                    <div class="about-compact-item">
+                        <div class="about-compact-icon"><i class="fa-solid fa-briefcase"></i></div>
+                        <div class="about-compact-content">
+                            <h4 data-lang-key="about_h2">Business Mindset</h4>
+                            <p data-lang-key="about_p2">Większość Juniorów pyta "jak to zakodować?". Ja pytam "czy to się opłaca biznesowo?". Moje doświadczenie jako przedsiębiorca zmienia perspektywę.</p>
+                        </div>
+                    </div>
+                    <div class="about-compact-item">
+                        <div class="about-compact-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="about-compact-content">
+                            <h4 data-lang-key="about_h3">Impact & ROI</h4>
+                            <p data-lang-key="about_p3">Szukam miejsc do automatyzacji. Skracam procesy. Dowożę MVP, które działa, zamiast perfekcyjnego kodu, który nie zarabia.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     <span class="skills-label" data-lang-key="soft_label">CORE SOFT SKILLS:</span>
                     <div class="soft-skills-cloud">
@@ -978,9 +1246,9 @@
                     <div class="flip-back">
                         <ul data-lang-key="cat_python_dev_list">
                             <li>Python (Basics)</li>
-                            <li>FastAPI</li>
-                            <li>SQL (PostgreSQL)</li>
-                            <li>C++ (Basics)</li>
+                            <li>FastAPI / Django</li>
+                            <li>SQL / NoSQL</li><li>Bazy Wektorowe</li>
+                            <li>C++(Podstawowy) / JavaScript</li>
                         </ul>
                     </div>
                 </div>
@@ -997,8 +1265,8 @@
                         <ul data-lang-key="cat_cloud_data_list">
                             <li>Pandas & NumPy Analysis</li>
                             <li>Data Visualization</li>
-                            <li>Docker & Containers</li>
-                            <li>Git Version Control</li>
+                            <li>Statystyka</li><li>Web Scraping</li>
+                            <li>Docker / Git</li>
                         </ul>
                     </div>
                 </div>
@@ -1014,9 +1282,9 @@
                     <div class="flip-back">
                         <ul data-lang-key="cat_infra_ops_list">
                             <li>Linux / Bash</li>
-                            <li>n8n / Make.com (No-Code)</li>>
-                            <li>API Integration</li>
-                            <li>Workflow Optimization</li>
+                            <li>Automatyzacje n8n</li>
+                            <li>Make.com</li><li>MLflow</li>
+                            <li>Optymalizacja Procesów</li>
                         </ul>
                     </div>
                 </div>
@@ -1024,7 +1292,7 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience Section (Interactive Timeline) -->
     <section id="experience">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_career_sub">CAREER PATH</div>
@@ -1032,13 +1300,18 @@
         </div>
         
         <div class="timeline-container">
+            <!-- Dynamic Background Lines -->
+            <div class="timeline-line-bg"></div>
+            <div class="timeline-line-progress" id="timeline-progress"></div>
+
             <!-- Item 1 -->
             <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2024 - 2025</div>
                     <span class="timeline-duration">1 rok</span>
                 </div>
-                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <!-- Node on the line -->
+                <div class="timeline-node"></div>
                 <div class="timeline-content">
                     <h3 class="t-role" data-lang-key="exp_1_role">Przedsiębiorca</h3>
                     <div class="t-company"><i class="fa-solid fa-building"></i> DopeClub</div>
@@ -1058,7 +1331,7 @@
                     <div class="timeline-date">2022 - 2025</div>
                     <span class="timeline-duration">3 lata</span>
                 </div>
-                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-node"></div>
                 <div class="timeline-content">
                     <h3 class="t-role" data-lang-key="exp_2_role">Przedsiębiorca</h3>
                     <div class="t-company"><i class="fa-solid fa-car"></i> DopeDetailing</div>
@@ -1078,7 +1351,7 @@
                     <div class="timeline-date">2018 - NOW</div>
                     <span class="timeline-duration">7 lat</span>
                 </div>
-                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-node"></div>
                 <div class="timeline-content">
                     <h3 class="t-role" data-lang-key="exp_3_role">Projekt E-commerce</h3>
                     <div class="t-company"><i class="fa-solid fa-store"></i> DopeShop</div>
@@ -1098,7 +1371,7 @@
                     <div class="timeline-date">2022 - 2023</div>
                     <span class="timeline-duration">1 rok</span>
                 </div>
-                <div class="timeline-divider"><div class="timeline-dot"></div></div>
+                <div class="timeline-node"></div>
                 <div class="timeline-content">
                     <h3 class="t-role" data-lang-key="exp_4_role">Wsparcie Klienta</h3>
                     <div class="t-company"><i class="fa-solid fa-headset"></i> AS Lotus</div>
@@ -1396,7 +1669,15 @@
                 stat_repos: "Repozytoria", stat_stars: "Gwiazdki", stat_stack: "Technologie", stat_loc: "Linii Kodu", stat_tokens: "Tokeny LLM", stat_models: "Modele AI",
                 sect_who: "CO ROBIĘ", sect_profile: "O MNIE",
                 vibe_desc: "Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>Skupienie na architekturze i logice biznesowej.",
-                about_bio: "Junior Inżynier AI i Uczenia maszynowego łączący kompetencje techniczne z myśleniem biznesowym. Doświadczenie w Python, Machine Learning oraz zarządzaniu operacjami e-commerce pozwala mi projektować i wdrażać rozwiązania, które odpowiadają na realne potrzeby organizacji i przynoszą konkretne rezultaty.",
+                
+                // NEW ABOUT SECTION TRANSLATIONS
+                about_h1: "Workflow Wspierany przez AI",
+                about_p1: "Nie wymyślam koła na nowo. Wykorzystuję LLM jako 'drugi mózg', by dostarczać kod 3x szybciej, skupiając się na architekturze i logice.",
+                about_h2: "Podejście Biznesowe",
+                about_p2: "Większość Juniorów pyta 'jak to zakodować?'. Ja pytam 'czy to się opłaca biznesowo?'. Moje doświadczenie jako przedsiębiorca zmienia perspektywę.",
+                about_h3: "Wpływ i ROI",
+                about_p3: "Szukam miejsc do automatyzacji. Skracam procesy. Dowożę MVP, które działa, zamiast perfekcyjnego kodu, który nie zarabia.",
+
                 soft_label: "KOMPETENCJE MIĘKKIE:",
                 soft_1: "Samodzielność", soft_2: "Komunikatywność", soft_3: "Organizacja pracy", soft_4: "Kreatywność", soft_5: "Zarządzanie", soft_6: "Nieszablonowe myślenie", soft_7: "Analityczne myślenie", soft_8: "Odporność na stres", soft_9: "Angielski (B2/C1)",
                 why_1_h: "Biznes + Technologia", why_1_p: "Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.",
@@ -1432,18 +1713,18 @@
                 edu_2_title: "Zarządzanie", edu_2_school: "Wyższa Szkoła Bankowa",
                 edu_2_list: "<li>Zarządzanie Zasobami Ludzkimi (HRM)</li><li>Finanse Przedsiębiorstw i Controlling</li><li>Prawo Gospodarcze</li><li>Marketing Strategiczny</li><li>Zarządzanie Projektami (Agile/Scrum Basics)</li>",
                 edu_3_title: "Technik Informatyk", edu_3_school: "CKZiU nr 2 (Elektronik)",
-                edu_3_list: "<li>Diagnostyka i serwis sprzętu komputerowego</li><li>Administracja Sieciami (LAN/WAN, Cisco)</li><li>Systemy Operacyjne (Linux/Windows Server)</li><li>Podstawy Baz Danych (SQL)</li>",
-                sect_cert_sub: "CERTYFIKATY", sect_cert: "KURSY",
-                cert_1_h: "Podstawy AI", cert_3_inst: "Uniwersytet Szczeciński", cert_show: "Pokaż Certyfikat",
-                cert_1_list: "<li>Podstawy Machine Learning</li><li>Stronniczość Danych i Etyka</li><li>Wstęp do NLP</li>",
-                cert_2_list: "<li>Inżynieria Promptów</li><li>Ograniczenia LLM</li><li>Koncepcje RAG</li><li>Efektywność Narzędzi AI</li>",
-                cert_3_list: "<li>Programowanie Obiektowe</li><li>Struktury Danych i Algorytmy</li><li>Podstawy Pandas / NumPy</li><li>Integracja API</li>",
-                cert_4_list: "<li>Dokumentacja Techniczna</li><li>Komunikacja Biznesowa</li><li>Relacje Międzynarodowe</li>",
+                edu_3_list: "<li>Computer hardware diagnostics and service</li><li>Network Administration (LAN/WAN, Cisco)</li><li>Operating Systems (Linux/Windows Server)</li><li>Database Basics (SQL)</li>",
+                sect_cert_sub: "CERTIFICATIONS", sect_cert: "COURSES",
+                cert_1_h: "AI Fundamentals", cert_3_inst: "University of Szczecin", cert_show: "Show Certificate",
+                cert_1_list: "<li>Machine Learning Fundamentals</li><li>Data Bias & Ethics</li><li>Intro to NLP</li>",
+                cert_2_list: "<li>Prompt Engineering</li><li>LLM Limitations</li><li>RAG Concepts</li><li>AI Tools Efficiency</li>",
+                cert_3_list: "<li>Object-Oriented Programming</li><li>Data Structures & Algos</li><li>Pandas / NumPy Basics</li><li>API Integration</li>",
+                cert_4_list: "<li>Technical Documentation</li><li>Business Communication</li><li>International Relations</li>",
                 sect_live: "WDROŻENIA", sect_proj: "Projekty",
                 sect_hobby_sub: "ZAINTERESOWANIA", sect_hobby: "Hobby i Pasje",
                 hob_1: '<i class="fa-solid fa-brain"></i> AI & Nowe Technologie', hob_2: '<i class="fa-solid fa-gears"></i> Automatyzacje', hob_3: '<i class="fa-solid fa-code"></i> Aplikacje No-Code', hob_4: '<i class="fa-solid fa-dumbbell"></i> Siłownia',
                 hob_5: '<i class="fa-solid fa-car"></i> Motoryzacja', hob_6: '<i class="fa-solid fa-briefcase"></i> Biznes', hob_7: '<i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
-                sect_social_sub: "SOCIALE", sect_social: "Media Społecznościowe",
+                sect_social_sub: "ESTABLISH UPLINK", sect_social: "Socials",
                 social_git: "Dostęp do repozytoriów i kodu", social_lin: "Sprawdź mój profil zawodowy",
                 social_kag: "Notebooki i Zbiory Danych", social_hf: "Modele i Space'y",
                 sect_dl_sub: "PLIKI DO POBRANIA", sect_dl: "Pobierz moje CV",
@@ -1466,7 +1747,15 @@
                 stat_repos: "Repositories", stat_stars: "Total Stars", stat_stack: "Tech Stack", stat_loc: "Lines of Code", stat_tokens: "LLM Tokens", stat_models: "AI Models Trained",
                 sect_who: "WHAT I DO", sect_profile: "ABOUT ME",
                 vibe_desc: "Faster delivery of solutions through LLM integration in workflow.<br>Focus on architecture and business logic.",
-                about_bio: "Junior AI & Machine Learning Engineer combining technical skills with business thinking. Experience in Python, Machine Learning, and e-commerce operations management allows me to design and implement solutions that address real organizational needs and deliver tangible results.",
+                
+                // NEW ABOUT SECTION TRANSLATIONS
+                about_h1: "AI-Augmented Workflow",
+                about_p1: "I don't reinvent the wheel. I use LLMs as a 'second brain' to ship code 3x faster, focusing on architecture and logic.",
+                about_h2: "Business Mindset",
+                about_p2: "Most Juniors ask 'how to code this?'. I ask 'does this make business sense?'. My entrepreneurial background changes the perspective.",
+                about_h3: "Impact & ROI",
+                about_p3: "I spot automation opportunities. I shorten processes. I ship working MVPs instead of perfect code that doesn't sell.",
+
                 soft_label: "CORE SOFT SKILLS:",
                 soft_1: "Independence", soft_2: "Communication", soft_3: "Work Organization", soft_4: "Creativity", soft_5: "Management", soft_6: "Out-of-box Thinking", soft_7: "Analytical Thinking", soft_8: "Stress Resistance", soft_9: "English (B2/C1)",
                 why_1_h: "Business + Technology", why_1_p: "I don't just write code. I understand P&L, ROI, and sales processes. I create solutions that actually earn or save money.",
@@ -1620,36 +1909,70 @@
 
         // --- Visual Effects & Interactivity ---
         
-        // 1. Scroll Progress
+        // 1. Scroll Progress (Global)
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (scrollTop / scrollHeight) * 100;
             document.getElementById('progressBar').style.width = scrolled + "%";
+            
+            // Call Timeline Animation
+            animateTimeline();
         });
 
-        // 2. Section Scroll Animations (Large Blocks)
+        // 2. Timeline Progress Animation
+        function animateTimeline() {
+            const container = document.querySelector('.timeline-container');
+            if (!container) return;
+
+            const progressBar = document.getElementById('timeline-progress');
+            const items = document.querySelectorAll('.timeline-item');
+            
+            const containerRect = container.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // Calculate how much of the timeline container has been scrolled past the center of the viewport
+            const startOffset = viewportHeight * 0.5;
+            let progress = startOffset - containerRect.top;
+            
+            // Clamp progress between 0 and container height
+            let heightPercent = (progress / containerRect.height) * 100;
+            if (heightPercent < 0) heightPercent = 0;
+            if (heightPercent > 100) heightPercent = 100;
+            
+            progressBar.style.height = heightPercent + '%';
+
+            // Highlight items as the line passes them
+            items.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < startOffset) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // 3. Section Scroll Animations (Large Blocks)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-        // 3. Element Scroll Animations (Inner Items) - NEW
+        // 4. Element Scroll Animations (Inner Items) - NEW
         const elObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
                     entry.target.classList.add('reveal-active');
-                    // Opcjonalnie: odłącz obserwator, jeśli animacja ma być jednorazowa
                     elObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 }); // 10% elementu widoczne = start animacji
+        }, { threshold: 0.1 }); 
 
-        // Apply observer to all elements with class .reveal-item
         document.querySelectorAll('.reveal-item').forEach(el => elObserver.observe(el));
 
 
-        // 4. Stats Counter
+        // 5. Stats Counter
         function initFunStats() {
             const el = document.getElementById('stat-tokens');
             const target = 55000000; 
@@ -1674,7 +1997,7 @@
             requestAnimationFrame(step);
         }
 
-        // 5. Gamification (Final Boss)
+        // 6. Gamification
         const unlockedAchievements = new Set();
         function initGamification() {
             const achObserver = new IntersectionObserver((entries) => {
@@ -1718,7 +2041,7 @@
             }, 4000);
         }
 
-        // 6. GitHub Data Fetching
+        // 7. GitHub Data Fetching
         const githubUsername = 'cewa-stack';
         const container = document.getElementById('github-projects');
         const statReposElem = document.getElementById('stat-repos');
@@ -1820,7 +2143,7 @@
             window.requestAnimationFrame(step);
         }
 
-        // 7. Background Particles
+        // 8. Background Particles
         const canvas = document.getElementById('neuro-bg');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -1866,7 +2189,7 @@
         initParticles(); loop();
         fetchGitHubRepos();
 
-        // 8. Toast & Form
+        // 9. Toast & Form
         function showCyberToast(message, isError = false) {
             let toast = document.getElementById("cyber-toast");
             if (!toast) {
