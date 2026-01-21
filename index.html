@@ -238,7 +238,7 @@
         .about-tech-card {
             background: rgba(18, 18, 18, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); 
             border-radius: 24px; padding: 3rem;
-            display: flex; gap: 4rem; align-items: stretch; /* WAŻNE: Wyrównuje wysokość kolumn */
+            display: flex; gap: 4rem; align-items: stretch;
             position: relative; overflow: hidden;
             backdrop-filter: blur(15px); box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
@@ -259,7 +259,6 @@
         .vibe-desc { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
         @keyframes pulse-icon { 0% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.5; transform: scale(1); } }
         
-        /* New Compact List Style for About Section */
         .about-compact-list {
             display: flex;
             flex-direction: column;
@@ -337,10 +336,15 @@
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
         }
-
-        .flip-card:hover .flip-card-inner,
+        
         .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
+        }
+        
+        @media (min-width: 901px) {
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
         }
 
         .flip-front, .flip-back {
@@ -445,24 +449,22 @@
             gap: 2rem;
         }
 
-        /* The background static line */
         .timeline-line-bg {
             position: absolute;
             top: 20px;
-            left: 140px; /* Aligned with divider */
+            left: 140px; 
             width: 2px;
             height: calc(100% - 40px);
             background: rgba(255, 255, 255, 0.1);
             z-index: 0;
         }
 
-        /* The fill-up neon line */
         .timeline-line-progress {
             position: absolute;
             top: 20px;
             left: 140px;
             width: 2px;
-            height: 0%; /* JS will animate this */
+            height: 0%;
             background: var(--primary);
             box-shadow: 0 0 10px var(--primary);
             z-index: 1;
@@ -473,23 +475,22 @@
             display: flex;
             gap: 30px;
             position: relative;
-            z-index: 2; /* Above lines */
+            z-index: 2;
         }
 
-        /* Left date part */
         .timeline-left {
             flex: 0 0 140px;
             text-align: right;
             padding-top: 15px;
             position: relative;
-            padding-right: 40px; /* Dodany odstęp od linii (daty odsunięte w lewo) */
+            padding-right: 40px;
         }
         .timeline-date {
             font-family: var(--font-code);
             color: var(--primary);
             font-weight: 700;
-            font-size: 0.95rem; /* Zmniejszona czcionka (było 1.1rem) */
-            white-space: nowrap; /* Wymuszenie jednej linii */
+            font-size: 0.95rem;
+            white-space: nowrap;
             transition: all 0.3s;
         }
         .timeline-duration {
@@ -500,10 +501,9 @@
             text-transform: uppercase;
         }
 
-        /* The node (dot) */
         .timeline-node {
             position: absolute;
-            right: -16px; /* Half of gap (30) + 1px for center align */
+            right: -16px;
             top: 22px;
             width: 14px;
             height: 14px;
@@ -513,7 +513,6 @@
             transition: all 0.4s ease;
             z-index: 3;
         }
-        /* Active state for node (added by JS) */
         .timeline-item.active .timeline-node {
             background: var(--primary);
             border-color: var(--primary);
@@ -521,7 +520,6 @@
             transform: scale(1.2);
         }
 
-        /* The Card */
         .timeline-content {
             flex: 1;
             background: rgba(20, 20, 20, 0.6);
@@ -531,7 +529,6 @@
             position: relative;
             backdrop-filter: blur(5px);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* Corner clip effect */
             clip-path: polygon(
                 20px 0, 100% 0, 
                 100% calc(100% - 20px), calc(100% - 20px) 100%, 
@@ -540,14 +537,12 @@
         }
         
         .timeline-content::before {
-            /* Decorative small line */
             content: ''; position: absolute; top: 0; left: 0; 
             width: 4px; height: 100%; 
             background: rgba(255,255,255,0.05); 
             transition: 0.3s;
         }
 
-        /* Hover effects */
         .timeline-item:hover .timeline-content,
         .timeline-item.active .timeline-content {
             background: rgba(25, 25, 25, 0.9);
@@ -565,7 +560,6 @@
             color: #fff;
         }
 
-        /* Typography inside card */
         .t-role { font-size: 1.4rem; color: #fff; font-weight: 700; margin-bottom: 0.3rem; }
         .t-company { font-family: var(--font-code); color: var(--secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
         .t-list { list-style: none; margin-bottom: 1.5rem; }
@@ -586,20 +580,17 @@
             position: relative; display: flex; flex-direction: column;
         }
 
-        /* DOMYŚLNY HOVER (Dla kart ukończonych - ZIELONY) */
         .edu-card:hover { 
             transform: translateY(-8px); 
-            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.15); /* Zielona poświata */
-            border-color: var(--primary); /* Zielona ramka */
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.15);
+            border-color: var(--primary);
         }
         
-        /* SPECYFICZNY STYL DLA KARTY "W TRAKCIE" (Highlight - NIEBIESKI) */
         .edu-card.highlight { 
             border-color: var(--secondary); 
             background: linear-gradient(180deg, rgba(0,204,255,0.03) 0%, rgba(15,15,15,0.9) 100%); 
         }
         
-        /* HOVER DLA KARTY "W TRAKCIE" (Musi zostać NIEBIESKI, nadpisuje zielony) */
         .edu-card.highlight:hover { 
             border-color: var(--secondary); 
             box-shadow: 0 15px 40px rgba(0,204,255,0.15); 
@@ -609,14 +600,11 @@
         
         .edu-icon-box { width: 50px; height: 50px; background: rgba(255,255,255,0.03); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #fff; border: 1px solid rgba(255,255,255,0.1); }
         
-        /* Ikonka w karcie Highlight - Niebieska */
         .edu-card.highlight .edu-icon-box { color: var(--secondary); border-color: rgba(0,204,255,0.3); background: rgba(0,204,255,0.05); }
-        /* Ikonka w zwykłych kartach - Zielona */
         .edu-card:not(.highlight) .edu-icon-box { color: var(--primary); border-color: rgba(0,255,136,0.3); }
 
         .edu-status { font-family: var(--font-code); font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Statusy */
         .status-active { color: var(--secondary); background: rgba(0,204,255,0.1); border: 1px solid rgba(0,204,255,0.2); animation: pulse-blue 2s infinite; }
         .status-done { color: var(--primary); background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2); }
         
@@ -630,25 +618,22 @@
         .edu-details { margin-top: auto; background: rgba(0,0,0,0.25); padding: 1.2rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
         .edu-label { display: block; font-family: var(--font-code); font-size: 0.7rem; color: #666; margin-bottom: 8px; text-transform: uppercase; }
 
-        /* LISTA PUNKTÓW EDUKACJI */
         .edu-list { list-style: none !important; padding-left: 0 !important; margin-top: 10px; }
         .edu-list li { position: relative; padding-left: 25px; margin-bottom: 10px; color: #bbb; font-size: 0.9rem; line-height: 1.5; transition: color 0.3s; }
         .edu-list li:hover { color: #fff; }
         
-        /* Domyślne punkty (ZIELONE - dla ukończonych) */
         .edu-list li::before {
             content: '>';
             position: absolute; left: 0; top: 2px;
-            color: var(--primary); /* Zielony */
+            color: var(--primary);
             font-size: 0.8rem;
             text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
             font-weight: bold;
             animation: pulse-marker 3s infinite;
         }
 
-        /* Punkty w karcie Highlight (NIEBIESKIE - dla "W trakcie") */
         .edu-card.highlight .edu-list li::before {
-            color: var(--secondary); /* Niebieski */
+            color: var(--secondary);
             text-shadow: 0 0 8px rgba(0, 204, 255, 0.4);
         }
 
@@ -841,7 +826,7 @@
         }
 
         .mini-term {
-            flex: 1 1 0; /* Forces equal height split (50/50) */
+            flex: 1 1 0; 
             height: auto; 
             background: rgba(10, 10, 10, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -855,14 +840,12 @@
             position: relative;
         }
 
-        /* Hover effect */
         .mini-term:hover {
             border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
             box-shadow: 0 15px 50px rgba(0,0,0,0.7);
         }
 
-        /* AI Terminal Specifics */
         .ai-term {
             border: 1px solid rgba(0, 255, 136, 0.15); 
             box-shadow: 0 0 30px rgba(0, 255, 136, 0.05); 
@@ -900,7 +883,7 @@
             font-family: var(--font-code);
             font-size: 0.8rem;
             color: #ccc;
-            flex-grow: 1; /* Allows content area to fill the flex item */
+            flex-grow: 1; 
             overflow: hidden;
             white-space: pre;
             line-height: 1.6;
@@ -945,43 +928,45 @@
             50% { opacity: 0; }
         }
 
-        /* RESPONSIVE */
+        /* RESPONSIVE & MOBILE IMPROVEMENTS */
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
         .bar { display: block; width: 25px; height: 3px; background-color: var(--primary); transition: all 0.3s ease; }
 
         @media (max-width: 900px) {
-            :root { --section-spacing: 60px; }
+            :root { --section-spacing: 80px; }
+            
+            .section-title { font-size: 2.2rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            
             #home { flex-direction: column-reverse; text-align: center; padding-top: 100px; padding-bottom: 50px; }
             .hero-content { max-width: 100%; }
-            .hero-content h1 { font-size: 2.5rem; }
             .hero-dashboard { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .hero-image-container { width: 220px; height: 220px; margin-bottom: 30px; }
             .btn-group { justify-content: center; gap: 10px; }
             
-            /* ABOUT SECTION MOBILE */
             .about-tech-card { flex-direction: column; text-align: center; padding: 1.5rem; gap: 2rem; }
-            .about-img { width: 100%; max-width: 260px; height: auto; aspect-ratio: 4/5; }
             .about-text h3 { font-size: 1.5rem; }
             .about-compact-item { text-align: left; }
             
             .terminal-wrapper {
                 width: 100%;
                 max-width: 100%;
-                height: 450px; /* Fixed height for mobile stack */
+                /* Let height be automatic on tablet to fit content */
+                height: auto; 
                 margin-bottom: 20px;
             }
 
-            .section-title { font-size: 2rem; }
             .socials-grid, .downloads-grid { grid-template-columns: 1fr; gap: 1rem; }
             
-            /* TIMELINE MOBILE FIX */
             .timeline-line-bg, .timeline-line-progress { left: 20px; }
             .timeline-item { flex-direction: column; gap: 0; padding-left: 50px; margin-bottom: 2rem; }
             .timeline-left { text-align: left; padding: 0; padding-right: 0; margin-bottom: 5px; flex: auto; }
             .timeline-node { left: 14px; right: auto; top: 5px; } 
             
             .why-me-grid, .tech-grid, .edu-modern-grid, .courses-grid, .portfolio-grid { grid-template-columns: 1fr; }
-            .flip-card { height: 340px; } /* Mobile adjustment for flip cards */
+            
+            /* Better sizing for mobile flip cards */
+            .flip-card { height: 280px; }
             
             #scroll-top-btn { bottom: 20px; right: 20px; width: 40px; height: 40px; }
             .hamburger { display: flex; z-index: 2000; }
@@ -997,16 +982,39 @@
             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
 
+        /* --- STRICT MOBILE OPTIMIZATIONS (Small Screens) --- */
         @media (max-width: 480px) {
+            :root { --section-spacing: 50px; }
+            
+            /* Typography Scale Down */
             .hero-content h1 { font-size: 1.8rem; }
-            .section-title { font-size: 1.6rem; }
+            .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
+            .about-text h3 { font-size: 1.3rem; }
+            
             .dash-item { padding: 0.8rem; }
             .dash-num { font-size: 1.4rem; }
+            
+            /* Compact Terminals */
+            .terminal-wrapper { gap: 10px; }
+            .mini-term { min-height: 140px; } 
+            .term-content { font-size: 0.65rem; padding: 10px; } /* Smaller code font */
+            
+            /* Compact Flip Cards */
+            .flip-card { height: 260px; }
+            .flip-front i { font-size: 2rem; }
+            .flip-icon-wrapper { width: 60px; height: 60px; margin-bottom: 1rem; }
+            .flip-front h4 { font-size: 1rem; }
+            .flip-back { padding: 1.2rem; }
+            .flip-back li { font-size: 0.8rem; padding: 5px 0 5px 20px; }
+
             .soft-pill { padding: 6px 12px; font-size: 0.75rem; }
             .about-tech-card { padding: 1.2rem; }
             .timeline-container { padding: 0; }
             .edu-degree { font-size: 1.1rem; }
             .social-icon-box, .download-icon-box { min-width: 60px; height: 60px; font-size: 1.8rem; }
+            
+            /* Hero Image Small */
+            .hero-image-container { width: 180px; height: 180px; }
         }
     </style>
 </head>
@@ -1104,14 +1112,14 @@
         </div>
     </section>
 
-    <!-- Profile Section (UPDATED) -->
+    <!-- Profile Section -->
     <section id="about">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_who">CO ROBIĘ</div>
             <h2 class="section-title" data-lang-key="sect_profile">O MNIE</h2>
         </div>
         <div class="about-tech-card reveal-item">
-           <!-- Terminal Animation: How I work (Left Side) -->
+           <!-- Terminal Animation -->
            <div class="about-image-wrapper terminal-wrapper">
                 <div class="mini-term human-term">
                     <div class="term-header">
@@ -1135,7 +1143,6 @@
             <div class="about-text">
                 <h3>"Data-driven logic, <span>AI-powered execution</span>."</h3>
                 
-                <!-- Work Mode Box -->
                 <div class="vibe-box">
                     <div class="vibe-header">
                         <i class="fa-solid fa-bolt"></i> 
@@ -1150,26 +1157,25 @@
                     </div>
                 </div>
 
-                <!-- NEW COMPACT CONTENT (Replaces the bio paragraph) -->
                 <div class="about-compact-list">
                     <div class="about-compact-item">
                         <div class="about-compact-icon"><i class="fa-solid fa-bolt"></i></div>
                         <div class="about-compact-content">
-                            <h4 data-lang-key="about_h1">AI-Augmented Workflow</h4>
+                            <h4 data-lang-key="about_h1">Workflow Wspierany przez AI</h4>
                             <p data-lang-key="about_p1">Nie wymyślam koła na nowo. Wykorzystuję LLM jako "drugi mózg", by dostarczać kod 3x szybciej, skupiając się na architekturze i logice.</p>
                         </div>
                     </div>
                     <div class="about-compact-item">
                         <div class="about-compact-icon"><i class="fa-solid fa-briefcase"></i></div>
                         <div class="about-compact-content">
-                            <h4 data-lang-key="about_h2">Business Mindset</h4>
+                            <h4 data-lang-key="about_h2">Podejście Biznesowe</h4>
                             <p data-lang-key="about_p2">Większość Juniorów pyta "jak to zakodować?". Ja pytam "czy to się opłaca biznesowo?". Moje doświadczenie jako przedsiębiorca zmienia perspektywę.</p>
                         </div>
                     </div>
                     <div class="about-compact-item">
                         <div class="about-compact-icon"><i class="fa-solid fa-chart-line"></i></div>
                         <div class="about-compact-content">
-                            <h4 data-lang-key="about_h3">Impact & ROI</h4>
+                            <h4 data-lang-key="about_h3">Wpływ i ROI</h4>
                             <p data-lang-key="about_p3">Szukam miejsc do automatyzacji. Skracam procesy. Dowożę MVP, które działa, zamiast perfekcyjnego kodu, który nie zarabia.</p>
                         </div>
                     </div>
@@ -1215,20 +1221,18 @@
         </div>
 
         <div class="tech-grid">
-            <!-- Card 1: AI & ML -->
-            <div class="flip-card reveal-item delay-100" onclick="this.classList.toggle('flipped')">
+            <!-- Card 1 -->
+            <div class="flip-card reveal-item delay-100">
                 <div class="flip-card-inner">
-                    <!-- FRONT -->
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-solid fa-brain"></i></div>
                         <h4 data-lang-key="cat_ml_ai">AI & Machine Learning</h4>
                     </div>
-                    <!-- BACK -->
                     <div class="flip-back">
                         <ul data-lang-key="cat_ml_ai_list">
                             <li>LLMs & RAG Systems</li>
-                            <li>PyTorch / TensorFlow / Scikit-learn</li>
-                            <li>Computer Vision (Junior)</li>
+                            <li>PyTorch / TensorFlow</li>
+                            <li>Computer Vision (YOLO)</li>
                             <li>NLP & Transformers</li>
                             <li>Ollama & Local Models</li>
                         </ul>
@@ -1236,8 +1240,8 @@
                 </div>
             </div>
 
-            <!-- Card 2: Python & Backend -->
-            <div class="flip-card reveal-item delay-200" onclick="this.classList.toggle('flipped')">
+            <!-- Card 2 -->
+            <div class="flip-card reveal-item delay-200">
                 <div class="flip-card-inner">
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-brands fa-python"></i></div>
@@ -1245,7 +1249,7 @@
                     </div>
                     <div class="flip-back">
                         <ul data-lang-key="cat_python_dev_list">
-                            <li>Python (Basics)</li>
+                            <li>Python (Podstawowy)</li>
                             <li>FastAPI / Django</li>
                             <li>SQL / NoSQL</li><li>Bazy Wektorowe</li>
                             <li>C++(Podstawowy) / JavaScript</li>
@@ -1254,8 +1258,8 @@
                 </div>
             </div>
 
-            <!-- Card 3: Cloud & Data -->
-            <div class="flip-card reveal-item delay-300" onclick="this.classList.toggle('flipped')">
+            <!-- Card 3 -->
+            <div class="flip-card reveal-item delay-300">
                 <div class="flip-card-inner">
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-solid fa-cloud"></i></div>
@@ -1263,17 +1267,16 @@
                     </div>
                     <div class="flip-back">
                         <ul data-lang-key="cat_cloud_data_list">
-                            <li>Pandas & NumPy Analysis</li>
-                            <li>Data Visualization</li>
-                            <li>Statystyka</li><li>Web Scraping</li>
+                            <li>Pandas & NumPy</li>
+                            <li>Analiza Danych</li><li>Statystyka</li><li>Web Scraping</li>
                             <li>Docker / Git</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 4: Infra & Automation -->
-            <div class="flip-card reveal-item delay-400" onclick="this.classList.toggle('flipped')">
+            <!-- Card 4 -->
+            <div class="flip-card reveal-item delay-400">
                 <div class="flip-card-inner">
                     <div class="flip-front">
                         <div class="flip-icon-wrapper"><i class="fa-solid fa-server"></i></div>
@@ -1292,7 +1295,7 @@
         </div>
     </section>
 
-    <!-- Experience Section (Interactive Timeline) -->
+    <!-- Experience Section -->
     <section id="experience">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_career_sub">CAREER PATH</div>
@@ -1300,32 +1303,28 @@
         </div>
         
         <div class="timeline-container">
-            <!-- Dynamic Background Lines -->
             <div class="timeline-line-bg"></div>
             <div class="timeline-line-progress" id="timeline-progress"></div>
 
-            <!-- Item 1 -->
             <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2024 - 2025</div>
                     <span class="timeline-duration">1 rok</span>
                 </div>
-                <!-- Node on the line -->
                 <div class="timeline-node"></div>
                 <div class="timeline-content">
                     <h3 class="t-role" data-lang-key="exp_1_role">Przedsiębiorca</h3>
                     <div class="t-company"><i class="fa-solid fa-building"></i> DopeClub</div>
                     <ul class="t-list" data-lang-key="exp_1_list"></ul>
                     <div class="t-tags">
-                        <span class="t-tag">Management</span>
-                        <span class="t-tag">KPI & P&L</span>
-                        <span class="t-tag">No-Code Automations</span>
-                        <span class="t-tag">CRM</span>
+                        <span class="t-tag" data-lang-key="exp_tag_mgmt">Management</span>
+                        <span class="t-tag" data-lang-key="exp_tag_kpi">KPI & P&L</span>
+                        <span class="t-tag" data-lang-key="exp_tag_nocode">No-Code Automations</span>
+                        <span class="t-tag" data-lang-key="exp_tag_crm">CRM</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 2 -->
             <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2022 - 2025</div>
@@ -1337,15 +1336,14 @@
                     <div class="t-company"><i class="fa-solid fa-car"></i> DopeDetailing</div>
                     <ul class="t-list" data-lang-key="exp_2_list"></ul>
                     <div class="t-tags">
-                        <span class="t-tag">Marketing</span>
-                        <span class="t-tag">Data Analysis</span>
-                        <span class="t-tag">Sales B2C/B2B</span>
-                        <span class="t-tag">Branding</span>
+                        <span class="t-tag" data-lang-key="exp_tag_mkt">Marketing</span>
+                        <span class="t-tag" data-lang-key="exp_tag_data">Data Analysis</span>
+                        <span class="t-tag" data-lang-key="exp_tag_sales">Sales B2C/B2B</span>
+                        <span class="t-tag" data-lang-key="exp_tag_brand">Branding</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 3 -->
             <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2018 - NOW</div>
@@ -1357,15 +1355,14 @@
                     <div class="t-company"><i class="fa-solid fa-store"></i> DopeShop</div>
                     <ul class="t-list" data-lang-key="exp_3_list"></ul>
                     <div class="t-tags">
-                        <span class="t-tag">Supply Chain</span>
-                        <span class="t-tag">ML Prediction</span>
-                        <span class="t-tag">ERP</span>
-                        <span class="t-tag">Automation Code/No-Code</span>
+                        <span class="t-tag" data-lang-key="exp_tag_supply">Supply Chain</span>
+                        <span class="t-tag" data-lang-key="exp_tag_mlpred">ML Prediction</span>
+                        <span class="t-tag" data-lang-key="exp_tag_erp">ERP</span>
+                        <span class="t-tag" data-lang-key="exp_tag_auto">Automation</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 4 -->
             <div class="timeline-item reveal-item">
                 <div class="timeline-left">
                     <div class="timeline-date">2022 - 2023</div>
@@ -1377,9 +1374,9 @@
                     <div class="t-company"><i class="fa-solid fa-headset"></i> AS Lotus</div>
                     <ul class="t-list" data-lang-key="exp_4_list"></ul>
                     <div class="t-tags">
-                        <span class="t-tag">Jira</span>
-                        <span class="t-tag">Hardware Diagnostic</span>
-                        <span class="t-tag">B2B/B2C sales helper</span>
+                        <span class="t-tag" data-lang-key="exp_tag_jira">Jira</span>
+                        <span class="t-tag" data-lang-key="exp_tag_hw">Hardware Diagnostic</span>
+                        <span class="t-tag" data-lang-key="exp_tag_help">Sales Helper</span>
                     </div>
                 </div>
             </div>
@@ -1394,7 +1391,6 @@
         </div>
         
         <div class="edu-modern-grid">
-            <!-- Edu 1 -->
             <div class="edu-card highlight reveal-item delay-100">
                 <div class="edu-top">
                     <div class="edu-icon-box"><i class="fa-solid fa-microchip"></i></div>
@@ -1411,7 +1407,6 @@
                 </div>
             </div>
 
-            <!-- Edu 2 -->
             <div class="edu-card reveal-item delay-200">
                 <div class="edu-top">
                     <div class="edu-icon-box"><i class="fa-solid fa-user-tie"></i></div>
@@ -1428,7 +1423,6 @@
                 </div>
             </div>
 
-            <!-- Edu 3 -->
             <div class="edu-card reveal-item delay-300">
                 <div class="edu-top">
                     <div class="edu-icon-box"><i class="fa-solid fa-server"></i></div>
@@ -1450,17 +1444,13 @@
     <!-- Courses -->
     <section id="courses">
         <div class="section-header">
-            <!-- Poprawka: Dodano klucz dla podtytułu -->
             <div class="section-subtitle" data-lang-key="sect_cert_sub">CERTIFICATIONS</div>
             <h2 class="section-title" data-lang-key="sect_cert">KURSY</h2>
         </div>
         <div class="courses-grid">
-            
-            <!-- Karta 1 -->
             <div class="vault-item reveal-item delay-100">
                 <div>
                     <i class="fa-solid fa-robot vault-icon"></i>
-                    <!-- Dodano klucz cert_1_inst -->
                     <h4 style="color:#fff;" data-lang-key="cert_1_h">Podstawy AI</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;" data-lang-key="cert_1_inst">OPI - PIB</p>
                     <ul class="vault-list" data-lang-key="cert_1_list"></ul>
@@ -1469,12 +1459,9 @@
                     <div class="cert-popup"><img src="cert_podstawyai.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
-
-            <!-- Karta 2 -->
             <div class="vault-item reveal-item delay-200">
                 <div>
                     <i class="fa-solid fa-wand-magic-sparkles vault-icon"></i>
-                    <!-- Dodano klucze cert_2_h i cert_2_inst -->
                     <h4 style="color:#fff;" data-lang-key="cert_2_h">Generative AI</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;" data-lang-key="cert_2_inst">Lubuskie Centrum Cyfryzacji</p>
                     <ul class="vault-list" data-lang-key="cert_2_list"></ul>
@@ -1483,12 +1470,9 @@
                     <div class="cert-popup"><img src="cert_podstawyai2.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
-
-            <!-- Karta 3 -->
             <div class="vault-item reveal-item delay-300">
                 <div>
                     <i class="fa-brands fa-python vault-icon"></i>
-                    <!-- Dodano klucz cert_3_h -->
                     <h4 style="color:#fff;" data-lang-key="cert_3_h">Python 3</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;" data-lang-key="cert_3_inst">Uniwersytet Szczeciński</p>
                     <ul class="vault-list" data-lang-key="cert_3_list"></ul>
@@ -1497,12 +1481,9 @@
                     <div class="cert-popup"><img src="cert_podstawyprog.png" loading="lazy" onload="this.classList.add('lazy-loaded')"></div>
                 </a>
             </div>
-
-            <!-- Karta 4 -->
             <div class="vault-item reveal-item delay-400">
                 <div>
                     <i class="fa-solid fa-globe vault-icon"></i>
-                    <!-- Dodano klucze cert_4_h i cert_4_inst -->
                     <h4 style="color:#fff;" data-lang-key="cert_4_h">English B2/C1</h4>
                     <p style="color:#666; font-size:0.8rem; margin-bottom:10px;" data-lang-key="cert_4_inst">Cambridge</p>
                     <ul class="vault-list" data-lang-key="cert_4_list"></ul>
@@ -1546,7 +1527,7 @@
     <!-- Socials -->
     <section id="socials">
         <div class="section-header">
-            <div class="section-subtitle" data-lang-key="sect_social_sub">ESTABLISH UPLINK</div>
+            <div class="section-subtitle" data-lang-key="sect_social_sub">ZNAJDŹ MNIE ONLINE</div>
             <h2 class="section-title" data-lang-key="sect_social">Media Społecznościowe</h2>
         </div>
         
@@ -1592,7 +1573,7 @@
     <!-- Downloads -->
     <section id="downloads">
         <div class="section-header">
-            <div class="section-subtitle" data-lang-key="sect_dl_sub">OFFLINE DATA</div>
+            <div class="section-subtitle" data-lang-key="sect_dl_sub">PLIKI DO POBRANIA</div>
             <h2 class="section-title" data-lang-key="sect_dl">Pobierz moje CV</h2>
         </div>
 
@@ -1620,8 +1601,8 @@
     <!-- Contact Form -->
     <section id="contact">
         <div class="section-header">
-            <div class="section-subtitle" data-lang-key="sect_contact_sub">INITIATE CONNECTION</div>
-            <h2 class="section-title" data-lang-key="sect_contact">Skontaktuj się</h2>
+            <div class="section-subtitle" data-lang-key="sect_contact_sub">KONTAKT</div>
+            <h2 class="section-title" data-lang-key="sect_contact">Napisz do mnie!</h2>
         </div>
         <div class="terminal-window reveal-item">
             <div class="term-header">
@@ -1665,707 +1646,661 @@
 
     <!-- --- JAVASCRIPT LOGIC --- -->
     <script>
-     /**
-     * GLOBAL CONFIGURATION & STATE
-     */
-    let currentLang = 'pl';
-    let typedInstance = null;
-    
-    // --- Translations Dictionary (ZAKTUALIZOWANY) ---
-    const translations = {
-        pl: {
-            nav_about: "O MNIE", nav_skills: "UMIEJĘTNOŚCI", nav_exp: "DOŚWIADCZENIE", nav_edu: "EDUKACJA", nav_certs: "CERTYFIKATY", nav_projects: "PROJEKTY", nav_contact: "KONTAKT",
-            hero_greeting: "Cześć, nazywam się",
-            hero_desc: "Junior AI & Automation Engineer. Widzę rozwiązania tam, gdzie inni widzą dane. Tworzę systemy AI, które napędzają realny rozwój biznesu.",
-            hero_btn_projects: "ZOBACZ PROJEKTY",
-            hero_btn_resume: "POBIERZ CV",
-            stat_repos: "Repozytoria", stat_stars: "Gwiazdki", stat_stack: "Technologie", stat_loc: "Linii Kodu", stat_tokens: "Tokeny LLM", stat_models: "Modele AI",
-            sect_who: "CO ROBIĘ", sect_profile: "O MNIE",
-            vibe_desc: "Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>Skupienie na architekturze i logice biznesowej.",
-            
-            // ABOUT SECTION
-            about_h1: "Workflow Wspierany przez AI",
-            about_p1: "Nie wymyślam koła na nowo. Wykorzystuję LLM jako 'drugi mózg', by dostarczać kod szybciej, skupiając się na architekturze i logice.",
-            about_h2: "Podejście Biznesowe",
-            about_p2: "Większość Juniorów pyta 'jak to zrobić?'. Ja pytam 'czy to się opłaca biznesowo?'. Moje doświadczenie jako przedsiębiorca zmienia perspektywę.",
-            about_h3: "Wpływ i ROI",
-            about_p3: "Szukam miejsc do automatyzacji. Skracam procesy. Dowożę MVP, które działa, zamiast perfekcyjnego kodu, który nie zarabia.",
-
-            soft_label: "KOMPETENCJE MIĘKKIE:",
-            soft_1: "Samodzielność", soft_2: "Komunikatywność", soft_3: "Organizacja pracy", soft_4: "Kreatywność", soft_5: "Zarządzanie", soft_6: "Nieszablonowe myślenie", soft_7: "Analityczne myślenie", soft_8: "Odporność na stres", soft_9: "Angielski (B2/C1)",
-            why_1_h: "Biznes + Technologia", why_1_p: "Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.",
-            why_2_h: "Szybkie Wdrożenia", why_2_p: "Łączę wiedzę z LLM, aby dostarczać działające MVP w dni, a nie w miesiące.",
-            
-            // HARD SKILLS
-            sect_tech_sub: "TECHNOLOGIE", sect_hard_skills: "MOJE TECHSTACK",
-            
-            cat_ml_ai: "Uczenie Maszynowe & AI",
-            cat_ml_ai_list: "<li>LLMs & RAG Systems</li><li>PyTorch / TensorFlow</li><li>Computer Vision (YOLO)</li><li>NLP & Transformers</li><li>Ollama & Local Models</li>",
-
-            cat_python_dev: "Python & Development",
-            cat_python_dev_list: "<li>Python (Podstawowy)</li><li>FastAPI / Django</li><li>SQL / NoSQL</li><li>Bazy Wektorowe</li><li>C++(Podstawowy) / JavaScript</li>",
-
-            cat_cloud_data: "Chmura i Dane",
-            cat_cloud_data_list: "<li>Pandas & NumPy</li><li>Analiza Danych</li><li>Statystyka</li><li>Web Scraping</li><li>Docker / Git</li>",
-
-            cat_infra_ops: "Infrastruktura",
-            cat_infra_ops_list: "<li>Linux / Bash</li><li>Automatyzacje n8n</li><li>Make.com</li><li>MLflow</li><li>Optymalizacja Procesów</li>",
-
-            // EXPERIENCE
-            sect_career_sub: "ŚCIEŻKA KARIERY", sect_exp: "DOŚWIADCZENIE",
-            exp_1_role: "Przedsiębiorca",
-            exp_1_list: "<li>Zarządzanie 10-osobowym zespołem (delegowanie, KPI).</li><li>Optymalizacja Cashflow i analiza P&L.</li><li>Wdrażanie automatyzacji procesów wewnętrznych (No-Code).</li><li>Budowanie strategii retencji klientów.</li><li>Implementacja systemu CRM i obiegu dokumentów.</li>",
-            exp_2_role: "Przedsiębiorca",
-            exp_2_list: "<li>Social Media Marketing (Meta Ads, Content Strategy).</li><li>Analiza danych sprzedażowych i optymalizacja konwersji (CRO).</li><li>Budowanie wizerunku marki (Brand Identity).</li><li>Sprzedaż B2C i obsługa klienta premium.</li>",
-            exp_3_role: "Projekt E-commerce",
-            exp_3_list: "<li>Logistyka i zarządzanie łańcuchem dostaw (Supply Chain).</li><li>Obsługa systemów ERP i prognozowanie stanów magazynowych.</li><li>Negocjacje B2B z dostawcami międzynarodowymi.</li><li>Automatyzacja procesów sprzedażowych.</li><li>Wykorzystanie ML do optymalizacji contentu i predykcji trendów wyszukiwania</li>",
-            exp_4_role: "Wsparcie Klienta",
-            exp_4_list: "<li>Diagnostyka sprzętowa i software'owa maszyn.</li><li>Obsługa systemów ticketowych (Jira).</li><li>Bezpośrednia komunikacja z klientem i rozwiązywanie problemów.</li>",
-            
-            // EDUCATION
-            sect_kb_sub: "WYKSZTAŁCENIE", sect_edu: "BAZA WIEDZY",
-            edu_1_date: "2025 - Obecnie", edu_1_title: "Inżynieria AI & ML", edu_1_school: "Wyższa Szkoła Kształcenia Zawodowego",
-            edu_1_list: "<li>Sieci Neuronowe (CNN/RNN/Transformers)</li><li>Frameworki Deep Learning (PyTorch/TensorFlow)</li><li>Algorytmy Computer Vision i NLP</li><li>Data Science i Inżynieria Cech</li><li>Matematyka: Algebra Liniowa, Statystyka</li>",
-            edu_2_title: "Zarządzanie", edu_2_school: "Wyższa Szkoła Bankowa",
-            edu_2_list: "<li>Zarządzanie Zasobami Ludzkimi (HRM)</li><li>Finanse Przedsiębiorstw i Controlling</li><li>Prawo Gospodarcze</li><li>Marketing Strategiczny</li><li>Zarządzanie Projektami (Agile/Scrum Basics)</li>",
-            edu_3_title: "Technik Informatyk", edu_3_school: "CKZiU nr 2 (Elektronik)",
-            edu_3_list: "<li>Diagnostyka i serwis sprzętu komputerowego</li><li>Administracja Sieciami (LAN/WAN, Cisco)</li><li>Systemy Operacyjne (Linux/Windows Server)</li><li>Podstawy Baz Danych (SQL)</li>",
-            
-            // --- POPRAWIONE KURSY ---
-            sect_cert_sub: "CERTYFIKATY", sect_cert: "WIEDZA+",
-            cert_show: "Pokaż Certyfikat",
-            
-            cert_1_h: "Podstawy AI", cert_1_inst: "OPI - PIB",
-            cert_1_list: "<li>Podstawy uczenia maszynowego</li><li>Etyka danych i bias</li><li>Wstęp do NLP</li>",
-            
-            cert_2_h: "Generative AI", cert_2_inst: "Lubuskie Centrum Cyfryzacji",
-            cert_2_list: "<li>Inżynieria Promptów</li><li>Ograniczenia LLM</li><li>Koncepcje RAG</li><li>Efektywność narzędzi AI</li>",
-            
-            cert_3_h: "Python 3", cert_3_inst: "Uniwersytet Szczeciński",
-            cert_3_list: "<li>Programowanie obiektowe</li><li>Struktury danych i algorytmy</li><li>Podstawy Pandas / NumPy</li><li>Integracja API</li>",
-            
-            cert_4_h: "Język Angielski B2/C1", cert_4_inst: "Cambridge",
-            cert_4_list: "<li>Dokumentacja techniczna</li><li>Komunikacja biznesowa</li><li>Relacje międzynarodowe</li>",
-
-            // PROJEKTY, HOBBY I SOCIALS
-            sect_live: "MOJE PRACE", sect_proj: "Projekty",
-            sect_hobby_sub: "ZAINTERESOWANIA", sect_hobby: "Hobby i Pasje",
-            hob_1: '<i class="fa-solid fa-brain"></i> AI & Nowe Technologie', hob_2: '<i class="fa-solid fa-gears"></i> Automatyzacje', hob_3: '<i class="fa-solid fa-code"></i> Aplikacje No-Code', hob_4: '<i class="fa-solid fa-dumbbell"></i> Siłownia',
-            hob_5: '<i class="fa-solid fa-car"></i> Motoryzacja', hob_6: '<i class="fa-solid fa-briefcase"></i> Biznes', hob_7: '<i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
-            
-            // POPRAWIONE SOCIALS
-            sect_social_sub: "SPRAWDŹ MOJE", sect_social: "Media Społecznościowe",
-            social_git: "Dostęp do repozytoriów i kodu", social_lin: "Sprawdź mój profil zawodowy",
-            social_kag: "Notebooki i Zbiory Danych", social_hf: "Modele i Space'y",
-            
-            // FOOTER & DOWNLOAD
-            sect_dl_sub: "PLIKI DO POBRANIA", sect_dl: "Pobierz moje CV",
-            dl_desc: "PODGLĄD / POBIERANIE / DRUK", dl_desc_2: "POBIERANIE / DRUK",
-            
-            // KONTAKT
-            sect_contact_sub: "KONTAKT", sect_contact: "Napisz do mnie!",
-            contact_label_name: "nazwa_użytkownika", contact_label_email: "adres_email", contact_label_msg: "treść_wiadomości",
-            ph_name: "Twoje Imię", ph_msg: "Treść wiadomości...", form_btn: " > WYŚLIJ_WIADOMOŚĆ",
-            
-            ach_4_t: "Osiągnięcie: Ostateczny Boss?", ach_4_d: "Dotarto do sekcji kontaktowej.",
-            status_progress: "W TRAKCIE", status_done: "UKOŃCZONE"
-        },
-        en: {
-            nav_about: "ABOUT", nav_skills: "SKILLS", nav_exp: "EXPERIENCE", nav_edu: "EDUCATION", nav_certs: "CERTS", nav_projects: "PROJECTS", nav_contact: "CONTACT",
-            hero_greeting: "Hello, I am",
-            hero_desc: "Junior AI & Automation Engineer. I see solutions where others see data. I create AI systems that drive real business growth.",
-            hero_btn_projects: "EXPLORE PROJECTS",
-            hero_btn_resume: "GET RESUME",
-            stat_repos: "Repositories", stat_stars: "Total Stars", stat_stack: "Tech Stack", stat_loc: "Lines of Code", stat_tokens: "LLM Tokens", stat_models: "AI Models Trained",
-            sect_who: "WHAT I DO", sect_profile: "ABOUT ME",
-            vibe_desc: "Faster delivery of solutions through LLM integration in workflow.<br>Focus on architecture and business logic.",
-            
-            about_h1: "AI-Augmented Workflow",
-            about_p1: "I don't reinvent the wheel. I use LLMs as a 'second brain' to ship code 3x faster, focusing on architecture and logic.",
-            about_h2: "Business Mindset",
-            about_p2: "Most Juniors ask 'how to code this?'. I ask 'does this make business sense?'. My entrepreneurial background changes the perspective.",
-            about_h3: "Impact & ROI",
-            about_p3: "I spot automation opportunities. I shorten processes. I ship working MVPs instead of perfect code that doesn't sell.",
-
-            soft_label: "CORE SOFT SKILLS:",
-            soft_1: "Independence", soft_2: "Communication", soft_3: "Work Organization", soft_4: "Creativity", soft_5: "Management", soft_6: "Out-of-box Thinking", soft_7: "Analytical Thinking", soft_8: "Stress Resistance", soft_9: "English (B2/C1)",
-            why_1_h: "Business + Technology", why_1_p: "I don't just write code. I understand P&L, ROI, and sales processes. I create solutions that actually earn or save money.",
-            why_2_h: "Rapid Deployment", why_2_p: "I combine knowledge with LLM's to deliver working MVPs in days, not months.",
-            
-            sect_tech_sub: "TECHNOLOGY KNOWLEDGE", sect_hard_skills: "HARD SKILLS",
-
-            cat_ml_ai: "Machine Learning & AI",
-            cat_ml_ai_list: "<li>LLMs & RAG Systems</li><li>PyTorch / TensorFlow</li><li>Computer Vision (YOLO)</li><li>NLP & Transformers</li><li>Ollama & Local Models</li>",
-
-            cat_python_dev: "Python & Development",
-            cat_python_dev_list: "<li>Python (Basics)</li><li>FastAPI / Django</li><li>SQL / NoSQL</li><li>Vector Databases</li><li>C++(Basics) / JavaScript</li>",
-
-            cat_cloud_data: "Cloud & Data",
-            cat_cloud_data_list: "<li>Pandas & NumPy</li><li>Data Analysis</li><li>Statistics</li><li>Web Scraping</li><li>Docker / Git</li>",
-
-            cat_infra_ops: "Infrastructure",
-            cat_infra_ops_list: "<li>Linux / Bash</li><li>n8n Automations</li><li>Make.com</li><li>MLflow</li><li>Process Optimization</li>",
-
-            sect_career_sub: "CAREER PATH", sect_exp: "EXPERIENCE",
-            exp_1_role: "Entrepreneur",
-            exp_1_list: "<li>Managing a 10-person team (delegation, KPIs).</li><li>Cashflow optimization and P&L analysis.</li><li>Implementing internal process automation (No-Code).</li><li>Building customer retention strategies.</li><li>Implementing CRM and document workflow systems.</li>",
-            exp_2_role: "Entrepreneur",
-            exp_2_list: "<li>Social Media Marketing (Meta Ads, Content Strategy).</li><li>Sales data analysis and conversion optimization (CRO).</li><li>Brand Identity building.</li><li>B2C sales and premium customer service.</li>",
-            exp_3_role: "E-commerce Project",
-            exp_3_list: "<li>Logistics and Supply Chain management.</li><li>ERP system operation and inventory forecasting.</li><li>B2B negotiations with international suppliers.</li><li>Sales process automation.</li><li>Using ML for content optimization and search trend prediction.</li>",
-            exp_4_role: "Client Support",
-            exp_4_list: "<li>Hardware and software diagnostics of machines.</li><li>Handling ticketing systems (Jira).</li><li>Direct client communication and problem solving.</li>",
-            
-            sect_kb_sub: "KNOWLEDGE BASE", sect_edu: "EDUCATION",
-            edu_1_date: "2025 - Present", edu_1_title: "AI & ML Engineering", edu_1_school: "Vocational Training College",
-            edu_1_list: "<li>Neural Networks (CNN/RNN/Transformers)</li><li>Deep Learning Frameworks (PyTorch/TensorFlow)</li><li>Computer Vision & NLP Algorithms</li><li>Data Science & Feature Engineering</li><li>Math: Linear Algebra, Statistics</li>",
-            edu_2_title: "Management", edu_2_school: "WSB University",
-            edu_2_list: "<li>Human Resource Management (HRM)</li><li>Corporate Finance and Controlling</li><li>Business Law</li><li>Strategic Marketing</li><li>Project Management (Agile/Scrum Basics)</li>",
-            edu_3_title: "IT Technician", edu_3_school: "CKZiU No. 2 (Electronics)",
-            edu_3_list: "<li>Computer hardware diagnostics and service</li><li>Network Administration (LAN/WAN, Cisco)</li><li>Operating Systems (Linux/Windows Server)</li><li>Database Basics (SQL)</li>",
-            
-            // --- UPDATED COURSES ---
-            sect_cert_sub: "CERTIFICATIONS", sect_cert: "COURSES",
-            cert_show: "Show Certificate",
-
-            cert_1_h: "AI Fundamentals", cert_1_inst: "OPI - PIB",
-            cert_1_list: "<li>Machine Learning Fundamentals</li><li>Data Bias & Ethics</li><li>Intro to NLP</li>",
-
-            cert_2_h: "Generative AI", cert_2_inst: "Lubuskie Digital Center",
-            cert_2_list: "<li>Prompt Engineering</li><li>LLM Limitations</li><li>RAG Concepts</li><li>AI Tools Efficiency</li>",
-
-            cert_3_h: "Python 3", cert_3_inst: "University of Szczecin",
-            cert_3_list: "<li>Object-Oriented Programming</li><li>Data Structures & Algos</li><li>Pandas / NumPy Basics</li><li>API Integration</li>",
-
-            cert_4_h: "English B2/C1", cert_4_inst: "Cambridge",
-            cert_4_list: "<li>Technical Documentation</li><li>Business Communication</li><li>International Relations</li>",
-
-            sect_live: "LIVE DEPLOYMENTS", sect_proj: "Projects",
-            sect_hobby_sub: "PERSONAL INTERESTS", sect_hobby: "Hobbies & Passions",
-            hob_1: '<i class="fa-solid fa-brain"></i> AI & New Tech', hob_2: '<i class="fa-solid fa-gears"></i> Automations', hob_3: '<i class="fa-solid fa-code"></i> No-Code Apps', hob_4: '<i class="fa-solid fa-dumbbell"></i> Gym',
-            hob_5: '<i class="fa-solid fa-car"></i> Automotive', hob_6: '<i class="fa-solid fa-briefcase"></i> Business', hob_7: '<i class="fa-solid fa-chart-line"></i> Finance & Investing', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychology',
-            
-            // UPDATED SOCIALS
-            sect_social_sub: "ESTABLISH UPLINK", sect_social: "Social Media",
-            social_git: "Access Source Code & Repos", social_lin: "Check my Profile!",
-            social_kag: "Notebooks & Datasets", social_hf: "Models, Spaces & Datasets",
-            
-            sect_dl_sub: "OFFLINE DATA", sect_dl: "DOWNLOAD MY CV",
-            dl_desc: "VIEW ONLINE / DOWNLOAD / PRINT", dl_desc_2: "DOWNLOAD / PRINT",
-            
-            sect_contact_sub: "INITIATE CONNECTION", sect_contact: "CONTACT ME",
-            contact_label_name: "user_name", contact_label_email: "user_email", contact_label_msg: "user_message",
-            ph_name: "User Name", ph_msg: "Message content...", form_btn: " > SEND_MESSAGE",
-            
-            ach_4_t: "Achievement: Final Boss?", ach_4_d: "Reached contact section.",
-            status_progress: "IN PROGRESS", status_done: "COMPLETED"
-        }
-    };
-
-    // --- Core Logic ---
-    function setLanguage(lang) {
-        currentLang = lang;
-        const data = translations[lang];
-
-        // Toggle Buttons
-        document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-        document.documentElement.lang = lang;
-
-        // Update text content
-        document.querySelectorAll('[data-lang-key]').forEach(el => {
-            const key = el.getAttribute('data-lang-key');
-            if(data[key]) {
-                if(key.includes('list') || key.includes('vibe') || key.includes('hob') || key.includes('cat_')) {
-                    el.innerHTML = data[key]; 
-                } else {
-                    el.textContent = data[key]; 
-                }
-            }
-        });
-
-        // Update placeholders
-        document.querySelectorAll('[data-lang-ph]').forEach(el => {
-            const key = el.getAttribute('data-lang-ph');
-            if(data[key]) el.placeholder = data[key];
-        });
-
-        // Update Download Links
-        const pdfLink = document.getElementById('dl-pdf');
-        const docxLink = document.getElementById('dl-docx');
-
-        if(lang === 'pl') {
-            if(pdfLink) pdfLink.href = 'cv_pdf.pdf';
-            if(docxLink) docxLink.href = 'cv_docx.docx';
-        } else {
-            if(pdfLink) pdfLink.href = 'cv_pdf_eng.pdf';
-            if(docxLink) docxLink.href = 'cv_docx_eng.docx';
-        }
-
-        // Refresh Typed.js
-        if(typedInstance) typedInstance.destroy();
-        typedInstance = new Typed('#typed-name', {
-            strings: ['Łukasz Szymankiewicz'],
-            typeSpeed: 50, startDelay: 200, loop: false,
-            showCursor: true, cursorChar: '|',
-            onComplete: function(self) { self.cursor.remove(); }
-        });
-    }
-
-    // --- Initialization ---
-    window.addEventListener('load', () => {
-        const bar = document.getElementById('loader-bar');
-        const text = document.getElementById('loader-text');
-        const preloader = document.getElementById('preloader');
-        const body = document.body;
-        let width = 0;
-
-        // Simulated Loading
-        const interval = setInterval(() => {
-            width += Math.random() * 10 + 5;
-            if(width > 100) width = 100;
-            bar.style.width = width + '%';
-
-            const loadingText = currentLang === 'pl' ? 
-                (width < 30 ? "ŁADOWANIE MODUŁÓW..." : (width < 70 ? "POBIERANIE DANYCH GITHUB..." : "RENDEROWANIE INTERFEJSU...")) :
-                (width < 30 ? "LOADING CORE MODULES..." : (width < 70 ? "FETCHING GITHUB DATA..." : "RENDERING INTERFACE..."));
-
-            text.innerText = loadingText;
-
-            if(width === 100) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    preloader.classList.add('fade-out');
-                    body.classList.remove('loading-active');
-                    setTimeout(() => preloader.style.display = 'none', 500);
-                    
-                    // Default to Polish
-                    setLanguage('pl');
-                    
-                    // Init Stats & Achievements
-                    initFunStats();
-                    initGamification();
-
-                }, 200);
-            }
-        }, 20);
-    });
-
-    // --- Visual Effects & Interactivity ---
-    
-    // 1. Scroll Progress (Global)
-    window.addEventListener('scroll', () => {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (scrollTop / scrollHeight) * 100;
-        document.getElementById('progressBar').style.width = scrolled + "%";
+        let currentLang = 'pl';
+        let typedInstance = null;
         
-        // Call Timeline Animation
-        animateTimeline();
-    });
+        const translations = {
+            pl: {
+                nav_about: "O MNIE", nav_skills: "UMIEJĘTNOŚCI", nav_exp: "DOŚWIADCZENIE", nav_edu: "EDUKACJA", nav_certs: "CERTYFIKATY", nav_projects: "PROJEKTY", nav_contact: "KONTAKT",
+                hero_greeting: "Cześć, nazywam się",
+                hero_desc: "Junior AI & Automation Engineer. Widzę rozwiązania tam, gdzie inni widzą dane. Tworzę systemy AI, które napędzają realny rozwój biznesu.",
+                hero_btn_projects: "ZOBACZ PROJEKTY",
+                hero_btn_resume: "POBIERZ CV",
+                stat_repos: "Repozytoria", stat_stars: "Gwiazdki", stat_stack: "Technologie", stat_loc: "Linii Kodu", stat_tokens: "Tokeny LLM", stat_models: "Modele AI",
+                sect_who: "CO ROBIĘ", sect_profile: "O MNIE",
+                vibe_desc: "Szybsze dostarczanie rozwiązań dzięki integracji LLM w workflow.<br>Skupienie na architekturze i logice biznesowej.",
+                
+                about_h1: "Workflow Wspierany przez AI",
+                about_p1: "Nie wymyślam koła na nowo. Wykorzystuję LLM jako 'drugi mózg', by dostarczać kod 3x szybciej, skupiając się na architekturze i logice.",
+                about_h2: "Podejście Biznesowe",
+                about_p2: "Większość Juniorów pyta 'jak to zakodować?'. Ja pytam 'czy to się opłaca biznesowo?'. Moje doświadczenie jako przedsiębiorca zmienia perspektywę.",
+                about_h3: "Wpływ i ROI",
+                about_p3: "Szukam miejsc do automatyzacji. Skracam procesy. Dowożę MVP, które działa, zamiast perfekcyjnego kodu, który nie zarabia.",
 
-    // 2. Timeline Progress Animation
-    function animateTimeline() {
-        const container = document.querySelector('.timeline-container');
-        if (!container) return;
+                soft_label: "KOMPETENCJE MIĘKKIE:",
+                soft_1: "Samodzielność", soft_2: "Komunikatywność", soft_3: "Organizacja pracy", soft_4: "Kreatywność", soft_5: "Zarządzanie", soft_6: "Nieszablonowe myślenie", soft_7: "Analityczne myślenie", soft_8: "Odporność na stres", soft_9: "Angielski (B2/C1)",
+                why_1_h: "Biznes + Technologia", why_1_p: "Nie tylko piszę kod. Rozumiem P&L, ROI i procesy sprzedażowe. Tworzę rozwiązania, które realnie zarabiają lub oszczędzają pieniądze.",
+                why_2_h: "Szybkie Wdrożenia", why_2_p: "Łączę wiedzę z LLM, aby dostarczać działające MVP w dni, a nie w miesiące.",
+                
+                sect_tech_sub: "TECHNOLOGIE", sect_hard_skills: "KOMPETENCJE TECHNICZNE",
+                
+                cat_ml_ai: "Uczenie Maszynowe & AI",
+                cat_ml_ai_list: "<li>LLMs & RAG Systems</li><li>PyTorch / TensorFlow</li><li>Computer Vision (YOLO)</li><li>NLP & Transformers</li><li>Ollama & Local Models</li>",
 
-        const progressBar = document.getElementById('timeline-progress');
-        const items = document.querySelectorAll('.timeline-item');
-        
-        const containerRect = container.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        
-        // Calculate how much of the timeline container has been scrolled past the center of the viewport
-        const startOffset = viewportHeight * 0.5;
-        let progress = startOffset - containerRect.top;
-        
-        // Clamp progress between 0 and container height
-        let heightPercent = (progress / containerRect.height) * 100;
-        if (heightPercent < 0) heightPercent = 0;
-        if (heightPercent > 100) heightPercent = 100;
-        
-        progressBar.style.height = heightPercent + '%';
+                cat_python_dev: "Python & Development",
+                cat_python_dev_list: "<li>Python (Podstawowy)</li><li>FastAPI / Django</li><li>SQL / NoSQL</li><li>Bazy Wektorowe</li><li>C++(Podstawowy) / JavaScript</li>",
 
-        // Highlight items as the line passes them
-        items.forEach(item => {
-            const itemTop = item.getBoundingClientRect().top;
-            if (itemTop < startOffset) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
+                cat_cloud_data: "Chmura i Dane",
+                cat_cloud_data_list: "<li>Pandas & NumPy</li><li>Analiza Danych</li><li>Statystyka</li><li>Web Scraping</li><li>Docker / Git</li>",
+
+                cat_infra_ops: "Infrastruktura",
+                cat_infra_ops_list: "<li>Linux / Bash</li><li>Automatyzacje n8n</li><li>Make.com</li><li>MLflow</li><li>Optymalizacja Procesów</li>",
+
+                sect_career_sub: "ŚCIEŻKA KARIERY", sect_exp: "DOŚWIADCZENIE",
+                
+                // --- Experience Tags PL ---
+                exp_tag_mgmt: "Zarządzanie", exp_tag_kpi: "KPI i P&L", exp_tag_nocode: "Automatyzacje No-Code", exp_tag_crm: "Systemy CRM",
+                exp_tag_mkt: "Marketing", exp_tag_data: "Analiza Danych", exp_tag_sales: "Sprzedaż B2C/B2B", exp_tag_brand: "Wizerunek Marki",
+                exp_tag_supply: "Łańcuch Dostaw", exp_tag_mlpred: "Predykcje ML", exp_tag_erp: "Systemy ERP", exp_tag_auto: "Automatyzacja",
+                exp_tag_jira: "Jira", exp_tag_hw: "Diagnostyka Sprzętu", exp_tag_help: "Wsparcie Sprzedaży",
+
+                exp_1_role: "Przedsiębiorca",
+                exp_1_list: "<li>Zarządzanie 10-osobowym zespołem (delegowanie, KPI).</li><li>Optymalizacja Cashflow i analiza P&L.</li><li>Wdrażanie automatyzacji procesów wewnętrznych (No-Code).</li><li>Budowanie strategii retencji klientów.</li><li>Implementacja systemu CRM i obiegu dokumentów.</li>",
+                exp_2_role: "Przedsiębiorca",
+                exp_2_list: "<li>Social Media Marketing (Meta Ads, Content Strategy).</li><li>Analiza danych sprzedażowych i optymalizacja konwersji (CRO).</li><li>Budowanie wizerunku marki (Brand Identity).</li><li>Sprzedaż B2C i obsługa klienta premium.</li>",
+                exp_3_role: "Projekt E-commerce",
+                exp_3_list: "<li>Logistyka i zarządzanie łańcuchem dostaw (Supply Chain).</li><li>Obsługa systemów ERP i prognozowanie stanów magazynowych.</li><li>Negocjacje B2B z dostawcami międzynarodowymi.</li><li>Automatyzacja procesów sprzedażowych.</li><li>Wykorzystanie ML do optymalizacji contentu i predykcji trendów wyszukiwania</li>",
+                exp_4_role: "Wsparcie Klienta",
+                exp_4_list: "<li>Diagnostyka sprzętowa i software'owa maszyn.</li><li>Obsługa systemów ticketowych (Jira).</li><li>Bezpośrednia komunikacja z klientem i rozwiązywanie problemów.</li>",
+                
+                sect_kb_sub: "BAZA WIEDZY", sect_edu: "EDUKACJA",
+                edu_1_date: "2025 - Obecnie", edu_1_title: "Inżynieria AI & ML", edu_1_school: "Wyższa Szkoła Kształcenia Zawodowego",
+                edu_1_list: "<li>Sieci Neuronowe (CNN/RNN/Transformers)</li><li>Frameworki Deep Learning (PyTorch/TensorFlow)</li><li>Algorytmy Computer Vision i NLP</li><li>Data Science i Inżynieria Cech</li><li>Matematyka: Algebra Liniowa, Statystyka</li>",
+                edu_2_title: "Zarządzanie", edu_2_school: "Wyższa Szkoła Bankowa",
+                edu_2_list: "<li>Zarządzanie Zasobami Ludzkimi (HRM)</li><li>Finanse Przedsiębiorstw i Controlling</li><li>Prawo Gospodarcze</li><li>Marketing Strategiczny</li><li>Zarządzanie Projektami (Agile/Scrum Basics)</li>",
+                edu_3_title: "Technik Informatyk", edu_3_school: "CKZiU nr 2 (Elektronik)",
+                edu_3_list: "<li>Diagnostyka i serwis sprzętu komputerowego</li><li>Administracja Sieciami (LAN/WAN, Cisco)</li><li>Systemy Operacyjne (Linux/Windows Server)</li><li>Podstawy Baz Danych (SQL)</li>",
+                
+                sect_cert_sub: "CERTYFIKATY I KURSY", sect_cert: "EDUKACJA DODATKOWA",
+                cert_show: "Pokaż Certyfikat",
+                
+                cert_1_h: "Podstawy AI", cert_1_inst: "OPI - PIB",
+                cert_1_list: "<li>Podstawy uczenia maszynowego</li><li>Etyka danych i bias</li><li>Wstęp do NLP</li>",
+                
+                cert_2_h: "Generative AI", cert_2_inst: "Lubuskie Centrum Cyfryzacji",
+                cert_2_list: "<li>Inżynieria Promptów</li><li>Ograniczenia LLM</li><li>Koncepcje RAG</li><li>Efektywność narzędzi AI</li>",
+                
+                cert_3_h: "Python 3", cert_3_inst: "Uniwersytet Szczeciński",
+                cert_3_list: "<li>Programowanie obiektowe</li><li>Struktury danych i algorytmy</li><li>Podstawy Pandas / NumPy</li><li>Integracja API</li>",
+                
+                cert_4_h: "Język Angielski B2/C1", cert_4_inst: "Cambridge",
+                cert_4_list: "<li>Dokumentacja techniczna</li><li>Komunikacja biznesowa</li><li>Relacje międzynarodowe</li>",
+
+                sect_live: "WDROŻENIA", sect_proj: "Projekty",
+                sect_hobby_sub: "ZAINTERESOWANIA", sect_hobby: "Hobby i Pasje",
+                hob_1: '<i class="fa-solid fa-brain"></i> AI & Nowe Technologie', hob_2: '<i class="fa-solid fa-gears"></i> Automatyzacje', hob_3: '<i class="fa-solid fa-code"></i> Aplikacje No-Code', hob_4: '<i class="fa-solid fa-dumbbell"></i> Siłownia',
+                hob_5: '<i class="fa-solid fa-car"></i> Motoryzacja', hob_6: '<i class="fa-solid fa-briefcase"></i> Biznes', hob_7: '<i class="fa-solid fa-chart-line"></i> Finanse & Inwestowanie', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychologia',
+                
+                sect_social_sub: "ZNAJDŹ MNIE ONLINE", sect_social: "Media Społecznościowe",
+                social_git: "Dostęp do repozytoriów i kodu", social_lin: "Sprawdź mój profil zawodowy",
+                social_kag: "Notebooki i Zbiory Danych", social_hf: "Modele i Space'y",
+                
+                sect_dl_sub: "PLIKI DO POBRANIA", sect_dl: "Pobierz moje CV",
+                dl_desc: "PODGLĄD / POBIERANIE / DRUK", dl_desc_2: "POBIERANIE / EDYCJA / DRUK",
+                
+                sect_contact_sub: "KONTAKT", sect_contact: "Napisz do mnie!",
+                contact_label_name: "nazwa_użytkownika", contact_label_email: "adres_email", contact_label_msg: "treść_wiadomości",
+                ph_name: "Twoje Imię", ph_msg: "Treść wiadomości...", form_btn: " > WYŚLIJ_WIADOMOŚĆ",
+                
+                ach_4_t: "Osiągnięcie: Ostateczny Boss?", ach_4_d: "Dotarto do sekcji kontaktowej.",
+                status_progress: "W TRAKCIE", status_done: "UKOŃCZONE"
+            },
+            en: {
+                nav_about: "ABOUT", nav_skills: "SKILLS", nav_exp: "EXPERIENCE", nav_edu: "EDUCATION", nav_certs: "CERTS", nav_projects: "PROJECTS", nav_contact: "CONTACT",
+                hero_greeting: "Hello, I am",
+                hero_desc: "Junior AI & Automation Engineer. I see solutions where others see data. I create AI systems that drive real business growth.",
+                hero_btn_projects: "EXPLORE PROJECTS",
+                hero_btn_resume: "GET RESUME",
+                stat_repos: "Repositories", stat_stars: "Total Stars", stat_stack: "Tech Stack", stat_loc: "Lines of Code", stat_tokens: "LLM Tokens", stat_models: "AI Models Trained",
+                sect_who: "WHAT I DO", sect_profile: "ABOUT ME",
+                vibe_desc: "Faster delivery of solutions through LLM integration in workflow.<br>Focus on architecture and business logic.",
+                
+                about_h1: "AI-Augmented Workflow",
+                about_p1: "I don't reinvent the wheel. I use LLMs as a 'second brain' to ship code 3x faster, focusing on architecture and logic.",
+                about_h2: "Business Mindset",
+                about_p2: "Most Juniors ask 'how to code this?'. I ask 'does this make business sense?'. My entrepreneurial background changes the perspective.",
+                about_h3: "Impact & ROI",
+                about_p3: "I spot automation opportunities. I shorten processes. I ship working MVPs instead of perfect code that doesn't sell.",
+
+                soft_label: "CORE SOFT SKILLS:",
+                soft_1: "Independence", soft_2: "Communication", soft_3: "Work Organization", soft_4: "Creativity", soft_5: "Management", soft_6: "Out-of-box Thinking", soft_7: "Analytical Thinking", soft_8: "Stress Resistance", soft_9: "English (B2/C1)",
+                why_1_h: "Business + Technology", why_1_p: "I don't just write code. I understand P&L, ROI, and sales processes. I create solutions that actually earn or save money.",
+                why_2_h: "Rapid Deployment", why_2_p: "I combine knowledge with LLM's to deliver working MVPs in days, not months.",
+                
+                sect_tech_sub: "TECHNOLOGY KNOWLEDGE", sect_hard_skills: "HARD SKILLS",
+
+                cat_ml_ai: "Machine Learning & AI",
+                cat_ml_ai_list: "<li>LLMs & RAG Systems</li><li>PyTorch / TensorFlow</li><li>Computer Vision (YOLO)</li><li>NLP & Transformers</li><li>Ollama & Local Models</li>",
+
+                cat_python_dev: "Python & Development",
+                cat_python_dev_list: "<li>Python (Basics)</li><li>FastAPI / Django</li><li>SQL / NoSQL</li><li>Vector Databases</li><li>C++(Basics) / JavaScript</li>",
+
+                cat_cloud_data: "Cloud & Data",
+                cat_cloud_data_list: "<li>Pandas & NumPy</li><li>Data Analysis</li><li>Statistics</li><li>Web Scraping</li><li>Docker / Git</li>",
+
+                cat_infra_ops: "Infrastructure",
+                cat_infra_ops_list: "<li>Linux / Bash</li><li>n8n Automations</li><li>Make.com</li><li>MLflow</li><li>Process Optimization</li>",
+
+                sect_career_sub: "CAREER PATH", sect_exp: "EXPERIENCE",
+                
+                // --- Experience Tags EN ---
+                exp_tag_mgmt: "Management", exp_tag_kpi: "KPI & P&L", exp_tag_nocode: "No-Code Automations", exp_tag_crm: "CRM",
+                exp_tag_mkt: "Marketing", exp_tag_data: "Data Analysis", exp_tag_sales: "Sales B2C/B2B", exp_tag_brand: "Branding",
+                exp_tag_supply: "Supply Chain", exp_tag_mlpred: "ML Prediction", exp_tag_erp: "ERP", exp_tag_auto: "Automation",
+                exp_tag_jira: "Jira", exp_tag_hw: "Hardware Diagnostic", exp_tag_help: "Sales Helper",
+
+                exp_1_role: "Entrepreneur",
+                exp_1_list: "<li>Managing a 10-person team (delegation, KPIs).</li><li>Cashflow optimization and P&L analysis.</li><li>Implementing internal process automation (No-Code).</li><li>Building customer retention strategies.</li><li>Implementing CRM and document workflow systems.</li>",
+                exp_2_role: "Entrepreneur",
+                exp_2_list: "<li>Social Media Marketing (Meta Ads, Content Strategy).</li><li>Sales data analysis and conversion optimization (CRO).</li><li>Brand Identity building.</li><li>B2C sales and premium customer service.</li>",
+                exp_3_role: "E-commerce Project",
+                exp_3_list: "<li>Logistics and Supply Chain management.</li><li>ERP system operation and inventory forecasting.</li><li>B2B negotiations with international suppliers.</li><li>Sales process automation.</li><li>Using ML for content optimization and search trend prediction.</li>",
+                exp_4_role: "Client Support",
+                exp_4_list: "<li>Hardware and software diagnostics of machines.</li><li>Handling ticketing systems (Jira).</li><li>Direct client communication and problem solving.</li>",
+                
+                sect_kb_sub: "KNOWLEDGE BASE", sect_edu: "EDUCATION",
+                edu_1_date: "2025 - Present", edu_1_title: "AI & ML Engineering", edu_1_school: "Vocational Training College",
+                edu_1_list: "<li>Neural Networks (CNN/RNN/Transformers)</li><li>Deep Learning Frameworks (PyTorch/TensorFlow)</li><li>Computer Vision & NLP Algorithms</li><li>Data Science & Feature Engineering</li><li>Math: Linear Algebra, Statistics</li>",
+                edu_2_title: "Management", edu_2_school: "WSB University",
+                edu_2_list: "<li>Human Resource Management (HRM)</li><li>Corporate Finance and Controlling</li><li>Business Law</li><li>Strategic Marketing</li><li>Project Management (Agile/Scrum Basics)</li>",
+                edu_3_title: "IT Technician", edu_3_school: "CKZiU No. 2 (Electronics)",
+                edu_3_list: "<li>Computer hardware diagnostics and service</li><li>Network Administration (LAN/WAN, Cisco)</li><li>Operating Systems (Linux/Windows Server)</li><li>Database Basics (SQL)</li>",
+                
+                sect_cert_sub: "CERTIFICATIONS", sect_cert: "COURSES",
+                cert_show: "Show Certificate",
+
+                cert_1_h: "AI Fundamentals", cert_1_inst: "OPI - PIB",
+                cert_1_list: "<li>Machine Learning Fundamentals</li><li>Data Bias & Ethics</li><li>Intro to NLP</li>",
+
+                cert_2_h: "Generative AI", cert_2_inst: "Lubuskie Digital Center",
+                cert_2_list: "<li>Prompt Engineering</li><li>LLM Limitations</li><li>RAG Concepts</li><li>AI Tools Efficiency</li>",
+
+                cert_3_h: "Python 3", cert_3_inst: "University of Szczecin",
+                cert_3_list: "<li>Object-Oriented Programming</li><li>Data Structures & Algos</li><li>Pandas / NumPy Basics</li><li>API Integration</li>",
+
+                cert_4_h: "English B2/C1", cert_4_inst: "Cambridge",
+                cert_4_list: "<li>Technical Documentation</li><li>Business Communication</li><li>International Relations</li>",
+
+                sect_live: "LIVE DEPLOYMENTS", sect_proj: "Projects",
+                sect_hobby_sub: "PERSONAL INTERESTS", sect_hobby: "Hobbies & Passions",
+                hob_1: '<i class="fa-solid fa-brain"></i> AI & New Tech', hob_2: '<i class="fa-solid fa-gears"></i> Automations', hob_3: '<i class="fa-solid fa-code"></i> No-Code Apps', hob_4: '<i class="fa-solid fa-dumbbell"></i> Gym',
+                hob_5: '<i class="fa-solid fa-car"></i> Automotive', hob_6: '<i class="fa-solid fa-briefcase"></i> Business', hob_7: '<i class="fa-solid fa-chart-line"></i> Finance & Investing', hob_8: '<i class="fa-solid fa-user-graduate"></i> Psychology',
+                
+                sect_social_sub: "CONNECT ONLINE", sect_social: "Social Media",
+                social_git: "Access Source Code & Repos", social_lin: "Check my Profile!",
+                social_kag: "Notebooks & Datasets", social_hf: "Models, Spaces & Datasets",
+                
+                sect_dl_sub: "OFFLINE DATA", sect_dl: "DOWNLOAD MY CV",
+                dl_desc: "VIEW ONLINE / DOWNLOAD / PRINT", dl_desc_2: "DOWNLOAD / PRINT",
+                
+                sect_contact_sub: "INITIATE CONNECTION", sect_contact: "CONTACT ME",
+                contact_label_name: "user_name", contact_label_email: "user_email", contact_label_msg: "user_message",
+                ph_name: "User Name", ph_msg: "Message content...", form_btn: " > SEND_MESSAGE",
+                
+                ach_4_t: "Achievement: Final Boss?", ach_4_d: "Reached contact section.",
+                status_progress: "IN PROGRESS", status_done: "COMPLETED"
             }
-        });
-    }
-
-    // 3. Section Scroll Animations (Large Blocks)
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('section').forEach(s => observer.observe(s));
-
-    // 4. Element Scroll Animations (Inner Items) - NEW
-    const elObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('reveal-active');
-                elObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 }); 
-
-    document.querySelectorAll('.reveal-item').forEach(el => elObserver.observe(el));
-
-
-    // 5. Stats Counter
-    function initFunStats() {
-        const el = document.getElementById('stat-tokens');
-        const target = 55000000; 
-        const duration = 2500;
-        let start = null;
-
-        const step = (timestamp) => {
-            if (!start) start = timestamp;
-            const progress = Math.min((timestamp - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 4); 
-            
-            const current = Math.floor(ease * target);
-            
-            if (current > 1000000) {
-                el.innerHTML = (current / 1000000).toFixed(0) + 'M+';
-            } else {
-                el.innerHTML = current;
-            }
-
-            if (progress < 1) requestAnimationFrame(step);
         };
-        requestAnimationFrame(step);
-    }
 
-    // 6. Gamification
-    const unlockedAchievements = new Set();
-    function initGamification() {
-        const achObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if(e.isIntersecting) {
-                    const id = e.target.id;
-                    if(id === 'contact') checkAchievement('contact_view', 'ach_4_t', 'ach_4_d', 'fa-solid fa-gamepad');
+        function setLanguage(lang) {
+            currentLang = lang;
+            const data = translations[lang];
+
+            document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if(data[key]) {
+                    if(key.includes('list') || key.includes('vibe') || key.includes('hob') || key.includes('cat_')) {
+                        el.innerHTML = data[key]; 
+                    } else {
+                        el.textContent = data[key]; 
+                    }
                 }
             });
-        }, { threshold: 0.3 });
-        document.querySelectorAll('section').forEach(s => achObserver.observe(s));
-    }
 
-    function checkAchievement(id, titleKey, descKey, icon) {
-        if(!unlockedAchievements.has(id)) {
-            unlockedAchievements.add(id);
-            showAchievement(titleKey, descKey, icon);
-        }
-    }
-
-    function showAchievement(titleKey, descKey, iconClass) {
-        const container = document.getElementById('achievement-container');
-        const el = document.createElement('div');
-        el.className = 'achievement-popup';
-        
-        const title = translations[currentLang][titleKey];
-        const desc = translations[currentLang][descKey];
-
-        el.innerHTML = `
-            <i class="${iconClass} ach-icon"></i>
-            <div class="ach-info">
-                <h4>${title}</h4>
-                <p>${desc}</p>
-            </div>
-        `;
-        container.appendChild(el);
-        setTimeout(() => el.classList.add('show'), 100);
-        setTimeout(() => {
-            el.classList.remove('show');
-            setTimeout(() => el.remove(), 500);
-        }, 4000);
-    }
-
-    // 7. GitHub Data Fetching
-    const githubUsername = 'cewa-stack';
-    const container = document.getElementById('github-projects');
-    const statReposElem = document.getElementById('stat-repos');
-    const statStarsElem = document.getElementById('stat-stars');
-    const statTechElem = document.getElementById('stat-tech');
-    const ignoredRepos = ['cewa-stack.github.io','cewa-stack'];
-  
-    const techIconMap = {
-        'python': 'fa-brands fa-python', 'js': 'fa-brands fa-js', 'javascript': 'fa-brands fa-js',
-        'react': 'fa-brands fa-react', 'html': 'fa-brands fa-html5', 'css': 'fa-brands fa-css3-alt',
-        'java': 'fa-brands fa-java', 'ai': 'fa-solid fa-brain', 'ml': 'fa-solid fa-microchip',
-        'machine-learning': 'fa-solid fa-microchip', 'nlp': 'fa-solid fa-comments',
-        'openai': 'fa-solid fa-wand-magic-sparkles', 'gpt': 'fa-solid fa-robot'
-    };
-
-    const projectConfig = {
-        "car-diagnostic-ai-bot": { img: "projekt1.png", metrics: [{v:"85%", l:"TRAFIC"}, {v:"2m", l:"TIME"}] },
-        "lecturemate-ai-reporter": { img: "projekt2.png", metrics: [{v:"92%", l:"ACCURACY"}, {v:"3h+", l:"SAVED"}] },
-        "SmartStudy_alpba_0.1.0": { img: "projekt3.png", metrics: [{v:"40%", l:"EFFICIENCY"}, {v:"200+", l:"NOTES"}] },
-        "google-drive-invoice-bot": { img: "projekt4.png", metrics: [{v:"100%", l:"AUTO"}, {v:"RPA", l:"TYPE"}] },
-        "ai-financial-assistant": { img: "projekt5.png", metrics: [{v:"API", l:"BACKEND"}, {v:"+10%", l:"MORE SAVINGS"}] },
-        "finance-predictor-ai-bot": { img: "projekt6.png", metrics: [{v:"ML", l:"MODEL"}, {v:"LIVE", l:"DATA"}] }
-    };
-
-    function createProjectCard(repo, index) {
-        const cfg = projectConfig[repo.name] || {};
-        const imgHTML = cfg.img 
-            ? `<img src="${cfg.img}" class="cmd-img" loading="lazy" onload="this.classList.add('lazy-loaded')">`
-            : `<div style="height:180px; background:#111; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #222; color:#333; font-family:var(--font-code);">NO_IMG_DATA</div>`;
-
-        let metricsHTML = (cfg.metrics || [{v: repo.stargazers_count, l:"STARS"}, {v:repo.forks_count, l:"FORKS"}]).map(m => `
-            <div class="c-stat"><span class="c-val">${m.v}</span><span class="c-lbl">${m.l}</span></div>
-        `).join('');
-
-        let topicsList = repo.topics || [];
-        if (topicsList.length === 0 && repo.language) topicsList.push(repo.language.toLowerCase());
-
-        const topicsHTML = topicsList.length > 0 
-            ? `<div class="repo-topics">
-                ${topicsList.slice(0, 4).map(topic => { 
-                    const iconClass = techIconMap[topic.toLowerCase()] || 'fa-solid fa-code'; 
-                    return `<span class="topic-badge"><i class="${iconClass}"></i> ${topic}</span>`;
-                }).join('')}
-               </div>`
-            : '';
-
-        // Calculate delay based on index for stagger effect
-        const delayClass = `delay-${Math.min((index % 4) * 100 + 100, 400)}`;
-
-        return `
-        <div class="cmd-card reveal-item ${delayClass}">
-            <div class="cmd-header">
-                <div class="cmd-status"><div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div></div>
-                <div style="color:#555; font-size:0.7rem; font-family:var(--font-code);">ID: ${repo.id}</div>
-            </div>
-            ${imgHTML}
-            <div class="cmd-body">
-                <h3 class="cmd-title">${repo.name}</h3>
-                ${topicsHTML}
-                <p class="cmd-desc">${repo.description || "No description available."}</p>
-                <div class="cmd-stats">${metricsHTML}</div>
-                <a href="${repo.html_url}" class="btn-cmd" target="_blank"><i class="fa-brands fa-github"></i> :: INSPECT_ON_GITHUB</a>
-            </div>
-        </div>`;
-    }
-
-    async function fetchGitHubRepos() {
-        try {
-            const res = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100`);
-            const repos = await res.json();
-            container.innerHTML = '';
-            const myRepos = repos.filter(r => !r.fork && !ignoredRepos.includes(r.name));
-            
-            myRepos.forEach((r, index) => {
-                container.insertAdjacentHTML('beforeend', createProjectCard(r, index));
+            document.querySelectorAll('[data-lang-ph]').forEach(el => {
+                const key = el.getAttribute('data-lang-ph');
+                if(data[key]) el.placeholder = data[key];
             });
-            
-            // Re-attach observer for dynamically added items
-            document.querySelectorAll('#github-projects .reveal-item').forEach(el => elObserver.observe(el));
 
-            let stars = myRepos.reduce((acc, r) => acc + r.stargazers_count, 0);
-            animateValue(statReposElem, 0, myRepos.length, 1500);
-            animateValue(statStarsElem, 0, stars, 1500);
-            animateValue(statTechElem, 0, 7, 1500);
-        } catch (e) { 
-            console.error(e);
-            container.innerHTML = "ERR: CONNECTION_LOST"; 
-        }
-    }
+            const pdfLink = document.getElementById('dl-pdf');
+            const docxLink = document.getElementById('dl-docx');
 
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            obj.innerHTML = Math.floor(progress * (end - start) + start);
-            if (progress < 1) window.requestAnimationFrame(step);
-        };
-        window.requestAnimationFrame(step);
-    }
+            if(lang === 'pl') {
+                if(pdfLink) pdfLink.href = 'cv_pdf.pdf';
+                if(docxLink) docxLink.href = 'cv_docx.docx';
+            } else {
+                if(pdfLink) pdfLink.href = 'cv_pdf_eng.pdf';
+                if(docxLink) docxLink.href = 'cv_docx_eng.docx';
+            }
 
-    // 8. Background Particles
-    const canvas = document.getElementById('neuro-bg');
-    const ctx = canvas.getContext('2d');
-    let width, height, particles = [];
-
-    function initParticles() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        let particleCount = window.innerWidth < 768 ? 20 : 60;
-        particles = [];
-        for(let i=0; i<particleCount; i++) {
-            particles.push({
-                x: Math.random()*width, y: Math.random()*height,
-                vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5
+            if(typedInstance) typedInstance.destroy();
+            typedInstance = new Typed('#typed-name', {
+                strings: ['Łukasz Szymankiewicz'],
+                typeSpeed: 50, startDelay: 200, loop: false,
+                showCursor: true, cursorChar: '|',
+                onComplete: function(self) { self.cursor.remove(); }
             });
         }
-    }
 
-    function loop() {
-        ctx.clearRect(0,0,width,height);
-        for(let i=0; i<particles.length; i++) {
-            let p = particles[i];
-            p.x += p.vx; p.y += p.vy;
-            if(p.x < 0 || p.x > width) p.vx *= -1;
-            if(p.y < 0 || p.y > height) p.vy *= -1;
-            
-            ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
-            ctx.fillStyle = '#00ff88'; ctx.fill();
+        window.addEventListener('load', () => {
+            const bar = document.getElementById('loader-bar');
+            const text = document.getElementById('loader-text');
+            const preloader = document.getElementById('preloader');
+            const body = document.body;
+            let width = 0;
 
-            for(let j=i+1; j<particles.length; j++) {
-                let p2 = particles[j];
-                let d = Math.hypot(p.x-p2.x, p.y-p2.y);
-                if(d < 150) {
-                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `rgba(0, 255, 136, ${1 - d/150})`;
-                    ctx.lineWidth = 0.5; ctx.stroke();
+            const interval = setInterval(() => {
+                width += Math.random() * 10 + 5;
+                if(width > 100) width = 100;
+                bar.style.width = width + '%';
+
+                const loadingText = currentLang === 'pl' ? 
+                    (width < 30 ? "ŁADOWANIE MODUŁÓW..." : (width < 70 ? "POBIERANIE DANYCH GITHUB..." : "RENDEROWANIE INTERFEJSU...")) :
+                    (width < 30 ? "LOADING CORE MODULES..." : (width < 70 ? "FETCHING GITHUB DATA..." : "RENDERING INTERFACE..."));
+
+                text.innerText = loadingText;
+
+                if(width === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('fade-out');
+                        body.classList.remove('loading-active');
+                        setTimeout(() => preloader.style.display = 'none', 500);
+                        
+                        setLanguage('pl');
+                        initFunStats();
+                        initGamification();
+
+                    }, 200);
                 }
+            }, 20);
+        });
+
+        // 1. Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+            animateTimeline();
+        });
+
+        // 2. Timeline
+        function animateTimeline() {
+            const container = document.querySelector('.timeline-container');
+            if (!container) return;
+            const progressBar = document.getElementById('timeline-progress');
+            const items = document.querySelectorAll('.timeline-item');
+            const containerRect = container.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const startOffset = viewportHeight * 0.5;
+            let progress = startOffset - containerRect.top;
+            let heightPercent = (progress / containerRect.height) * 100;
+            if (heightPercent < 0) heightPercent = 0;
+            if (heightPercent > 100) heightPercent = 100;
+            progressBar.style.height = heightPercent + '%';
+
+            items.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < startOffset) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+        }
+
+        // 3. Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+        const elObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    elObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); 
+        document.querySelectorAll('.reveal-item').forEach(el => elObserver.observe(el));
+
+        // 4. Flip Card Interaction
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('flipped');
+            });
+        });
+
+        // 5. Stats
+        function initFunStats() {
+            const el = document.getElementById('stat-tokens');
+            const target = 55000000; 
+            const duration = 2500;
+            let start = null;
+            const step = (timestamp) => {
+                if (!start) start = timestamp;
+                const progress = Math.min((timestamp - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 4); 
+                const current = Math.floor(ease * target);
+                if (current > 1000000) el.innerHTML = (current / 1000000).toFixed(0) + 'M+';
+                else el.innerHTML = current;
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+
+        // 6. Gamification
+        const unlockedAchievements = new Set();
+        function initGamification() {
+            const achObserver = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if(e.isIntersecting) {
+                        const id = e.target.id;
+                        if(id === 'contact') checkAchievement('contact_view', 'ach_4_t', 'ach_4_d', 'fa-solid fa-gamepad');
+                    }
+                });
+            }, { threshold: 0.3 });
+            document.querySelectorAll('section').forEach(s => achObserver.observe(s));
+        }
+
+        function checkAchievement(id, titleKey, descKey, icon) {
+            if(!unlockedAchievements.has(id)) {
+                unlockedAchievements.add(id);
+                showAchievement(titleKey, descKey, icon);
             }
         }
-        requestAnimationFrame(loop);
-    }
 
-    window.addEventListener('resize', initParticles);
-    initParticles(); loop();
-    fetchGitHubRepos();
-
-    // 9. Toast & Form
-    function showCyberToast(message, isError = false) {
-        let toast = document.getElementById("cyber-toast");
-        if (!toast) {
-            toast = document.createElement("div");
-            toast.id = "cyber-toast";
-            document.body.appendChild(toast);
+        function showAchievement(titleKey, descKey, iconClass) {
+            const container = document.getElementById('achievement-container');
+            const el = document.createElement('div');
+            el.className = 'achievement-popup';
+            const title = translations[currentLang][titleKey];
+            const desc = translations[currentLang][descKey];
+            el.innerHTML = `<i class="${iconClass} ach-icon"></i><div class="ach-info"><h4>${title}</h4><p>${desc}</p></div>`;
+            container.appendChild(el);
+            setTimeout(() => el.classList.add('show'), 100);
+            setTimeout(() => {
+                el.classList.remove('show');
+                setTimeout(() => el.remove(), 500);
+            }, 4000);
         }
-        const icon = isError ? '<i class="fa-solid fa-triangle-exclamation" style="color:#ff5f56"></i>' : '<i class="fa-solid fa-check-circle"></i>';
-        toast.innerHTML = icon + message;
-        toast.style.borderColor = isError ? "#ff5f56" : "#00ff88";
-        toast.style.boxShadow = isError ? "0 0 20px rgba(255, 95, 86, 0.2)" : "0 0 20px rgba(0, 255, 136, 0.2)";
-        toast.className = "show";
-        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 4000);
-    }
 
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault(); 
-            const btn = contactForm.querySelector('.btn-term');
-            const originalText = btn.innerText;
-            btn.innerText = "> SENDING_DATA...";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
+        // 7. GitHub Data
+        const githubUsername = 'cewa-stack';
+        const container = document.getElementById('github-projects');
+        const statReposElem = document.getElementById('stat-repos');
+        const statStarsElem = document.getElementById('stat-stars');
+        const statTechElem = document.getElementById('stat-tech');
+        const ignoredRepos = ['cewa-stack.github.io','cewa-stack'];
+      
+        const techIconMap = {
+            'python': 'fa-brands fa-python', 'js': 'fa-brands fa-js', 'javascript': 'fa-brands fa-js',
+            'react': 'fa-brands fa-react', 'html': 'fa-brands fa-html5', 'css': 'fa-brands fa-css3-alt',
+            'java': 'fa-brands fa-java', 'ai': 'fa-solid fa-brain', 'ml': 'fa-solid fa-microchip',
+            'machine-learning': 'fa-solid fa-microchip', 'nlp': 'fa-solid fa-comments',
+            'openai': 'fa-solid fa-wand-magic-sparkles', 'gpt': 'fa-solid fa-robot'
+        };
 
-            const formData = new FormData(contactForm);
-            const formspreeUrl = "https://formspree.io/f/xbdrrrov"; 
+        const projectConfig = {
+            "car-diagnostic-ai-bot": { img: "projekt1.png", metrics: [{v:"85%", l:"TRAFIC"}, {v:"2m", l:"TIME"}] },
+            "lecturemate-ai-reporter": { img: "projekt2.png", metrics: [{v:"92%", l:"ACCURACY"}, {v:"3h+", l:"SAVED"}] },
+            "SmartStudy_alpba_0.1.0": { img: "projekt3.png", metrics: [{v:"40%", l:"EFFICIENCY"}, {v:"200+", l:"NOTES"}] },
+            "google-drive-invoice-bot": { img: "projekt4.png", metrics: [{v:"100%", l:"AUTO"}, {v:"RPA", l:"TYPE"}] },
+            "ai-financial-assistant": { img: "projekt5.png", metrics: [{v:"API", l:"BACKEND"}, {v:"+10%", l:"MORE SAVINGS"}] },
+            "finance-predictor-ai-bot": { img: "projekt6.png", metrics: [{v:"ML", l:"MODEL"}, {v:"LIVE", l:"DATA"}] }
+        };
 
+        function createProjectCard(repo, index) {
+            const cfg = projectConfig[repo.name] || {};
+            const imgHTML = cfg.img 
+                ? `<img src="${cfg.img}" class="cmd-img" loading="lazy" onload="this.classList.add('lazy-loaded')">`
+                : `<div style="height:180px; background:#111; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #222; color:#333; font-family:var(--font-code);">NO_IMG_DATA</div>`;
+
+            let metricsHTML = (cfg.metrics || [{v: repo.stargazers_count, l:"STARS"}, {v:repo.forks_count, l:"FORKS"}]).map(m => `
+                <div class="c-stat"><span class="c-val">${m.v}</span><span class="c-lbl">${m.l}</span></div>
+            `).join('');
+
+            let topicsList = repo.topics || [];
+            if (topicsList.length === 0 && repo.language) topicsList.push(repo.language.toLowerCase());
+
+            const topicsHTML = topicsList.length > 0 
+                ? `<div class="repo-topics">
+                    ${topicsList.slice(0, 4).map(topic => { 
+                        const iconClass = techIconMap[topic.toLowerCase()] || 'fa-solid fa-code'; 
+                        return `<span class="topic-badge"><i class="${iconClass}"></i> ${topic}</span>`;
+                    }).join('')}
+                   </div>`
+                : '';
+
+            const delayClass = `delay-${Math.min((index % 4) * 100 + 100, 400)}`;
+
+            return `
+            <div class="cmd-card reveal-item ${delayClass}">
+                <div class="cmd-header">
+                    <div class="cmd-status"><div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div></div>
+                    <div style="color:#555; font-size:0.7rem; font-family:var(--font-code);">ID: ${repo.id}</div>
+                </div>
+                ${imgHTML}
+                <div class="cmd-body">
+                    <h3 class="cmd-title">${repo.name}</h3>
+                    ${topicsHTML}
+                    <p class="cmd-desc">${repo.description || "No description available."}</p>
+                    <div class="cmd-stats">${metricsHTML}</div>
+                    <a href="${repo.html_url}" class="btn-cmd" target="_blank"><i class="fa-brands fa-github"></i> :: INSPECT_ON_GITHUB</a>
+                </div>
+            </div>`;
+        }
+
+        async function fetchGitHubRepos() {
             try {
-                const response = await fetch(formspreeUrl, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-                if (response.ok) {
-                    showCyberToast(currentLang === 'pl' ? "Wiadomość wysłana! Odezwę się wkrótce." : "Message sent! I will reply soon.");
-                    contactForm.reset(); 
-                    btn.innerText = "> SENT_SUCCESSFULLY";
-                    btn.style.color = "#27c93f"; btn.style.borderColor = "#27c93f";
-                } else throw new Error('Server error');
-            } catch (error) {
-                console.error("Error:", error);
-                showCyberToast(currentLang === 'pl' ? "Błąd połączenia. Spróbuj później." : "Connection error. Try again later.", true);
-                btn.innerText = "> ERROR: CONNECTION_FAILED";
-                btn.style.color = "#ff5f56"; btn.style.borderColor = "#ff5f56";
-            } finally {
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.opacity = "1";
-                    btn.disabled = false;
-                    btn.style.color = ""; btn.style.borderColor = ""; 
-                }, 5000);
+                const res = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100`);
+                const repos = await res.json();
+                container.innerHTML = '';
+                const myRepos = repos.filter(r => !r.fork && !ignoredRepos.includes(r.name));
+                
+                myRepos.forEach((r, index) => {
+                    container.insertAdjacentHTML('beforeend', createProjectCard(r, index));
+                });
+                
+                document.querySelectorAll('#github-projects .reveal-item').forEach(el => elObserver.observe(el));
+
+                let stars = myRepos.reduce((acc, r) => acc + r.stargazers_count, 0);
+                animateValue(statReposElem, 0, myRepos.length, 1500);
+                animateValue(statStarsElem, 0, stars, 1500);
+                animateValue(statTechElem, 0, 7, 1500);
+            } catch (e) { 
+                console.error(e);
+                container.innerHTML = "ERR: CONNECTION_LOST"; 
             }
+        }
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // 8. BG & Particles
+        const canvas = document.getElementById('neuro-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+
+        function initParticles() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            let particleCount = window.innerWidth < 768 ? 20 : 60;
+            particles = [];
+            for(let i=0; i<particleCount; i++) {
+                particles.push({
+                    x: Math.random()*width, y: Math.random()*height,
+                    vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5
+                });
+            }
+        }
+
+        function loop() {
+            ctx.clearRect(0,0,width,height);
+            for(let i=0; i<particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > width) p.vx *= -1;
+                if(p.y < 0 || p.y > height) p.vy *= -1;
+                
+                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                ctx.fillStyle = '#00ff88'; ctx.fill();
+
+                for(let j=i+1; j<particles.length; j++) {
+                    let p2 = particles[j];
+                    let d = Math.hypot(p.x-p2.x, p.y-p2.y);
+                    if(d < 150) {
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${1 - d/150})`;
+                        ctx.lineWidth = 0.5; ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', initParticles);
+        initParticles(); loop();
+        fetchGitHubRepos();
+
+        // 9. Form & Toast
+        function showCyberToast(message, isError = false) {
+            let toast = document.getElementById("cyber-toast");
+            if (!toast) {
+                toast = document.createElement("div");
+                toast.id = "cyber-toast";
+                document.body.appendChild(toast);
+            }
+            const icon = isError ? '<i class="fa-solid fa-triangle-exclamation" style="color:#ff5f56"></i>' : '<i class="fa-solid fa-check-circle"></i>';
+            toast.innerHTML = icon + message;
+            toast.style.borderColor = isError ? "#ff5f56" : "#00ff88";
+            toast.style.boxShadow = isError ? "0 0 20px rgba(255, 95, 86, 0.2)" : "0 0 20px rgba(0, 255, 136, 0.2)";
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 4000);
+        }
+
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                const btn = contactForm.querySelector('.btn-term');
+                const originalText = btn.innerText;
+                btn.innerText = "> SENDING_DATA...";
+                btn.style.opacity = "0.7";
+                btn.disabled = true;
+
+                const formData = new FormData(contactForm);
+                const formspreeUrl = "https://formspree.io/f/xbdrrrov"; 
+
+                try {
+                    const response = await fetch(formspreeUrl, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+                    if (response.ok) {
+                        showCyberToast(currentLang === 'pl' ? "Wiadomość wysłana! Odezwę się wkrótce." : "Message sent! I will reply soon.");
+                        contactForm.reset(); 
+                        btn.innerText = "> SENT_SUCCESSFULLY";
+                        btn.style.color = "#27c93f"; btn.style.borderColor = "#27c93f";
+                    } else throw new Error('Server error');
+                } catch (error) {
+                    console.error("Error:", error);
+                    showCyberToast(currentLang === 'pl' ? "Błąd połączenia. Spróbuj później." : "Connection error. Try again later.", true);
+                    btn.innerText = "> ERROR: CONNECTION_FAILED";
+                    btn.style.color = "#ff5f56"; btn.style.borderColor = "#ff5f56";
+                } finally {
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.opacity = "1";
+                        btn.disabled = false;
+                        btn.style.color = ""; btn.style.borderColor = ""; 
+                    }, 5000);
+                }
+            });
+        }
+
+        const scrollBtn = document.getElementById('scroll-top-btn');
+        const aboutSection = document.getElementById('about');
+        window.addEventListener('scroll', () => {
+            if (!aboutSection) return;
+            const triggerHeight = aboutSection.offsetTop - 100;
+            if (window.scrollY > triggerHeight) scrollBtn.classList.add('active');
+            else scrollBtn.classList.remove('active');
         });
-    }
+        scrollBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-    // Scroll to Top
-    const scrollBtn = document.getElementById('scroll-top-btn');
-    const aboutSection = document.getElementById('about');
-    window.addEventListener('scroll', () => {
-        if (!aboutSection) return;
-        const triggerHeight = aboutSection.offsetTop - 100;
-        if (window.scrollY > triggerHeight) scrollBtn.classList.add('active');
-        else scrollBtn.classList.remove('active');
-    });
-    scrollBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-links");
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+        document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
 
-    // Mobile Menu
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-links");
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-    });
-    document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navMenu.classList.remove("active");
-    }));
-
-    /* --- DUAL TERMINAL TYPING LOGIC --- */
-    const humanCode = 
+        /* --- DUAL TERMINAL TYPING LOGIC --- */
+        const humanCode = 
 `names = ["Anna", "Tom"]
 msgs = []
-
 # Formatting strings...
-
 for name in names:
-
 txt = "Hello " + name
 msgs.append(txt)
 print(msgs)`;
 
-    const aiCode = 
+        const aiCode = 
 `names = ["Anna", "Tom"]
-
 # Fast generation with f-strings
-
 msgs = [f"Hello {name}" for name in names]
 print(msgs)
 
 
 # Done.`;
 
-    async function typeWriterEffect(elementId, text, speedMin, speedMax) {
-        const element = document.getElementById(elementId);
-        if (!element) return;
-        element.textContent = "";
-        for (let i = 0; i < text.length; i++) {
-            element.textContent += text.charAt(i);
-            const delay = Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
-            await new Promise(r => setTimeout(r, delay));
+        async function typeWriterEffect(elementId, text, speedMin, speedMax) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            element.textContent = "";
+            for (let i = 0; i < text.length; i++) {
+                element.textContent += text.charAt(i);
+                const delay = Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
+                await new Promise(r => setTimeout(r, delay));
+            }
         }
-    }
 
-    async function runTerminalLoop() {
-        const humanEl = document.getElementById('code-human');
-        const aiEl = document.getElementById('code-ai');
-        if(!humanEl || !aiEl) return;
+        async function runTerminalLoop() {
+            const humanEl = document.getElementById('code-human');
+            const aiEl = document.getElementById('code-ai');
+            if(!humanEl || !aiEl) return;
 
-        while(true) {
-            humanEl.textContent = "";
-            aiEl.textContent = "";
-            const humanPromise = typeWriterEffect('code-human', humanCode, 50, 150);
-            await new Promise(r => setTimeout(r, 500)); 
-            const aiPromise = typeWriterEffect('code-ai', aiCode, 5, 20);
-            await Promise.all([humanPromise, aiPromise]);
-            await new Promise(r => setTimeout(r, 4000));
+            while(true) {
+                humanEl.textContent = "";
+                aiEl.textContent = "";
+                const humanPromise = typeWriterEffect('code-human', humanCode, 50, 150);
+                await new Promise(r => setTimeout(r, 500)); 
+                const aiPromise = typeWriterEffect('code-ai', aiCode, 5, 20);
+                await Promise.all([humanPromise, aiPromise]);
+                await new Promise(r => setTimeout(r, 4000));
+            }
         }
-    }
 
-    window.addEventListener('load', () => {
-        setTimeout(runTerminalLoop, 1000); 
-    });
+        window.addEventListener('load', () => {
+            setTimeout(runTerminalLoop, 1000); 
+        });
 
     </script>
 </body>
