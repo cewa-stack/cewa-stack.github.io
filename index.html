@@ -116,31 +116,144 @@
         .delay-400 { transition-delay: 400ms; }
         .delay-500 { transition-delay: 500ms; }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (POPRAWIONA WARSTWOWOŚĆ) --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 1.5rem 5%;
+            position: fixed; top: 0; width: 100%; height: 80px; padding: 0 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); 
-            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px); 
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-        .logo { font-family: var(--font-code); font-weight: 700; font-size: 1.2rem; color: #fff; }
+        
+        .logo { 
+            font-family: var(--font-code); font-weight: 700; font-size: 1.1rem; 
+            color: #fff; z-index: 1001; letter-spacing: -0.5px;
+        }
         .logo span { color: var(--primary); }
         
-        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-        .nav-links a {
-            color: #ccc; text-decoration: none; font-size: 0.9rem; 
-            transition: color 0.3s; text-transform: uppercase; 
-            letter-spacing: 1px; cursor: pointer;
+        /* Kontener prawej strony - USUNIĘTO wysoki z-index, aby menu mogło go przykryć */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+            /* Ważne: brak z-index tutaj, aby elementy w środku mogły być sterowane osobno */
         }
-        .nav-links a:hover { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
 
-        .lang-switch {
-            font-family: var(--font-code); font-size: 0.9rem; margin-left: 20px; 
-            border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px;
+        /* Przełącznik języka - Zostaje na dole (przykrywany przez menu) */
+        .lang-switch-nav {
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            color: #888;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1001; /* Niski indeks */
         }
-        .lang-btn { cursor: pointer; color: #666; transition: 0.3s; font-weight: bold; }
-        .lang-btn.active { color: var(--primary); text-shadow: 0 0 5px var(--primary); }
-        .lang-sep { color: #444; margin: 0 5px; }
+        
+        /* Efekt zanikania PL/EN gdy menu jest aktywne (dodatkowy bajer estetyczny) */
+        body:has(.nav-links.active) .lang-switch-nav {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .lang-switch-nav:hover { border-color: var(--primary); }
+        .lang-btn { cursor: pointer; transition: 0.3s; font-weight: 600; }
+        .lang-btn:hover { color: #fff; }
+        .lang-btn.active { color: var(--primary); text-shadow: 0 0 8px rgba(0,255,136,0.4); }
+        .lang-sep { color: #444; margin: 0 6px; }
+
+        /* Hamburger - MUSI być NAJWYŻEJ (nad menu) */
+        .hamburger {
+            display: flex; cursor: pointer; flex-direction: column; gap: 5px; 
+            padding: 5px; transition: 0.3s;
+            position: relative;
+            z-index: 2000; /* Najwyższa warstwa - zawsze na wierzchu */
+        }
+        .hamburger:hover .bar { background-color: #fff; }
+        .bar { 
+            display: block; width: 26px; height: 2px; 
+            background-color: var(--primary); transition: all 0.3s ease; border-radius: 2px;
+        }
+        
+        .hamburger.active .bar:nth-child(2) { opacity: 0; transform: translateX(10px); }
+        .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* --- DRAWER MENU --- */
+        .nav-links { 
+            position: fixed; top: 0; right: -100%; 
+            width: 100%; max-width: 380px; height: 100vh;
+            background-color: rgba(12, 12, 12, 0.98); /* Tło menu */
+            backdrop-filter: blur(20px);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: flex-start;
+            padding: 40px;
+            list-style: none;
+            transition: right 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            
+            /* KLUCZ: z-index wyższy niż logo i lang-switch, ale niższy niż hamburger */
+            z-index: 1500; 
+            
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: -20px 0 50px rgba(0,0,0,0.8);
+        }
+        
+        .nav-links.active { right: 0; }
+
+        /* Dekoracje */
+        .menu-header-decoration {
+            position: absolute; top: 30px; left: 40px;
+            font-family: var(--font-code); font-size: 0.7rem; color: #444;
+            letter-spacing: 2px;
+        }
+        .menu-footer-decoration {
+            position: absolute; bottom: 30px; right: 40px;
+            font-family: var(--font-code); font-size: 0.65rem; color: #333;
+        }
+
+        .nav-links li {
+            width: 100%; margin: 10px 0; opacity: 0;
+            transform: translateX(30px); transition: all 0.4s ease;
+        }
+
+        .nav-links.active li { opacity: 1; transform: translateX(0); }
+        .nav-links.active li:nth-child(2) { transition-delay: 0.1s; }
+        .nav-links.active li:nth-child(3) { transition-delay: 0.15s; }
+        .nav-links.active li:nth-child(4) { transition-delay: 0.2s; }
+        .nav-links.active li:nth-child(5) { transition-delay: 0.25s; }
+        .nav-links.active li:nth-child(6) { transition-delay: 0.3s; }
+        .nav-links.active li:nth-child(7) { transition-delay: 0.35s; }
+        .nav-links.active li:nth-child(8) { transition-delay: 0.4s; }
+
+        .nav-links a {
+            display: block; color: #bbb; text-decoration: none; 
+            font-family: var(--font-code); font-size: 1.1rem; 
+            font-weight: 500; text-transform: uppercase; 
+            letter-spacing: 1px; padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.3s; position: relative;
+        }
+        
+        .nav-links a:hover { 
+            color: #fff; padding-left: 15px; 
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+        
+        .nav-links a::before {
+            content: '>'; position: absolute; left: 0; opacity: 0;
+            color: var(--primary); transition: 0.3s;
+        }
+        .nav-links a:hover::before { opacity: 1; left: 0; }
+
+        @media (max-width: 600px) {
+            .nav-links { max-width: 100%; padding: 30px; }
+            .logo { font-size: 1rem; }
+            .nav-actions { gap: 15px; }
+            .lang-switch-nav { padding: 4px 8px; font-size: 0.75rem; }
+        }
 
         /* --- SECTIONS --- */
         section {
@@ -929,9 +1042,6 @@
         }
 
         /* RESPONSIVE & MOBILE IMPROVEMENTS */
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .bar { display: block; width: 25px; height: 3px; background-color: var(--primary); transition: all 0.3s ease; }
-
         @media (max-width: 900px) {
             :root { --section-spacing: 80px; }
             
@@ -969,17 +1079,6 @@
             .flip-card { height: 280px; }
             
             #scroll-top-btn { bottom: 20px; right: 20px; width: 40px; height: 40px; }
-            .hamburger { display: flex; z-index: 2000; }
-            .nav-links {
-                display: flex; position: fixed; left: -100%; top: 0; gap: 0; flex-direction: column;
-                background-color: rgba(10, 10, 10, 0.98); width: 100%; height: 100vh;
-                text-align: center; transition: 0.3s; padding-top: 100px; backdrop-filter: blur(10px);
-            }
-            .nav-links.active { left: 0; }
-            .nav-links li { margin: 16px 0; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
 
         /* --- STRICT MOBILE OPTIMIZATIONS (Small Screens) --- */
@@ -1039,25 +1138,35 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">JUNIOR_AI/ML_<span>ENGINEER</span></div>
-        <ul class="nav-links">
-            <li><a href="#about" data-lang-key="nav_about">O MNIE</a></li>
-            <li><a href="#tech-stack" data-lang-key="nav_skills">UMIEJĘTNOŚCI</a></li>
-            <li><a href="#experience" data-lang-key="nav_exp">DOŚWIADCZENIE</a></li>
-            <li><a href="#education" data-lang-key="nav_edu">EDUKACJA</a></li>
-            <li><a href="#courses" data-lang-key="nav_certs">CERTYFIKATY</a></li>
-            <li><a href="#portfolio" data-lang-key="nav_projects">PROJEKTY</a></li>
-            <li><a href="#contact" data-lang-key="nav_contact">KONTAKT</a></li>
-            <li class="lang-switch">
+        
+        <!-- Prawa strona: Język + Hamburger -->
+        <div class="nav-actions">
+            <!-- Przełącznik języka (teraz widoczny zawsze) -->
+            <div class="lang-switch-nav">
                 <span class="lang-btn active" id="btn-pl" onclick="setLanguage('pl')">PL</span>
-                <span class="lang-sep">|</span>
+                <span class="lang-sep">/</span>
                 <span class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</span>
-            </li>
-        </ul>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            </div>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
+
+        <!-- Menu boczne (tylko linki) -->
+        <ul class="nav-links">
+            <div class="menu-header-decoration">MENU_SYSTEM //</div>
+            <li><a href="#about" data-lang-key="nav_about" onclick="closeMenu()">O MNIE</a></li>
+            <li><a href="#tech-stack" data-lang-key="nav_skills" onclick="closeMenu()">UMIEJĘTNOŚCI</a></li>
+            <li><a href="#experience" data-lang-key="nav_exp" onclick="closeMenu()">DOŚWIADCZENIE</a></li>
+            <li><a href="#education" data-lang-key="nav_edu" onclick="closeMenu()">EDUKACJA</a></li>
+            <li><a href="#courses" data-lang-key="nav_certs" onclick="closeMenu()">CERTYFIKATY</a></li>
+            <li><a href="#portfolio" data-lang-key="nav_projects" onclick="closeMenu()">PROJEKTY</a></li>
+            <li><a href="#contact" data-lang-key="nav_contact" onclick="closeMenu()">KONTAKT</a></li>
+            <div class="menu-footer-decoration">v2.0.5 :: SYSTEM_READY</div>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
@@ -2241,16 +2350,19 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-links");
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
-        document.querySelectorAll(".nav-links li a").forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
+    const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+});
+
+// Nowa funkcja do zamykania menu
+function closeMenu() {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}
 
         /* --- DUAL TERMINAL TYPING LOGIC --- */
         const humanCode = 
