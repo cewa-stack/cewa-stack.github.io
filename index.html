@@ -116,7 +116,7 @@
         .delay-400 { transition-delay: 400ms; }
         .delay-500 { transition-delay: 500ms; }
 
-        /* --- NAVIGATION (POPRAWIONA WARSTWOWOŚĆ) --- */
+        /* --- NAVIGATION (UPDATED HAMBURGER + DRAWER) --- */
         nav {
             position: fixed; top: 0; width: 100%; height: 80px; padding: 0 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -136,7 +136,6 @@
             align-items: center;
             gap: 25px;
             position: relative;
-            /* Ważne: brak z-index tutaj, aby elementy w środku mogły być sterowane osobno */
         }
 
         /* Przełącznik języka - Zostaje na dole (przykrywany przez menu) */
@@ -153,7 +152,7 @@
             z-index: 1001; /* Niski indeks */
         }
         
-        /* Efekt zanikania PL/EN gdy menu jest aktywne (dodatkowy bajer estetyczny) */
+        /* Efekt zanikania PL/EN gdy menu jest aktywne */
         body:has(.nav-links.active) .lang-switch-nav {
             opacity: 0;
             transform: translateX(20px);
@@ -186,7 +185,7 @@
         .nav-links { 
             position: fixed; top: 0; right: -100%; 
             width: 100%; max-width: 380px; height: 100vh;
-            background-color: rgba(12, 12, 12, 0.98); /* Tło menu */
+            background-color: rgba(12, 12, 12, 0.98); 
             backdrop-filter: blur(20px);
             display: flex; flex-direction: column;
             justify-content: center; align-items: flex-start;
@@ -873,17 +872,103 @@
         .download-card.docx:hover { border-color: var(--secondary); box-shadow: 0 0 30px rgba(0, 204, 255, 0.15); transform: translateY(-5px); }
         .download-card.docx:hover .download-icon-box { color: var(--secondary); border-color: var(--secondary); }
 
-        /* --- CONTACT TERMINAL --- */
+        /* --- CONTACT MODERN (Nowy Wygląd) --- */
         #contact { padding-top: 80px; }
-        .terminal-window { background: rgba(13,13,13,0.95); border: 1px solid #333; border-radius: 6px; max-width: 800px; margin: 0 auto; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
-        .term-header { background: #1f1f1f; padding: 10px 15px; display: flex; gap: 8px; border-bottom: 1px solid #333; }
-        .term-body { padding: 2rem; font-family: var(--font-code); }
-        .term-line { margin-bottom: 1.5rem; display: flex; flex-direction: column; }
-        .term-prompt { color: var(--primary); margin-bottom: 5px; }
-        .term-input { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; font-family: inherit; font-size: 1rem; padding: 5px 0; width: 100%; }
-        .term-input:focus { outline: none; border-color: var(--primary); }
-        .btn-term { background: #222; color: var(--primary); border: 1px solid var(--primary); padding: 10px 30px; font-family: inherit; cursor: pointer; transition: 0.3s; margin-top: 1rem; }
-        .btn-term:hover { background: var(--primary); color: #000; }
+
+        .contact-card {
+            background: rgba(15, 15, 15, 0.6); /* Ciemne, półprzezroczyste tło */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dwie kolumny dla Imię / Email */
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+
+        .contact-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333; /* Ciemna linia */
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            padding: 15px 0;
+            outline: none;
+            transition: all 0.3s;
+            border-radius: 0; /* Ważne dla inputów liniowych */
+        }
+
+        .contact-input:focus {
+            border-bottom-color: var(--primary); /* Zielona linia po kliknięciu */
+            box-shadow: 0 10px 20px -10px rgba(0, 255, 136, 0.1);
+        }
+
+        .contact-input::placeholder {
+            color: #666;
+            font-family: var(--font-main);
+            font-weight: 300;
+        }
+
+        /* TEXTAREA bez możliwości zmiany rozmiaru */
+        textarea.contact-input {
+            resize: none; /* Zablokowanie resize */
+            min-height: 120px;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        /* Przycisk Submit - Zielona bryła */
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--primary); /* Neonowa zieleń */
+            color: #000;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+            
+            /* Geometryczny kształt ze zdjęcia (ścięty lewy góry i prawy dół) */
+            clip-path: polygon(0 15%, 3% 0, 100% 0, 100% 85%, 97% 100%, 0 100%);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-dim);
+            background: #1aff9d;
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        /* Responsywność formularza */
+        @media (max-width: 700px) {
+            .contact-card { padding: 2rem; }
+            .form-row { 
+                grid-template-columns: 1fr; /* Jedna kolumna na mobilkach */
+                gap: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+        }
 
         /* --- UI ELEMENTS --- */
         #cyber-toast {
@@ -1707,41 +1792,32 @@
         </div>
     </section>
 
-    <!-- Contact Form -->
+    <!-- Contact Form (Nowy Design) -->
     <section id="contact">
         <div class="section-header">
             <div class="section-subtitle" data-lang-key="sect_contact_sub">KONTAKT</div>
             <h2 class="section-title" data-lang-key="sect_contact">Napisz do mnie!</h2>
         </div>
-        <div class="terminal-window reveal-item">
-            <div class="term-header">
-                <div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div>
-                <span style="color:#888; font-size:0.8rem; margin-left:10px;">bash -- contact.sh</span>
-            </div>
-            <div class="term-body">
-                <form id="contact-form">
-                    <div class="term-line">
-                        <span class="term-prompt" data-lang-key="contact_label_name">nazwa_użytkownika</span>
-                        <input type="text" class="term-input" name="name" placeholder="Twoje Imię" required data-lang-ph="ph_name">
+
+        <div class="contact-card reveal-item">
+            <form id="contact-form">
+                <div class="form-row">
+                    <div class="input-group">
+                        <input type="text" class="contact-input" name="name" placeholder="Imię" required data-lang-ph="ph_name">
                     </div>
-                    <div class="term-line">
-                        <span class="term-prompt" data-lang-key="contact_label_email">adres_email</span>
-                        <input type="email" class="term-input" name="email" placeholder="email@domena.pl" required>
+                    <div class="input-group">
+                        <input type="email" class="contact-input" name="email" placeholder="Email" required>
                     </div>
-                    <div class="term-line">
-                        <span class="term-prompt" data-lang-key="contact_label_msg">treść_wiadomości</span>
-                        <textarea class="term-input" name="message" rows="1" placeholder="Treść wiadomości..." required data-lang-ph="ph_msg"></textarea>
-                    </div>
-                    <button type="submit" class="btn-term" data-lang-key="form_btn"> > WYŚLIJ_WIADOMOŚĆ </button>
-                </form>
-                <div style="margin-top:2rem; border-top:1px dashed #333; padding-top:1rem;">
-                    <p style="color:#666; font-size:0.9rem;">
-                        > Email: <span style="color:#fff">lukas.aistudia@gmail.com</span><br>
-                        > Phone: <span style="color:#fff">+48 723 284 723</span><br>
-                        > Loc: <span style="color:#fff">Zielona Góra, PL</span>
-                    </p>
                 </div>
-            </div>
+                
+                <div class="input-group">
+                    <textarea class="contact-input" name="message" placeholder="Twoja wiadomość..." required data-lang-ph="ph_msg"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <span data-lang-key="form_btn">WYŚLIJ WIADOMOŚĆ</span>
+                </button>
+            </form>
         </div>
     </section>
 
@@ -1849,7 +1925,7 @@
                 
                 sect_contact_sub: "KONTAKT", sect_contact: "Napisz do mnie!",
                 contact_label_name: "nazwa_użytkownika", contact_label_email: "adres_email", contact_label_msg: "treść_wiadomości",
-                ph_name: "Twoje Imię", ph_msg: "Treść wiadomości...", form_btn: " > WYŚLIJ_WIADOMOŚĆ",
+                ph_name: "Imię", ph_msg: "Twoja wiadomość...", form_btn: "WYŚLIJ WIADOMOŚĆ",
                 
                 ach_4_t: "Osiągnięcie: Ostateczny Boss?", ach_4_d: "Dotarto do sekcji kontaktowej.",
                 status_progress: "W TRAKCIE", status_done: "UKOŃCZONE"
@@ -1944,7 +2020,7 @@
                 
                 sect_contact_sub: "INITIATE CONNECTION", sect_contact: "CONTACT ME",
                 contact_label_name: "user_name", contact_label_email: "user_email", contact_label_msg: "user_message",
-                ph_name: "User Name", ph_msg: "Message content...", form_btn: " > SEND_MESSAGE",
+                ph_name: "Name", ph_msg: "Your message...", form_btn: "SEND MESSAGE",
                 
                 ach_4_t: "Achievement: Final Boss?", ach_4_d: "Reached contact section.",
                 status_progress: "IN PROGRESS", status_done: "COMPLETED"
@@ -2304,9 +2380,12 @@
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault(); 
-                const btn = contactForm.querySelector('.btn-term');
-                const originalText = btn.innerText;
-                btn.innerText = "> SENDING_DATA...";
+                // Zmieniono selektor na .btn-submit
+                const btn = contactForm.querySelector('.btn-submit');
+                const btnText = btn.querySelector('span'); // Tekst jest w spanie
+                const originalText = btnText.innerText;
+                
+                btnText.innerText = currentLang === 'pl' ? "WYSYŁANIE..." : "SENDING...";
                 btn.style.opacity = "0.7";
                 btn.disabled = true;
 
@@ -2318,20 +2397,20 @@
                     if (response.ok) {
                         showCyberToast(currentLang === 'pl' ? "Wiadomość wysłana! Odezwę się wkrótce." : "Message sent! I will reply soon.");
                         contactForm.reset(); 
-                        btn.innerText = "> SENT_SUCCESSFULLY";
-                        btn.style.color = "#27c93f"; btn.style.borderColor = "#27c93f";
+                        btnText.innerText = currentLang === 'pl' ? "WYSŁANO!" : "SENT!";
+                        btn.style.background = "#1aff9d";
                     } else throw new Error('Server error');
                 } catch (error) {
                     console.error("Error:", error);
                     showCyberToast(currentLang === 'pl' ? "Błąd połączenia. Spróbuj później." : "Connection error. Try again later.", true);
-                    btn.innerText = "> ERROR: CONNECTION_FAILED";
-                    btn.style.color = "#ff5f56"; btn.style.borderColor = "#ff5f56";
+                    btnText.innerText = "ERROR";
+                    btn.style.background = "#ff5f56";
                 } finally {
                     setTimeout(() => {
-                        btn.innerText = originalText;
+                        btnText.innerText = originalText;
                         btn.style.opacity = "1";
                         btn.disabled = false;
-                        btn.style.color = ""; btn.style.borderColor = ""; 
+                        btn.style.background = ""; 
                     }, 5000);
                 }
             });
@@ -2350,19 +2429,20 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-    const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-links");
+        // --- HAMBURGER LOGIC ---
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-links");
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-});
-
-// Nowa funkcja do zamykania menu
-function closeMenu() {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-}
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+        
+        // Funkcja zamykająca menu (używana w onclick w HTML)
+        function closeMenu() {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }
 
         /* --- DUAL TERMINAL TYPING LOGIC --- */
         const humanCode = 
