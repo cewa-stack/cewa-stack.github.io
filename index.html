@@ -930,6 +930,34 @@
             margin-bottom: 2rem;
             line-height: 1.5;
         }
+        /* --- STYLIZACJA SCROLLBARA W TEXTAREA --- */
+        
+        /* Dla Chrome, Edge, Safari */
+        textarea.contact-input::-webkit-scrollbar {
+            width: 6px; /* Cienki pasek */
+        }
+
+        textarea.contact-input::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02); /* Bardzo subtelne tło paska */
+            border-radius: 3px;
+        }
+
+        textarea.contact-input::-webkit-scrollbar-thumb {
+            background: #333; /* Ciemny uchwyt */
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        textarea.contact-input::-webkit-scrollbar-thumb:hover {
+            background: var(--primary); /* Podświetlenie na zielono po najechaniu */
+            box-shadow: 0 0 10px var(--primary-dim);
+        }
+
+        /* Dla Firefox */
+        textarea.contact-input {
+            scrollbar-width: thin;
+            scrollbar-color: #333 rgba(255, 255, 255, 0.02);
+        }
 
         /* Przycisk Submit - Zielona bryła */
         .btn-submit {
