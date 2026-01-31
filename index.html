@@ -1228,6 +1228,14 @@
             /* Hero Image Small */
             .hero-image-container { width: 180px; height: 180px; }
         }
+        /* --- FIX MOBILNY DLA CERTYFIKATÓW --- */
+            .cert-popup.mobile-visible {
+                  opacity: 1 !important;
+                  visibility: visible !important;
+                 transform: translateY(-10px) !important;
+                  pointer-events: auto !important;
+                  z-index: 20 !important; 
+}
     </style>
 </head>
 <body class="loading-active">
@@ -2521,7 +2529,46 @@ print(msgs)
         window.addEventListener('load', () => {
             setTimeout(runTerminalLoop, 1000); 
         });
+/* --- CERTYFIKATY NA MOBILE (KLIKNIĘCIE POZA UKRYWA) --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const certLinks = document.querySelectorAll('.cert-link');
+    const allPopups = document.querySelectorAll('.cert-popup');
 
+    // 1. Obsługa kliknięcia w przycisk "Pokaż Certyfikat"
+    certLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+        
+            if (window.innerWidth <= 900) {
+                e.preventDefault(); 
+                e.stopPropagation(); 
+                
+                const thisPopup = this.querySelector('.cert-popup');
+                const isCurrentlyVisible = thisPopup.classList.contains('mobile-visible');
+             
+                allPopups.forEach(p => p.classList.remove('mobile-visible'));
+
+                if (!isCurrentlyVisible) {
+                    thisPopup.classList.add('mobile-visible');
+                }
+            }
+        });
+    });
+
+    // 2. Obsługa kliknięcia w dowolne inne miejsce na stronie
+    document.addEventListener('click', function(e) {
+
+        if (!e.target.closest('.cert-link')) {
+            allPopups.forEach(p => p.classList.remove('mobile-visible'));
+        }
+    });
+    
+    // 3. Obsługa przewijania
+    window.addEventListener('scroll', function() {
+        if (window.innerWidth <= 900) {
+             allPopups.forEach(p => p.classList.remove('mobile-visible'));
+        }
+    });
+});
     </script>
 </body>
 </html>
